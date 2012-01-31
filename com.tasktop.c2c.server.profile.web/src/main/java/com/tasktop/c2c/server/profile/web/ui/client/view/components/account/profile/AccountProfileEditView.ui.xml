@@ -1,0 +1,70 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel>
+
+		<div>
+			<div class="profile">
+				<form class="deployment" id="myform" action="" method="post">
+					<fieldset>
+						<label>Username</label>
+						<g:Label ui:field="userNameField"/>
+					</fieldset>
+					<div class="details edit">
+							<h2>Details
+  				      <span class="right">Editing</span>
+							</h2>
+							<div class="inner-contents">
+					<fieldset>
+						<label class="left">Email Address</label>
+						<div>
+							<g:TextBox ui:field="emailField" styleName="input left"/>
+
+							<span class="verification misc-icon">
+							<span></span><g:Label ui:field="emailVerifiedLabel"/>
+							<g:Anchor styleName="small help" ui:field="whatIsVerificationButton">(What is verification?)</g:Anchor>
+							<g:Anchor ui:field="verifyEmailButton" styleName="send-verification">Send Verification</g:Anchor>
+							</span>
+						</div>
+						<div class="clear"/>
+					</fieldset>
+					<fieldset>
+						<label class="left">First Name</label>
+						<div>
+							<g:TextBox ui:field="firstNameField" addStyleNames="input"/>
+						</div>
+						<div class="clear"/>
+					</fieldset>
+					<fieldset>
+						<label class="left">Last Name</label>
+						<div>
+							<g:TextBox ui:field="lastNameField" addStyleNames="input"/>
+						</div>
+						<div class="clear"/>
+					</fieldset>
+					<fieldset>
+
+						<label>Picture</label>
+						<div class="avatar">
+							<g:Image ui:field="avatarImage"/>
+						</div>
+
+							Image from
+							<a href="http://www.gravatar.com" target="_blank" class="underline">gravatar.com</a>
+						</fieldset>
+						</div>
+						 <div class="save right top-margin bottom-margin">
+							<g:Button ui:field="cancelButton" addStyleNames="button " text="Cancel"/>
+							<g:Button ui:field="saveButton" addStyleNames="button special" text="Save"/>
+ 	    					<div class="clear"></div>
+						</div>
+						<div class="clear"/>
+						</div>
+						<div class="clear"/>
+
+				</form>
+			</div>
+			<!-- Project Tab Contents start-->
+		</div>
+
+	</g:HTMLPanel>
+</ui:UiBinder>

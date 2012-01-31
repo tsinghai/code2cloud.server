@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:d='urn:import:com.tasktop.c2c.server.profile.web.ui.client.view.deployment'>
+	<g:HTMLPanel>
+		<fieldset>
+			<label>&nbsp;</label>
+			<div>
+				<g:Label ui:field="infoMessage"/>
+			</div>
+		</fieldset>
+		<fieldset>
+			<label>Type:</label>
+			<div>
+				<p><g:RadioButton ui:field="manualType" name="type">Manual</g:RadioButton></p>
+				<p><g:RadioButton ui:field="automaticType" name="type">Automatic</g:RadioButton></p>
+				<p><g:CheckBox ui:field="deployUnstableBuilds">Deploy unstable builds</g:CheckBox></p>
+			</div>
+		</fieldset>
+		<fieldset>
+			<label>Job:</label>
+			<div>
+				<g:ValueListBox ui:field="jobNameListBox"/>
+			</div>
+		</fieldset>
+		<fieldset>
+			<label><g:Label ui:field="jobNumberLabel">Build:</g:Label></label>
+			<div>
+				<g:ValueListBox ui:field="buildsListBox"/>
+			</div>
+		</fieldset>
+		<fieldset>
+			<label><g:Label ui:field="artifactLabel">Artifact:</g:Label></label>
+			<div>
+				<g:ValueListBox ui:field="artifactListBox"/>
+			</div>
+		</fieldset>
+		<fieldset>
+			<label><g:Label ui:field="artifactPathLabel">Artifact Path:</g:Label></label>
+			<div>
+				<g:TextBox ui:field="artifactTextBox" visibleLength="50"/>
+			</div>
+		</fieldset>
+	</g:HTMLPanel>
+							
+</ui:UiBinder>	

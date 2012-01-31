@@ -1,0 +1,61 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel>
+
+			<div>
+				<div class="profile">
+					<form class="deployment" id="myform" action="" method="post">
+						<fieldset>
+							<label>Username</label>
+							<g:Label ui:field="userNameField"/>
+						</fieldset>
+						<div class="details">
+							<h2>Details
+  				      <g:Anchor ui:field="editAnchor" styleName="misc-icon edit right" ><span></span>Edit</g:Anchor>
+							</h2>
+							<div class="inner-contents">
+    						<fieldset>
+    							<label>Email Address</label> 
+    							<div>
+    								<span class="left"><g:Label ui:field="emailField"/></span>
+									<span class="verification misc-icon">
+									<span></span><g:Label ui:field="emailVerifiedLabel"/>
+									<g:Anchor styleName="small help" ui:field="whatIsVerificationButton">(What is verification?)</g:Anchor>
+									<g:Anchor ui:field="verifyEmailButton" styleName="send-verification">Send Verification</g:Anchor>
+									</span>
+    								
+    							</div>
+    							<div class="clear"></div>
+    						</fieldset>
+    						<fieldset>
+    							<label class="left">First Name</label> 
+    							<div>
+    								<g:Label ui:field="firstNameField"/>
+    							</div>
+    							<div class="clear"></div>
+    						</fieldset>
+    						<fieldset>
+    							<label class="left">Last Name</label> 
+    							<div>
+    								<g:Label ui:field="lastNameField"/>
+    							</div>
+    							<div class="clear"></div>
+    						</fieldset>
+    						<fieldset>
+    							<label>Picture</label>
+    							
+								<div class="avatar">
+									<g:Image ui:field="avatarImage"/>
+								</div>
+    									Image from <a href="http://www.gravatar.com" target="_blank" class="underline">gravatar.com</a>
+    						</fieldset>
+  						</div>
+   						</div>
+						<div class="clear"></div>
+					</form>
+				</div>
+			</div>
+ 
+
+	</g:HTMLPanel>
+</ui:UiBinder>

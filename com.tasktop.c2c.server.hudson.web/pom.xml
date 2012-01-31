@@ -1,0 +1,307 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.jvnet.hudson.main</groupId>
+    <artifactId>pom</artifactId>
+    <version>1.384</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  
+  <groupId>com.tasktop.c2c.server</groupId>
+  <artifactId>hudson-war</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <name>Hudson war</name>
+  <description>
+    Creates a war file. Also includes additional static web resources, such as images, CSS, JavaScript, and some HTML files.
+  </description>
+  
+  <properties>
+  	<hudson.version>1.384</hudson.version>
+  	<hudson.shared.libs>hudson-shared-libs</hudson.shared.libs>
+  	<spring.version>3.0.5.RELEASE</spring.version>
+  </properties>
+  
+  <repositories>
+	  <repository>
+		<id>code2cloud-internal</id>
+		<name>Code2Cloud internal repo</name>
+		<url>https://q.tasktop.com/alm/s/code2cloud/maven/</url>
+	</repository>
+  </repositories>
+  
+  <dependencies>
+  	<!--  The war we are repackaging -->
+    <dependency>
+    	<groupId>org.jvnet.hudson.main</groupId>
+    	<artifactId>hudson-war</artifactId>
+        <version>${hudson.version}</version>
+        <type>war</type>
+        <scope>runtime</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-aop</artifactId>
+		<version>${spring.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-beans</artifactId>
+		<version>${spring.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-context</artifactId>
+		<version>${spring.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-core</artifactId>
+		<version>${spring.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-jdbc</artifactId>
+		<version>${spring.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-web</artifactId>
+		<version>${spring.version}</version>
+    </dependency>
+    <!--  Have issues with context files w/out this -->
+    <dependency>
+		<groupId>org.codehaus.jackson</groupId>
+		<artifactId>jackson-mapper-asl</artifactId>
+		<version>1.5.3</version>		
+	</dependency>
+    <!--  FIXME what is the 3.x corresponding to spring-dao -->
+	<!--  Customized Hudson Core -->
+    <dependency>
+    	<groupId>org.jvnet.hudson.main</groupId>
+    	<artifactId>hudson-core</artifactId>
+        <version>code2cloud-${hudson.version}</version>
+    </dependency>
+    <!--  Hudson Plugin deps. These are just to enforce proper build order, hence the provided scope (see below for their inclusion setup) -->
+    <dependency>
+    	<groupId>com.tasktop.c2c.server</groupId>
+    	<artifactId>hudson.plugin.auth</artifactId>
+        <version>${project.version}</version>
+        <type>hpi</type>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+    	<groupId>com.tasktop.c2c.server</groupId>
+    	<artifactId>hudson.plugin.cloud</artifactId>
+        <version>${project.version}</version>
+        <type>hpi</type>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+    	<groupId>com.tasktop.c2c.server</groupId>
+    	<artifactId>hudson.plugin.configuration</artifactId>
+        <version>${project.version}</version>
+        <type>hpi</type>
+        <scope>provided</scope>
+    </dependency>
+	<dependency>
+		<groupId>com.tasktop.c2c.server</groupId>
+		<artifactId>hudson.plugin.ui</artifactId>
+		<version>${project.version}</version>
+		<type>hpi</type>
+		<scope>provided</scope>
+	</dependency>
+     <dependency>
+    	<groupId>com.tasktop.c2c.server</groupId>
+    	<artifactId>hudson.plugin.buildlistener</artifactId>
+        <version>${project.version}</version>
+        <type>hpi</type>
+        <scope>provided</scope>
+    </dependency>
+     <dependency>
+ 		<groupId>org.jvnet.hudson.plugins</groupId>
+     	<artifactId>git</artifactId>
+        <version>1.1.4-code2cloud-SNAPSHOT</version>
+		<type>hpi</type>
+        <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <finalName>hudson</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.1-beta-1</version>
+        <configuration>
+          <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+          <webResources>
+            <resource>
+              <directory>${project.build.directory}/generated-resources</directory>
+            </resource>
+          </webResources>
+          <!-- for putting Main-Class into war -->
+          <archive>
+            <manifest>
+              <mainClass>Main</mainClass>
+            </manifest>
+            <manifestEntries>
+              <Implementation-Version>${project.version}</Implementation-Version>
+              <Hudson-Version>${project.version}</Hudson-Version>
+            </manifestEntries>
+          </archive>
+          <!--outputFileNameMapping>@{artifactId}@.@{extension}@</outputFileNameMapping-->
+          <!--  Remove stock plugins that we do not want -->
+          <overlays>
+	          <overlay>
+		    	<groupId>org.jvnet.hudson.main</groupId>
+	    		<artifactId>hudson-war</artifactId>
+	              <excludes>
+		            <exclude>META-INF/*</exclude> <!--  This has some signing stuff going on that breaks -->
+		            <exlcude>WEB-INF/lib/spring-*</exlcude> <!--  Want to use our own spring -->
+	                <exclude>WEB-INF/lib/hudson-core-*</exclude> <!--  Want to use our own hudson-core -->
+	                <exclude>WEB-INF/plugins/cvs.hpi</exclude>
+	                <exclude>WEB-INF/plugins/subversion.hpi</exclude>
+	                <exclude>WEB-INF/plugins/ssh-slaves.hpi</exclude>
+	              </excludes>
+	            </overlay>
+          </overlays>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>list</goal>
+            </goals>
+            <configuration>
+              <outputFile>${basedir}/target/classes/dependencies.txt</outputFile>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.jvnet.maven-antrun-extended-plugin</groupId>
+        <artifactId>maven-antrun-extended-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>resgen</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <verifyArtifact>false</verifyArtifact>
+              <tasks>
+                <mkdir dir="target/generated-resources" />
+
+                <!-- bundled plugins -->
+                <resolveArtifact type="hpi" groupId="org.jvnet.hudson.plugins" artifactId="cobertura" version="1.1" tofile="${basedir}/target/generated-resources/WEB-INF/plugins/cobertura-plugin.hpi" />
+                <resolveArtifact type="hpi" groupId="org.jvnet.hudson.main" artifactId="maven-plugin" version="${hudson.version}" tofile="${basedir}/target/generated-resources/WEB-INF/plugins/maven-plugin.hpi" />
+                <resolveArtifact type="hpi" groupId="org.jvnet.hudson.plugins" artifactId="git" version="1.1.4-code2cloud-SNAPSHOT" tofile="${basedir}/target/generated-resources/WEB-INF/plugins/git-plugin.hpi" />
+                <resolveArtifact type="hpi" groupId="org.jvnet.hudson.plugins" artifactId="build-timeout" version="1.6" tofile="${basedir}/target/generated-resources/WEB-INF/plugins/build-timeout-plugin.hpi" />
+                <resolveArtifact type="hpi" groupId="org.jvnet.hudson.plugins" artifactId="grails" version="1.4" tofile="${basedir}/target/generated-resources/WEB-INF/plugins/grails-plugin.hpi" />
+                <resolveArtifact type="hpi" groupId="com.tasktop.c2c.server" artifactId="hudson.plugin.auth" version="${project.version}" tofile="${basedir}/target/generated-resources/WEB-INF/plugins/code2cloud-auth.hpi" />
+                <resolveArtifact type="hpi" groupId="com.tasktop.c2c.server" artifactId="hudson.plugin.cloud" version="${project.version}" tofile="${basedir}/target/generated-resources/WEB-INF/plugins/code2cloud-cloud.hpi" />
+                <resolveArtifact type="hpi" groupId="com.tasktop.c2c.server" artifactId="hudson.plugin.buildlistener" version="${project.version}" tofile="${basedir}/target/generated-resources/WEB-INF/plugins/code2cloud-buildlistener.hpi" />
+                <resolveArtifact type="hpi" groupId="com.tasktop.c2c.server" artifactId="hudson.plugin.ui" version="${project.version}" tofile="${basedir}/target/generated-resources/WEB-INF/plugins/code2cloud-ui.hpi" />
+<!--                <resolveArtifact type="hpi" groupId="com.tasktop.c2c.server" artifactId="hudson.plugin.configuration" version="${project.version}" tofile="${basedir}/target/generated-resources/WEB-INF/plugins/code2cloud-configuration.hpi" />-->
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      
+      <!-- Segregate the shared libs into a zip and repackage the hudson.war without the shared libs -->
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <configuration>
+            
+              <target>
+              	<!-- segregate the libs to be shared -->
+		    	<mkdir dir="target/${hudson.shared.libs}"/>
+		    	<move todir="target/${hudson.shared.libs}">
+		    	    <fileset dir="target/hudson/WEB-INF/lib/">
+						<exclude name="**"/>
+		    	      	<!-- TODO: add shared libs here, e.g., --> 
+			    	  	<!-- <include name="spring-*.jar"/> -->
+		    	    </fileset>
+		    	</move>
+		    	
+		    	<!-- zip them for publishing as an artifact -->
+		    	<zip destfile="target/${hudson.shared.libs}.zip" basedir="target/${hudson.shared.libs}/" whenempty="create"/>
+
+				<!-- keep the raw hudson.war -->
+				<move file="target/hudson.war" tofile="target/hudson-with-all-libs.war"/>
+				
+				<!--  rewrites a war, excluding some paths along the way -->
+				<zip destfile="target/hudson.war">
+					<zipfileset src="target/hudson-with-all-libs.war">
+						<include name="**"/>
+		    	    	<!-- TODO: add shared libs here, e.g., --> 
+	     		    	<!--  <exclude name="WEB-INF/lib/spring-*.jar"/> -->
+				  	</zipfileset>
+				</zip>
+              </target>
+              
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      
+      <!--  Publish the hudson-shared-libs zip to the local repository -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>2.3.1</version>
+        <executions>
+        	<execution>
+        	<phase>install</phase>
+        	<goals>
+	        	<goal>install-file</goal>
+        	</goals>
+	   		<configuration>
+	   			<file>target/${hudson.shared.libs}.zip</file>
+	   			<artifactId>${hudson.shared.libs}</artifactId>
+	   			<groupId>${project.groupId}</groupId>
+	   			<version>${project.version}</version>
+	   			<packaging>zip</packaging>
+	   		</configuration>
+        	</execution>
+        </executions>
+      </plugin>
+       <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-eclipse-plugin</artifactId>
+			<version>2.8</version>
+			<configuration>
+			   <addGroupIdToProjectName>true</addGroupIdToProjectName>     
+			   <downloadSources>true</downloadSources>
+			   <additionalConfig>
+			     <file>
+			       <name>.settings/org.eclipse.jdt.core.prefs</name>
+			       <location>../com.tasktop.c2c.server.profile.build/parent/eclipse-settings/org.eclipse.jdt.core.prefs</location>
+			     </file>
+			     <file>
+			       <name>.settings/org.eclipse.jdt.ui.prefs</name>
+			       <location>../com.tasktop.c2c.server.profile.build/parent/eclipse-settings/org.eclipse.jdt.ui.prefs</location>
+			     </file>
+			   </additionalConfig>
+			</configuration>
+	    </plugin>
+      
+    </plugins>
+  </build>
+
+</project>

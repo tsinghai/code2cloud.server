@@ -1,0 +1,54 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<ui:style field="local">
+		.popup {
+			background: #ebf3f8;
+			padding: 20px 30px;
+			width: 400px;
+		}
+
+		.add-sshkey-popup {
+			width: 350px;
+		}
+
+		.add-sshkey-popup label {
+			width: 50px;
+			display: inline-block;
+		}
+
+		.add-sshkey-popup-textbox {
+			width: 290px;
+			display: inline-block;
+		}
+
+		.add-sshkey-popup-textarea {
+			width: 290px;
+			height: 80px;
+			display: inline-block;
+		}
+	</ui:style>
+
+	<g:HTMLPanel addStyleNames="add-ssh-key-popup {local.popup} {local.add-sshkey-popup}">
+		<g:FlowPanel ui:field="errorPanel"/>
+		<div class="clear"/>
+		<div class="create-key-form">
+			<fieldset>
+				<label>Name</label>
+				<div>
+					<g:TextBox ui:field="sshKeyNameField" addStyleNames="{local.add-sshkey-popup-textbox}"/>
+				</div>
+			</fieldset>
+			<fieldset>
+				<label>Key</label>
+				<div>
+					<g:TextArea ui:field="sshKeyField" addStyleNames="{local.add-sshkey-popup-textarea}"/>
+				</div>
+			</fieldset>
+			<div class="right">
+				<g:Button ui:field="cancelButton" addStyleNames="button cancel" text="Cancel"/>
+				<g:Button ui:field="saveButton" addStyleNames="button special" text="Save"/>
+			</div>
+			<div class="clear"/>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

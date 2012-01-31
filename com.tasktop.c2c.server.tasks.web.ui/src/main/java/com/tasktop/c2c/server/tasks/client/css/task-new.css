@@ -1,0 +1,118 @@
+.inline {
+	display: inline;
+}
+
+.inline div {
+	display: inline !important;
+}
+
+.wikiControl {
+ 	float: right;
+ }
+ 
+ .wikiControl > div {
+ 	display: inline;
+}
+ 
+ .wikiEdit {
+ 	
+ }
+ 
+ .small {
+ 	font-size: 7pt;
+ }
+ 
+ .left {
+ 	float: left;
+ }
+ 
+ .right {
+ 	float: right;
+ }
+ 
+ .inlineEditTrigger {
+ }
+ 
+ div.inlineEditTrigger a {
+	color: #595959;
+}
+
+  div.inlineEditTrigger img {
+	opacity: 0.0;
+    float: right;
+}
+
+ div.inlineEditTrigger {
+	border: 2px solid white;
+}
+
+ div.inlineEditTrigger:hover {
+	color: #2B5480;
+	border: 1px solid #D9D9D9;
+	padding: 1px;
+	background-color: #F2F2F2;
+	opacity: 1.0;
+}
+
+  div.inlineEditTrigger:hover img {
+	opacity: 1.0;
+}
+
+.editControls {
+	display: inline-block;
+	overflow: visible;
+	position: relative;
+	vertical-align: top;
+}
+
+.editControls button {
+	margin-left: 5px;
+}
+
+.editing {
+	overflow: visible;
+	position: absolute;
+}
+
+.editing table{
+	display: inline-block;
+}
+
+div.editing {
+	background-color: #E4EFF6;
+	border: 1px solid lightblue;
+	padding: 2px;
+	margin-top: -3px
+}
+
+.visibleTrigger {
+	display: inline;
+}
+
+a.visibleTrigger {
+	float: right;
+}
+
+div .taskSection .inlineEditTrigger a {
+	color: #313131;	
+}
+
+.taskTitle > div {
+	display: inline-block;
+}
+
+div.taskSummary {
+	max-width: 850px;
+	min-height: 15px; /* To get the text-box inline. Dont really understand why this is needed. */
+}
+
+div.taskType {
+	max-width: 850px;
+	min-height: 15px; /* To get the text-box inline. Dont really understand why this is needed. */
+}
+
+a.completeTask {
+	text-decoration: line-through;
+}
+
+

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+			 xmlns:g="urn:import:com.google.gwt.user.client.ui"
+			 xmlns:person="urn:import:com.tasktop.c2c.server.common.web.client.widgets.chooser.person">
+	<!--Missing Styles-->
+	<!--status-priority created comments-link-->
+	<g:HTMLPanel styleName="task-details">
+			<div class="task-details-top">
+				<div ui:field="priorityDivElement" class="priority left"/>
+				<a href="" ui:field="taskAnchorElement">
+					<g:Label ui:field="taskType"/> <g:NumberLabel ui:field="id" customFormat="0"/>: <g:Label ui:field="shortDescription"/>
+				</a>
+				<div class="clear"/>
+				<div class="small">
+					<div class="created left">Created by: <g:Label ui:field="reporter"/> <g:DateLabel ui:field="creationDate"/></div>
+					<div class="comments-link right">
+						<g:Anchor ui:field="commentsAnchor">comments</g:Anchor>
+					</div>
+				</div>
+				<div class="clear"/>
+			</div>
+			<div class="task-details-heading">
+				<div class="status-priority misc-icon resolved left">
+					<span ui:field="resolvedStatusIconSpanElement" class="icon"/>
+					<g:Label ui:field="status"/> <g:Label ui:field="resolution"/>
+				</div>
+				<div ui:field="severityDivElement" class="severity right"/>
+				<div class="clear"/>
+			</div>
+			<p>
+				<g:Label ui:field="description"/>
+				<g:Anchor ui:field="moreDescriptionAnchor">more</g:Anchor>
+			</p>
+			<fieldset>
+				<label>Product:</label>
+				<div><g:Label ui:field="productName"/></div>
+			</fieldset>
+			<fieldset>
+				<label>Component:</label>
+				<div><g:Label ui:field="componentName"/></div>
+			</fieldset>
+			<fieldset>
+				<label>Release:</label>
+				<div><g:Label ui:field="milestoneValue"/></div>
+			</fieldset>
+			<fieldset>
+				<label>Iteration:</label>
+				<div><g:Label ui:field="iteration"/></div>
+			</fieldset>
+			<fieldset>
+				<label>Estimate:</label>
+				<div><g:ValueLabel ui:field="estimatedTime"/></div>
+			</fieldset>
+			<fieldset>
+				<label>Tags:</label>
+				<div><g:ValueLabel ui:field="keywords"/></div>
+			</fieldset>
+			<fieldset>
+				<label>Owner:</label>
+				<g:Label ui:field="assignee" addStyleNames="task-details-owner"/>
+			</fieldset>
+	</g:HTMLPanel>
+</ui:UiBinder>

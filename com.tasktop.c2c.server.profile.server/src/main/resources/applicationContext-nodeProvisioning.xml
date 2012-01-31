@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:aop="http://www.springframework.org/schema/aop" 
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:jee="http://www.springframework.org/schema/jee" 
+       xmlns:tx="http://www.springframework.org/schema/tx" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util" 
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd   
+                           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd   
+                           http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd   
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
+                           >
+
+	<import resource="classpath:META-INF/spring/applicationContext-cloudService.xml"/>
+
+	<bean id="creationParent" class="com.tasktop.c2c.server.cloud.service.BasicNodeCreationService" abstract="true">
+		<property name="cloudService" value="#{ '${alm.mockCloud}'.equals('true') ? mockCloudService : realCloudService }"/>
+		<property name="nodeReadyStrategy">
+			<bean class="com.tasktop.c2c.server.cloud.service.IsReachableNodeReadyStrategy"/>
+		</property>
+	</bean>
+	
+	<bean id="databaseBackedNodeCreationService" class="com.tasktop.c2c.server.cloud.service.BasicNodeCreationService" parent="creationParent">
+		<property name="templateNodeName" value="${alm.databaseBacked.templateNode}"/>
+		<property name="nodeNamePrefix" value="${alm.databaseBacked.nodePrefix}"/>		
+	</bean>
+
+	<bean id="diskBackedNodeCreationService" class="com.tasktop.c2c.server.cloud.service.NodeWithExtraDiskCreationService" parent="creationParent">
+		<property name="diskSize" value="${alm.provisioning.diskSize}"/>
+		<property name="templateNodeName" value="${alm.diskBacked.templateNode}"/>
+		<property name="nodeNamePrefix" value="${alm.diskBacked.nodePrefix}"/>		
+	</bean>
+	
+	<bean id="hudsonMasterNodeCreationService" class="com.tasktop.c2c.server.cloud.service.NodeWithExtraDiskCreationService" parent="creationParent">
+		<property name="diskSize" value="${alm.provisioning.diskSize}"/>
+		<property name="templateNodeName" value="${alm.hudsonMaster.templateNode}"/>
+		<property name="nodeNamePrefix" value="${alm.hudsonMaster.nodePrefix}"/>		
+	</bean>
+	
+	<bean id="hudsonSlaveNodeCreationService" class="com.tasktop.c2c.server.cloud.service.NodeWithExtraDiskCreationService" >
+				<property name="cloudService" value="#{ '${alm.mockCloud}'.equals('true') ? mockCloudService : realCloudService }"/>
+				<property name="templateNodeName" value="${alm.hudsonSlave.templateNode}"/>
+				<property name="nodeNamePrefix" value="${alm.hudsonSlave.nodePrefix}"/>		
+				<property name="nodeReadyStrategy">
+					<bean class="com.tasktop.c2c.server.cloud.service.IsReachableNodeReadyStrategy"/>
+				</property> 
+				<property name="diskSize" value="${alm.provisioning.diskSize}"/>
+			</bean>
+	
+	<bean id="nodeLifecycleServiceProvider" class="com.tasktop.c2c.server.cloud.service.NodeLifecycleServiceProvider">
+		<property name="servicesByHostType">
+			<map>
+				<entry key="SCM" value-ref="diskBackedNodeCreationService"/>
+				<entry key="MAVEN" value-ref="diskBackedNodeCreationService"/>
+				<entry key="BUILD" value-ref="hudsonMasterNodeCreationService"/>
+				<entry key="BUILD_SLAVE" value-ref="hudsonSlaveNodeCreationService"/>
+				<entry key="TASKS" value-ref="databaseBackedNodeCreationService"/>
+				<entry key="WIKI" value-ref="databaseBackedNodeCreationService"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="databaseBackedNodeProvisioningService" class="com.tasktop.c2c.server.cloud.service.PoolingNodeProvisioningService">
+		<property name="serviceHostService" ref="serviceHostService"/>
+		<property name="nodeTypes">
+			<set value-type="com.tasktop.c2c.server.cloud.domain.ServiceType">
+				<value>TASKS</value>
+				<value>WIKI</value>
+			</set>
+		</property>
+		
+		<property name="maxCapacity" value="${alm.databaseBacked.maxTenantsPerNode}"/>
+		<property name="poolSize" value="${alm.databaseBacked.poolSize}"/>
+		<property name="startThreads" value="${alm.enableDynamicPoolSizing}"/>
+	</bean>
+	
+	<bean id="diskBackedNodeProvisioningService" class="com.tasktop.c2c.server.cloud.service.PoolingNodeProvisioningService">
+		<property name="serviceHostService" ref="serviceHostService"/>
+		<property name="nodeTypes">
+			<set value-type="com.tasktop.c2c.server.cloud.domain.ServiceType">
+				<value>SCM</value>
+				<value>MAVEN</value>
+			</set>
+		</property>
+		
+		<property name="maxCapacity" value="${alm.diskBacked.maxTenantsPerNode}"/>
+		<property name="poolSize" value="${alm.diskBacked.poolSize}"/>
+		<property name="startThreads" value="${alm.enableDynamicPoolSizing}"/>
+	</bean>
+	
+	<bean id="hudsonMasterNodeProvisioningService" class="com.tasktop.c2c.server.cloud.service.PoolingNodeProvisioningService">
+		<property name="serviceHostService" ref="serviceHostService"/>
+		<property name="nodeTypes">
+			<set value-type="com.tasktop.c2c.server.cloud.domain.ServiceType">
+				<value>BUILD</value>
+			</set>
+		</property>
+		
+		<property name="maxCapacity" value="${alm.hudsonMaster.maxTenantsPerNode}"/>
+		<property name="poolSize" value="${alm.hudsonMaster.poolSize}"/>
+		<property name="startThreads" value="${alm.enableDynamicPoolSizing}"/>
+	</bean>
+	
+	<bean id="hudsonSlavePoolService" class="com.tasktop.c2c.server.cloud.service.HudsonSlavePoolServiceImpl">
+		<property name="serviceHostService" ref="serviceHostService"/>
+		<property name="startThreads" value="${alm.enableDynamicPoolSizing}"/>
+		<property name="poolSizeStrategy">
+			<bean class="com.tasktop.c2c.server.cloud.service.DynamicPoolSizeStrategy">
+				<property name="maxTotalNodes" value="${alm.hudsonSlave.pool.max}"/>
+				<property name="minTotalNodes" value="${alm.hudsonSlave.pool.min}"/>
+				<property name="maxUnderCapacityNodes" value="${alm.hudsonSlave.pool.maxFree}"/>
+				<property name="minUnderCapacityNodes" value="${alm.hudsonSlave.pool.minFree}"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<util:map id="nodeProvisioningServiceByType" key-type="com.tasktop.c2c.server.cloud.domain.ServiceType" value-type="com.tasktop.c2c.server.cloud.service.NodeProvisioningService">
+		<entry key="TASKS" value-ref="databaseBackedNodeProvisioningService"/>
+		<entry key="WIKI" value-ref="databaseBackedNodeProvisioningService"/>
+		<entry key="SCM" value-ref="diskBackedNodeProvisioningService"/>
+		<entry key="MAVEN" value-ref="diskBackedNodeProvisioningService"/>
+	    <entry key="BUILD" value-ref="hudsonMasterNodeProvisioningService"/>
+	</util:map>
+	
+	<util:map id="configPathsByServiceType" key-type="com.tasktop.c2c.server.cloud.domain.ServiceType" value-type="java.lang.String">
+		<entry key="TASKS" value="tasks/config"/>
+		<entry key="WIKI" value="wiki/config"/>
+		<entry key="SCM" value="services/config/git"/>
+		<entry key="MAVEN" value="services/config/maven"/>
+		<entry key="BUILD" value="hudson-config/config"/>
+	</util:map>
+	
+	<bean id="hudsonSlaveNodeCleaningService" class="com.tasktop.c2c.server.cloud.service.SshNodeCleaningService">
+	<property name="directoriesToCleanString" value="${alm.hudsonSlave.build.directoriesToClean}"/>
+	<property name="sshKeyFilePath" value="${alm.hudsonSlave.ssh.keyFilePath}"/>
+	<property name="sshUser" value="${alm.hudsonSlave.ssh.user}"/>
+</bean>
+
+	
+	
+</beans>

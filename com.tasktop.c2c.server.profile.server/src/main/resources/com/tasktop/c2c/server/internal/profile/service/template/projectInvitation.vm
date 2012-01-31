@@ -1,0 +1,15 @@
+Hello,
+
+${profile.FirstName} ${profile.LastName} (${profile.Username}) has invited you to the '${project.Name}' project on ${AppName}.
+
+${project.Name} is described as:
+
+${project.Description}
+
+To accept this invitation, please visit:
+
+${invitePageUrl}
+
+Thank you for using ${AppName}. Happy Coding!
+
+- The ${AppName} Team

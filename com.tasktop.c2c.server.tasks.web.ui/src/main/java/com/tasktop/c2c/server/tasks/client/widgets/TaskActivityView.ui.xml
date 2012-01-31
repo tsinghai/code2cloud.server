@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:w="urn:import:com.tasktop.c2c.server.tasks.client.widgets.wiki"
+	xmlns:a="urn:import:com.tasktop.c2c.server.common.web.client.widgets"
+	xmlns:p="urn:import:com.tasktop.c2c.server.common.web.client.widgets.chooser.person" 
+	xmlns:h="urn:import:com.tasktop.c2c.server.common.web.client.widgets.hyperlink">
+	<g:HTMLPanel ui:field="actionWrapper" styleName="project-action">
+		<a class="social-icon"></a>
+		<div class="open">
+			<span class="date"><g:Label ui:field="dateLabel"/></span>
+			<g:Label ui:field="changeType"/>
+			by 
+			<p:PersonLabel ui:field="personLabel"/>
+			<br/>
+			<div ui:field="timeDiv">
+				Time: <g:Label ui:field="timeLabel"/>.
+			</div>
+			<div style="float: left;">
+				<h:HyperlinkingLabel ui:field="descriptionLabel" />
+			</div>
+		</div>
+		<div class="spacer clear small"></div>
+	</g:HTMLPanel>
+</ui:UiBinder>

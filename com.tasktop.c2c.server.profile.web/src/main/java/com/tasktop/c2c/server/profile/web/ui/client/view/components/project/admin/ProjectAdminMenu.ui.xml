@@ -1,0 +1,19 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel>
+		<ul class="inline-tabs">
+			<li class="">
+				<g:Anchor addStyleNames="button" ui:field="adminSettings">Settings</g:Anchor>
+			</li>
+			<li>
+				<g:Anchor addStyleNames="button" ui:field="adminTasks">Tasks</g:Anchor>
+			</li>
+			<li>
+				<g:Anchor addStyleNames="button" ui:field="adminSourceCode">Source Code</g:Anchor>
+			</li>
+			<li>
+				<g:Anchor addStyleNames="button" ui:field="adminTeam">Team</g:Anchor>
+			</li>
+		</ul>
+	</g:HTMLPanel>
+</ui:UiBinder>

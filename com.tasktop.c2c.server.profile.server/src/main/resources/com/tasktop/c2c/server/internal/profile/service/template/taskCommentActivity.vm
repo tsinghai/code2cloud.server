@@ -1,0 +1,4 @@
+
+Comment #${commentNumber} by ${activity.comment.author.realname} at ${commentTime} 
+
+${activity.comment.commentText} 

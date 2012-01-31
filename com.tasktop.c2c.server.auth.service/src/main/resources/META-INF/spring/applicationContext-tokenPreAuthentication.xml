@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<bean
+		class="com.tasktop.c2c.server.auth.service.proxy.AuthenticationTokenUserDetailsService"
+		id="authenticationTokenUserDetailsService"
+	/>
+
+	<bean
+		id="preAuthenticatedAuthenticationProvider"
+		class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider"
+		p:preAuthenticatedUserDetailsService-ref="authenticationTokenUserDetailsService"
+	/>
+
+	<security:authentication-manager alias="preAuthAuthenticationManager">
+		<security:authentication-provider ref="preAuthenticatedAuthenticationProvider"/>
+	</security:authentication-manager>
+	
+	<bean
+		class="com.tasktop.c2c.server.auth.service.proxy.ProxyPreAuthenticatedProcessingFilter"
+		id="proxyPreAuthenticatedProcessingFilter"
+		p:authenticationManager-ref="preAuthAuthenticationManager"
+	/>
+
+</beans>

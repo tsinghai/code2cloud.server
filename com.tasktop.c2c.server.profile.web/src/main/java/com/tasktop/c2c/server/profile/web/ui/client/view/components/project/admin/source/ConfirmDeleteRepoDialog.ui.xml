@@ -1,0 +1,31 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'
+			 xmlns:d='urn:import:com.tasktop.c2c.server.profile.web.ui.client.view.deployment'>
+	<ui:style>
+		.popup {
+			width: 450px;
+			padding: 15px;
+		}
+		.repoName {
+			font-weight: bolder;
+		}
+		.inline > div {
+			display: inline;
+		}
+	</ui:style>
+	<g:HTMLPanel styleName="{style.popup}">
+		<div class="{style.inline}">
+			Are you sure you want to remove <g:Label styleName="{style.repoName}" ui:field="name"/> ?
+		</div>
+		<div>
+			This will permanently remove the repository from this project. This operation cannot be undone.
+		</div>
+		<br/>
+		<div class="center">
+			<g:Button ui:field="deleteButton" styleName="button special">Delete</g:Button>
+			<g:Button ui:field="cancelButton" styleName="button">Cancel</g:Button>
+		</div>
+
+	</g:HTMLPanel>
+</ui:UiBinder>

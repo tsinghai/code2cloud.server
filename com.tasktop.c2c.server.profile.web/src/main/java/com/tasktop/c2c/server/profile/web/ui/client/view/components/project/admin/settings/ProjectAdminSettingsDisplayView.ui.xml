@@ -1,0 +1,32 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel>
+		<div class="add-form project-admin left">
+			<h4>Properties
+				<g:Anchor ui:field="editButton" addStyleNames="misc-icon edit right"><span/>Edit
+				</g:Anchor>
+			</h4>
+			<fieldset>
+				<label>Name:</label>
+				<g:Label ui:field="projectName"/>
+			</fieldset>
+			<fieldset>
+				<label>Description:</label>
+				<g:Label addStyleNames="description" ui:field="projectDescription"/>
+			</fieldset>
+			<fieldset>
+				<label>Privacy:</label>
+				<div>
+					<p>
+						<g:RadioButton ui:field="privacyPublicOption" name="privacy" enabled="false"/>
+						Public
+					</p>
+					<p>
+						<g:RadioButton ui:field="privacyPrivateOption" name="privacy" enabled="false"/>
+						Private
+					</p>
+				</div>
+			</fieldset>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Cloud API
+Bundle-SymbolicName: com.tasktop.c2c.server.cloud.api
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Tasktop Technologies
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: com.tasktop.c2c.server.cloud.domain,
+ com.tasktop.c2c.server.cloud.service
+Require-Bundle: com.tasktop.c2c.server.common.api;bundle-version="0.1.0"

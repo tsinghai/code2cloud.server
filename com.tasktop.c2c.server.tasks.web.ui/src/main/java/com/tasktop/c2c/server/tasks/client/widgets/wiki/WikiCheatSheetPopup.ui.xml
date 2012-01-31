@@ -1,0 +1,76 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<g:HTMLPanel >
+		<div class="wikiContent" >
+		<h3 id="TextileMarkupCheatSheet">Textile Markup Cheat Sheet</h3>
+		
+		<h4 id="PhraseModifiers">Phrase Modifiers</h4>
+		<table><tbody><tr><td>_emphasis_ </td><td><em>emphasis</em> 
+		</td></tr><tr><td>*strong* </td><td><strong>strong</strong> 
+		</td></tr><tr><td>__italic__ </td><td><i>italic</i> 
+		</td></tr><tr><td>**bold** </td><td><b>bold</b> 
+		</td></tr><tr><td>??citation?? </td><td><cite>citation</cite> </td></tr><tr>
+		<td>-deleted text- </td><td><del>deleted text</del> </td></tr><tr><td>+inserted text+ </td>
+		<td><ins>inserted text</ins> </td></tr><tr><td>^superscript^ </td><td><sup>superscript</sup> </td></tr><tr>
+		<td>~subscript~ </td><td><sub>subscript</sub> </td></tr><tr><td>%span% </td>
+		<td><span>span</span> </td></tr><tr><td>@code@ </td>
+		<td><code>code</code> </td></tr></tbody></table><h4 id="BlockModifiers">Block Modifiers</h4><table><tbody><tr>
+		<td>hn. </td><td>Heading </td></tr><tr><td>bq. </td><td>Block quote </td></tr><tr><td>fnn. </td>
+		<td>Footnote </td></tr><tr><td>p. </td><td>Paragraph (optional) </td></tr><tr><td>bc. </td>
+		<td>Block code </td></tr><tr><td>pre. </td><td>Pre-formatted </td></tr><tr><td># </td>
+		<td>Numeric list </td></tr><tr><td>* </td><td>Bulleted list </td></tr></tbody></table>
+		
+		<h4 id="Links">Links</h4><p>"title":http://www.example.com<br/>
+		!images/logo.png!:http://www.example.com</p>
+		
+		<h4 id="Images">Images</h4><p>!images/logo.png!</p>
+		
+		<h4 id="Punctuation">Punctuation</h4>
+		<table><tbody><tr><td>"quotes" </td><td>“quotes” </td></tr><tr><td>'quotes' </td><td>‘quotes’ </td></tr><tr>
+		<td>it's </td><td>it’s </td></tr><tr><td>em -- dash </td><td>em — dash </td></tr><tr><td>en - dash </td>
+		<td>en – dash </td></tr><tr><td>2 x 4 </td><td>2 × 4 </td></tr><tr><td>foo(tm) </td><td>foo™ </td></tr><tr>
+		<td>foo(r) </td><td>foo® </td></tr></tbody></table>
+		
+		<h4 id="Lists">Lists</h4><h5 id="BulletedLists">Bulleted Lists</h5>
+<pre>
+* one
+** one.one 
+** one.two 
+* two 
+</pre>
+		<ul><li>one<ul><li>one.one</li><li>one.two</li></ul></li><li>two</li></ul>
+		
+		<h5 id="NumericLists">Numeric Lists</h5>
+<pre>
+# one
+## one.one
+## one.two
+# two
+</pre>
+		<ol><li>one<ol><li>one.one</li><li>one.two</li></ol></li><li>two</li></ol>
+		
+		<h4 id="Tables">Tables</h4><p>|_. a|_. table|_. header|<br/>|a|table|row|<br/>|a|table|row|</p>
+		
+		<h4 id="AlignmentandPadding">Alignment and Padding</h4><table><tbody><tr><td>&lt; </td>
+		<td>left text alignment </td><td>eg: p&lt;. </td></tr><tr><td>&gt; </td><td>right text alignment </td>
+		<td>eg: p&gt;. </td></tr><tr><td>&lt;&gt; </td><td>justify text </td><td>eg: p&lt;&gt;. </td></tr><tr>
+		<td>= </td><td>center text </td><td>eg: p=. </td></tr><tr><td>( </td><td>pad left </td>
+		<td>eg: p(. </td></tr><tr><td>) </td><td>pad right </td><td>eg: p). </td></tr><tr><td>() </td>
+		<td>pad left and right </td></tr></tbody></table><h4 id="Attributes">Attributes</h4><table><tbody>
+		<tr><td>(class) </td><td>eg: h1(foo). </td></tr><tr><td>(#id) </td><td>eg: h1(foo). </td></tr>
+		<tr><td>{style} </td><td>eg: h1{color:red}. </td></tr><tr><td>[language] </td><td>eg: h1[en]. </td></tr></tbody></table>
+		<p>example:</p><p>h1(main-heading){color: red}. header text</p>
+		
+		<h4 id="Acronyms">Acronyms</h4><p>ABW(A Better Way)</p>
+		
+		<h4 id="Footnotes">Footnotes</h4><p>reference[1]<br/>fn1. footnote text</p>
+		
+		<h4 id="ExtendedBlocks">Extended Blocks</h4><p>bc..<br/>bq..<br/>pre..</p>
+		
+		<h4 id="GeneratedContent">Generated Content</h4><p>{toc} Generates a table of contents.  Eg: {toc} or {toc:style=disc|maxLevel=3}
+		<br/>{glossary} Generates a glossary based on acronyms in the document.  Eg: {glossary} or {glossary:style=disc}</p></div>
+
+	</g:HTMLPanel>
+</ui:UiBinder>

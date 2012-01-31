@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:aop="http://www.springframework.org/schema/aop" 
+       xmlns:context="http://www.springframework.org/schema/context" 
+	   xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:jee="http://www.springframework.org/schema/jee" 
+       xmlns:tx="http://www.springframework.org/schema/tx" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd   
+                           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd   
+                           http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd   
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+                           
+  	<import resource="classpath:applicationContext-eventServiceClient.xml"/>
+                           
+
+	<context:annotation-config/>	
+	<context:component-scan base-package="com.tasktop.c2c.server.internal.tasks,com.tasktop.c2c.server.tasks"/> 
+	
+	<bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="rawDataSource"
+		p:driverClassName="${task.database.driverClassName}" p:url="${task.database.url}"
+		p:username="${task.database.username}" p:password="${task.database.password}" />
+	
+	<bean class="com.tasktop.c2c.server.internal.tasks.service.TaskTenantAwareDataSource" id="dataSource"
+		p:wrappedDataSource-ref="rawDataSource"
+		p:language="MYSQL"
+	>
+		<qualifier value="switching"/>
+	</bean>
+
+	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
+		id="transactionManager" p:entityManagerFactory-ref="tasksDomain" />
+
+	<tx:annotation-driven />
+
+    <bean id="validator" class="com.tasktop.c2c.server.tasks.domain.validation.DomainValidator"/>
+    <bean id="internalValidator" class="com.tasktop.c2c.server.internal.tasks.domain.validation.DomainValidator"/>
+     
+    <!-- messages -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    	<property name="basenames">
+    		<array>
+	    	 	<value>classpath:messages</value>
+    		</array>
+    	</property>
+	</bean>  
+	
+	<bean class="com.tasktop.c2c.server.internal.tasks.service.TaskServiceConfiguration"
+		p:profileApplicationProtocol="${profile.application.protocol}"
+		p:webHost="${profile.application.host}"
+		p:baseContextPath="${profile.prefix.path}"
+		p:serviceProxyPath="${profile.serviceProxy.path}"
+	/>
+
+	<bean id="taskConfigurationService" class="com.tasktop.c2c.server.configuration.service.NodeConfigurationServiceBean">
+		<property name="configurators">
+			<list> 
+				<ref bean="taskDBConfigurationService"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="taskDBConfigurationService" class="com.tasktop.c2c.server.configuration.service.ProjectServiceDatabaseConfigurator" 
+					p:suffix="_tasks" p:rawDatasource-ref="rawDataSource" p:tenantAwareDataSource-ref="dataSource" 
+					p:changelog="classpath:/data/liquibase-task-db-master.xml"/>
+	
+	<bean id="aopLogger" class="com.tasktop.c2c.server.common.service.ServiceLoggingAdvice"/>
+	
+	<aop:config>
+		<aop:aspect ref="aopLogger">
+			<aop:pointcut id="serviceCall" expression="execution(public * com.tasktop.c2c.server.internal.tasks.service.TaskServiceBean.*(..))"/>
+			<aop:around pointcut-ref="serviceCall" method="doLogging"/>
+		</aop:aspect>
+	</aop:config>
+		
+</beans>

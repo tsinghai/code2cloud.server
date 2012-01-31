@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<import resource="classpath*:META-INF/spring/applicationContext-jackson.xml"/>
+
+	<bean class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" />
+
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"
+		p:objectMapper-ref="jacksonObjectMapper"
+	/>
+
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"
+		p:order="5" p:favorPathExtension="false">
+	
+		<property name="defaultContentType" value="application/json"></property>
+		<property name="viewResolvers">
+			<list>
+				<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+			</list>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<ref bean="jsonView"/>
+				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"
+					p:contentType="application/json" p:objectMapper-ref="jacksonObjectMapper"
+				/>
+				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"
+					p:contentType="application/x-javascript" p:objectMapper-ref="jacksonObjectMapper"
+				/>
+				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"
+					p:contentType="text/javascript" p:objectMapper-ref="jacksonObjectMapper"
+				/>
+				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"
+					p:contentType="text/x-javascript" p:objectMapper-ref="jacksonObjectMapper"
+				/>
+				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"
+					p:contentType="text/x-json" p:objectMapper-ref="jacksonObjectMapper"
+				/>
+				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"
+					p:contentType="text/json" p:objectMapper-ref="jacksonObjectMapper"
+				/>
+			</list>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jacksonMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="messageErrorHandlerFilter"
+		class="com.tasktop.c2c.server.common.service.web.MessageErrorHandlerFilter"
+		autowire="byType" >
+		<property name="modelMediaTypes">
+			<list>
+				<value>application/json</value>
+				<value>application/x-javascript</value>
+				<value>text/javascript</value>
+				<value>text/x-javascript</value>
+				<value>text/x-json</value>
+				<value>text/json</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>

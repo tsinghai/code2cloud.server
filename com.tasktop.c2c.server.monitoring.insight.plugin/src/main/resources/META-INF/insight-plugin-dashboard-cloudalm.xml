@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	                    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd" >
+
+	<import resource="classpath*:META-INF/spring/applicationContext-multiUserRestClient.xml"/>
+
+		<!-- centralized properties paths for: app, os x dev environments, vcloud self host -->
+	<context:property-placeholder location="/META-INF/*.properties, file:///opt/cloudalm/etc/*.properties, file:///home/cloudalm/etc/*.properties"  
+		ignore-resource-not-found="true"/>
+		
+ 
+	
+	<bean id="monitoringService" class="com.tasktop.c2c.server.monitoring.service.MonitoringServiceClient">
+		<property name="restTemplate" ref="basicAuthRestTemplate"/>
+		<!--  FIXME externalize. Seems that our standard mechanism does not work correctly in insight. -->
+		<property name="baseUrl" value="http://127.0.0.1:8080/alm/monitoring/"/>
+	</bean>
+
+	<bean id="dashboard-plugin.code2cloud-monitior" class="com.tasktop.c2c.server.monitoring.insight.MonitoringEventListiner" 
+	      depends-on="dashboardInterceptAttacher"> <!--  deps-on makes this happen after dashboard -->
+		<property name="monitoringService" ref="monitoringService"/>
+	</bean>
+	
+</beans>

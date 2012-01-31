@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel addStyleNames="workLogItem">
+		<g:Label ui:field="date"></g:Label>
+		<g:Label ui:field="hours"></g:Label>
+		<g:Label ui:field="personName"></g:Label>
+		<g:Label ui:field="comment"></g:Label>
+	</g:HTMLPanel>
+</ui:UiBinder>

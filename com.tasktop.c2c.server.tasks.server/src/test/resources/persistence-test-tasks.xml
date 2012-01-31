@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+
+    <persistence-unit name="tasksDomain" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <mapping-file>orm-test.xml</mapping-file>
+        <class>com.tasktop.c2c.server.internal.tasks.domain.AttachmentData</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Attachment</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.BugGroupMap</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Task</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.TaskActivity</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.BugSeeAlso</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.TaskSeverity</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.TaskFulltext</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.TaskStatus</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.BzSchema</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.CategoryGroupMap</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Cc</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Classification</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.ComponentCc</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Component</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Dependency</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Duplicate</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.EmailSetting</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Fielddef</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Flagexclusions</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Flaginclusions</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Flags</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Flagtypes</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.GroupControlMap</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.GroupGroupMap</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Group</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Keyworddef</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Keyword</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Logincookie</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.LoginFailure</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Comment</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Milestone</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Namedquery</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.NamedqueryLinkInFooter</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.NamedqueryGroupMap</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.OpSys</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Priority</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Product</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Profile</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.ProfileActivity</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.ProfileSetting</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Quips</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.RepPlatform</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Resolution</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.SavedTaskQuery</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Series</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.SeriesCategories</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.SeriesData</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Setting</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.SettingValue</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.StatusWorkflow</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Token</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.TsError</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.TsExitstatus</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.TsFuncmap</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.TsJob</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.TsNote</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.UserGroupMap</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Version</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Vote</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.Watch</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.WhineEvent</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.WhineQuery</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.WhineSchedule</class>
+		<class>com.tasktop.c2c.server.internal.tasks.domain.TaskType</class>
+        <properties>
+            <property name="eclipselink.target-database" value="com.tasktop.c2c.server.common.jpa.MySQL55Platform"/>
+            <!--value='drop-and-create-tables' to build a new database on each run; value='create-tables' creates new tables if needed; value='none' makes no changes to the database-->
+            <property name="eclipselink.ddl-generation" value="none"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+            <property name="eclipselink.weaving" value="false"/>
+            <property name="eclipselink.logging.level" value="CONFIG"/>
+        </properties>
+    </persistence-unit>
+</persistence>

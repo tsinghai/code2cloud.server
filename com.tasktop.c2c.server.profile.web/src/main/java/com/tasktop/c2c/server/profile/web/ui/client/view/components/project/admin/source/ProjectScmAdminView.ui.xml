@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+			 xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel>
+		<div class="deployment">
+			<div class="hosted-repos">
+				<h3>Hosted Source Repositories
+					<g:Anchor ui:field="addInternalRepositoryLink" addStyleNames="misc-icon plus right"><span></span>Add
+						Hosted Repository
+					</g:Anchor>
+				</h3>
+				<fieldset>
+					<g:FlowPanel ui:field="internalRepositoriesPanel"/>
+				</fieldset>
+			</div>
+			<div class="external-repos">
+				<h3>External Source Repositories
+					<g:Anchor ui:field="addExternalRepositoryLink" addStyleNames="misc-icon plus right"><span></span>Add
+						External Repository
+					</g:Anchor>
+				</h3>
+				<fieldset>
+					<g:FlowPanel ui:field="externalRepositoriesPanel"/>
+				</fieldset>
+			</div>
+			<div class="clear"></div>
+			<!--  NEEDED?? -->
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

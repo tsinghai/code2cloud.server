@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<entity-mappings
+	xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.eclipse.org/eclipselink/xsds/persistence/orm http://www.eclipse.org/eclipselink/xsds/eclipselink_orm_1_2.xsd"
+	version="1.2">
+	
+    <persistence-unit-metadata>
+        <persistence-unit-defaults>
+<!--             <delimited-identifiers/> -->
+        </persistence-unit-defaults>
+    </persistence-unit-metadata>
+    <mapped-superclass class="com.tasktop.c2c.server.internal.wiki.server.domain.BaseEntity"/>
+    <entity class="com.tasktop.c2c.server.internal.wiki.server.domain.Page">
+	    <attributes>
+		    <id name="id">
+		    	<generated-value strategy="AUTO"/>
+		    </id>
+	    </attributes>
+    </entity>
+    <entity class="com.tasktop.c2c.server.internal.wiki.server.domain.Person">
+	    <attributes>
+		    <id name="id">
+		    	<generated-value strategy="AUTO"/>
+		    </id>
+	    </attributes>
+    </entity>
+    <entity class="com.tasktop.c2c.server.internal.wiki.server.domain.PageContent">
+	    <attributes>
+		    <id name="id">
+		    	<generated-value strategy="AUTO"/>
+		    </id>
+	    </attributes>
+    </entity>
+    <entity class="com.tasktop.c2c.server.internal.wiki.server.domain.Attachment">
+	    <attributes>
+		    <id name="id">
+		    	<generated-value strategy="AUTO"/>
+		    </id>
+	    </attributes>
+    </entity>
+    <entity class="com.tasktop.c2c.server.internal.wiki.server.domain.AttachmentContent">
+	    <attributes>
+		    <id name="id">
+		    	<generated-value strategy="AUTO"/>
+		    </id>
+	    </attributes>
+    </entity>
+</entity-mappings>

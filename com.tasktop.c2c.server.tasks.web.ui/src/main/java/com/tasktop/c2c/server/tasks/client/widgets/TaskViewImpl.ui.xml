@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:t="urn:import:com.tasktop.c2c.server.tasks.client.widgets"
+	xmlns:c="urn:import:com.tasktop.c2c.server.common.web.client.widgets.chooser"
+	xmlns:w="urn:import:com.tasktop.c2c.server.tasks.client.widgets.wiki"
+	xmlns:a="urn:import:com.tasktop.c2c.server.common.web.client.widgets"
+	xmlns:tm='urn:import:com.tasktop.c2c.server.common.web.client.widgets.time'
+	xmlns:gd='urn:import:com.google.gwt.user.datepicker.client'>
+	
+	<ui:with field='res' type='com.tasktop.c2c.server.tasks.client.TaskResources'/>
+	
+	<g:HTMLPanel debugId="task-view-form">
+		<div class="task-section {res.style.taskSection}">
+			<h4>
+				<div>
+				<div class="left {res.style.taskTitle}">
+					<div class="{res.style.taskType}">
+						<div class="{res.style.inlineEditTrigger}">
+							<g:Anchor ui:field="editTaskTypeAnchor"/>
+						</div>
+						<g:HTML ui:field="readOnlyTaskType"/>
+						<div class="{res.style.editing}">
+							<g:ValueListBox ui:field="taskType"/>
+						</div>
+					</div>
+					<g:ValueLabel ui:field="id"/>
+					<div class="{res.style.taskSummary}">
+						<div class="{res.style.inlineEditTrigger}">
+							<g:Anchor ui:field="editSummaryAnchor"/>
+						</div>
+						<g:HTML ui:field="readOnlySummary" />
+						<div class="{res.style.editing}">
+							<g:TextBox ui:field="shortDescription" styleName="summary"/>
+						</div>
+					</div>
+				</div>
+				<g:Anchor ui:field="editTaskAnchor" styleName="misc-icon right"/>
+				</div>
+					<div class="clear"/>
+				<div class="date-info">
+					<div class="created left">
+						<span>Created by</span>
+						<span class="username">
+						<span class="avatar micro name-include">
+							<g:Image ui:field="createdByImage"/>
+						    <g:Label ui:field="createdBy"/>
+						</span>
+						<span>on <g:Label ui:field="creationDate"/></span>
+						</span>
+					</div>
+					<div class="changed right">
+						<span>Updated on <g:Label ui:field="updateDate"/></span>
+					</div>
+					<div class="clear"/>
+				</div>
+			</h4>
+		</div>
+		<div class="project-detail-container">
+			<div class="menu left">
+				<g:Anchor ui:field="taskListLink" debugId="taskListLink" styleName="misc-icon prev">
+					<span></span> Back to List
+				</g:Anchor>
+				<g:Anchor ui:field="taskHistoryLink" debugId="taskHistoryLink" styleName="misc-icon next">
+					<span></span> View History
+				</g:Anchor>
+				<g:Anchor ui:field="newSubTaskLink">
+					<span ui:field="newSubTaskSpan">
+					</span> New Subtask
+				</g:Anchor>
+				
+				<div class="clear"></div>
+				<ul class="task-properties">
+					<li><h3>Status</h3></li>
+					<li>
+						<fieldset>
+							<label>Priority</label>
+							<div class="{res.style.inlineEditTrigger}">
+								<g:Anchor debugId="editPriorityAnchor" ui:field="editPriorityAnchor"/>
+							</div>
+							<g:HTML ui:field="readOnlyPriority"/>
+							<div class="{res.style.editing}">
+								<g:ValueListBox ui:field="priority"/>
+							</div>
+							<!--  This Div will float around based on the field being edited  -->
+							<div ui:field="editControlsDiv" class="{res.style.editControls}">
+								<g:Button ui:field="saveButton" addStyleNames="button special right">Save</g:Button>
+								<g:Button ui:field="cancelButton" addStyleNames="button right">Cancel</g:Button>
+							</div>
+						</fieldset>
+						<fieldset>
+							<label>Severity</label>
+							<div class="{res.style.inlineEditTrigger}">
+								<g:Anchor debugId="editSeverityAnchor" ui:field="editSeverityAnchor"/>
+							</div>
+							<g:HTML ui:field="readOnlySeverity"/>
+							<div class="{res.style.editing}">
+								<g:ValueListBox ui:field="severity"/>
+							</div>
+						</fieldset>
+						<fieldset>
+							<label>Status</label>
+							<div class="{res.style.inlineEditTrigger}">
+								<g:Anchor debugId="editStatusAnchor" ui:field="editStatusAnchor" />
+							</div>
+							<g:HTML ui:field="readOnlyStatus"/>
+							<div class="{res.style.editing}">
+								<t:StatusEditorView ui:field="statusEditor" />
+							</div>
+							<g:HTMLPanel debugId="statusPanel" ui:field="statusPanel" />
+						</fieldset>
+					</li>
+					<li><h3>Properties</h3></li>
+					<li>
+						<fieldset>
+							<label>Estimate</label>
+							<div class="{res.style.inlineEditTrigger}">
+								<g:Anchor debugId="editEstimateAnchor" ui:field="editEstimateAnchor" />
+							</div>
+							<g:HTML ui:field="readOnlyEstimate"/>
+							<div class="{res.style.editing}">
+								<tm:TimePeriodBox ui:field="estimatedTime"/>
+							</div>
+							
+						</fieldset>
+						<fieldset>
+							<label>Time Spent</label>
+							<div class="{res.style.inlineEditTrigger}">
+								<g:Anchor debugId="timeSpent" ui:field="editTimeSpentAnchor" />
+							</div>
+							<g:HTML debugId="timeSpent" ui:field="readOnlyTimeSpent" />
+							<div class="{res.style.editing}">
+								<tm:TimePeriodBox ui:field="timeSpent"/>
+							</div>
+							
+						</fieldset>
+						<fieldset>
+							<label>Due Date</label>
+							<div class="{res.style.inlineEditTrigger}">
+								<g:Anchor ui:field="editDueDateAnchor" />
+							</div>
+							<g:HTML ui:field="readOnlyDueDate"/>
+							<div class="{res.style.editing}">
+								<gd:DateBox ui:field="deadline"/>
+							</div>
+							
+						</fieldset>
+						<fieldset>
+							<label>Product</label>
+							<div class="{res.style.inlineEditTrigger}">
+								<g:Anchor ui:field="editProductAnchor" />
+							</div>
+							<g:HTML ui:field="readOnlyProduct"/>
+							<div class="{res.style.editing}" >
+								<g:ValueListBox ui:field="product"/>
+							</div>
+						</fieldset>
+						<fieldset>
+							<label>Component</label>
+							<div class="{res.style.inlineEditTrigger}">
+								<g:Anchor ui:field="editComponentAnchor" />
+							</div>
+							<g:HTML ui:field="readOnlyComponent"/>
+							<div class="{res.style.editing}" >
+								<g:ValueListBox ui:field="component"/>
+							</div>	
+						</fieldset>
+						<fieldset>
+							<label>Found In</label>
+								<div class="{res.style.inlineEditTrigger}">
+								<g:Anchor ui:field="editFoundInAnchor" />
+							</div>
+							<g:HTML ui:field="readOnlyFoundIn"/>
+							<div class="{res.style.editing}" >
+								<c:SingleValueChooser ui:field="foundInRelease"/>
+							</div>
+						</fieldset>
+						<fieldset>
+							<label>Release</label>
+								<div class="{res.style.inlineEditTrigger}">
+								<g:Anchor ui:field="editReleaseAnchor" />
+							</div>
+							<g:HTML ui:field="readOnlyRelease"/>
+							<div class="{res.style.editing}">
+								<g:ValueListBox ui:field="milestone"/>
+							</div>
+						</fieldset>
+						<fieldset>
+							<label>Iteration</label>
+							<div class="{res.style.inlineEditTrigger}">
+								<g:Anchor debugId="editIterationAnchor" ui:field="editIterationAnchor" />
+							</div>
+							<g:HTML ui:field="readOnlyIteration"/>
+							<div class="{res.style.editing}">
+								<g:ValueListBox ui:field="iteration"/>
+							</div>							
+						</fieldset>
+						<fieldset>
+							<label>Tags</label>
+							<div class="{res.style.inlineEditTrigger}">
+								<g:Anchor debugId="editTagsAnchor" ui:field="editTagsAnchor" />
+							</div>
+							<g:HTML ui:field="readOnlyTags"/>
+							<div class="{res.style.editing}">
+								<c:MultiValueChooser ui:field="keywords" styleName="text long date left"/>
+							</div>
+						</fieldset>
+						<g:FlowPanel ui:field="customFieldsPanel"/>
+					</li>
+					<li><h3>Files</h3></li>
+					<li>
+						<g:HTMLPanel debugId='attachmentsPanel' ui:field='attachmentsPanel'></g:HTMLPanel>
+					</li>
+					<li><h3>Associations</h3></li>
+					<li>
+						<fieldset>
+							<label>Parent</label>
+							<g:FlowPanel ui:field="parentTasksPanel">
+								<g:Anchor ui:field="editParentAnchor"/>
+							</g:FlowPanel>
+							<div class="{res.style.editing}">
+								<c:MultiValueChooser ui:field="blocksTasks" />
+							</div>
+						</fieldset>
+					</li>
+					<li>
+						<fieldset>
+							<label>Subtasks</label>
+								<g:FlowPanel ui:field="subTasksPanel">
+									<g:Anchor ui:field="editSubtasksAnchor"/>
+								</g:FlowPanel>
+							<div class="{res.style.editing}">
+								<c:MultiValueChooser ui:field="subTasks" />
+							</div>
+						</fieldset>
+					</li>
+					<li>
+						<fieldset ui:field='duplicatesElement'>
+							<label>Duplicates</label>
+							<g:FlowPanel ui:field="duplicates" />
+						</fieldset>
+					</li>
+ 					<li>
+						<fieldset ui:field='externalDepsElement'>
+							<label>External</label>
+							<g:FlowPanel debugId="externalTaskRelations" ui:field="externalTaskRelations" />
+						</fieldset>
+					</li>
+ 					<li><h3>People</h3></li>
+					<li>
+						<fieldset>
+							<label>Owner</label>
+							<div class="{res.style.inlineEditTrigger}">
+								<g:Anchor debugId="editOwnerAnchor" ui:field="editOwnerAnchor"/>
+							</div>
+							<g:HTML ui:field="readOnlyOwner"/>
+							<div class="{res.style.editing}">
+								<t:SingleTaskProfileChooser ui:field="assignee" styleName="text long date left"/>
+							</div>
+						</fieldset>
+						<fieldset>
+							<label>CC</label>
+							<div class="{res.style.inlineEditTrigger}">
+								<g:Anchor debugId="editCCAnchor" ui:field="editCCAnchor"/>
+							</div>
+							<g:HTML ui:field="readOnlyCC"/>
+							<div class="{res.style.editing}">
+								<t:MultipleTaskProfileChooser ui:field="watchers" styleName="text long date left"/>
+							</div>
+						</fieldset>
+					</li>
+				</ul>
+			</div>
+			<div class="content right">
+				<div class="profile-div view-task-container left">
+					<div class="credentials advance-search task-section">
+						<div>
+							<w:WikiHTMLPanel ui:field="readOnlyDescription" addStyleNames="wikiContent"/>
+							<w:EditWikiPanel ui:field="description" visibleLines="7"/>
+						</div>
+					</div>
+					<div class="task-section">
+					<t:CommentsPanel ui:field="commentsPanel"/>		
+				</div>
+				<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

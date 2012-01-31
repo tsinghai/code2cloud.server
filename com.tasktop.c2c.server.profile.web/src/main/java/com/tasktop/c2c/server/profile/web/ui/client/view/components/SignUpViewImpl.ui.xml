@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:a='urn:import:com.tasktop.c2c.server.common.web.client.widgets'>
+	<g:HTMLPanel debugId="sign-up-page" >
+	<g:FlowPanel debugId="messagePanel" ui:field="messagePanel" styleName="warningMessage signUpMessage" visible="false"><g:Label>Code2Cloud is currently invitation only.</g:Label></g:FlowPanel>
+	<g:HTMLPanel debugId="issuingUserHeader" ui:field="issuingUserHeader" visible="false">
+		<div class="page-menu">
+			<div class="left">
+				<g:Label debugId="issuingUser" ui:field="issuingUser" styleName="headingLarge" />
+				<p>To access this project, sign up for an account or 
+				<g:Anchor ui:field="signInAnchor">sign in</g:Anchor>
+				 with your existing account</p>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</g:HTMLPanel>
+	<a:FormSectionPanel>
+		<g:HTMLPanel debugId="signUpForm" ui:field="signUpForm" visible="false">
+				<div class="create-account left">
+						<div class="headingMedium" >
+							Account Information
+						</div>
+						<form id="sign-up-form" class="sign-up-form" action="#" method="post">
+							<fieldset>
+								<label>Username</label>
+								<g:TextBox debugId="username" styleName="input" name="username" ui:field="username"/>
+							</fieldset>
+							<fieldset>
+								<label>Email Address</label>
+								<g:TextBox debugId="email" styleName="input" name="email" ui:field="email" />
+							</fieldset>
+							<fieldset>
+								<label>First Name</label>
+								<g:TextBox debugId="firstName" styleName="input"  ui:field="firstName"/>
+							</fieldset>
+							<fieldset>
+								<label>Last Name</label>
+								<g:TextBox debugId="lastName" styleName="input" ui:field="lastName" />
+							</fieldset>
+							<fieldset>
+								<label>Password</label>
+								<g:PasswordTextBox debugId="password" styleName="input" name="password" ui:field="password" />
+							</fieldset>
+							<fieldset>
+								<label>Confirm</label>
+								<g:PasswordTextBox debugId="passwordConfirm" styleName="input" name="password" ui:field="passwordConfirm" />
+							</fieldset>
+							<fieldset>
+								<label>&nbsp;</label>
+								<g:HTMLPanel debugId="passMatchError" ui:field="passMatchError" visible="false" styleName="error misc-icon"><span/>Password and Confirm Password must be the same</g:HTMLPanel>
+							</fieldset>
+							<div class="form-button-holder margin-top10">
+								<g:Button debugId="createAccountButton" addStyleNames="button special login" ui:field="createAccountButton">Create Account</g:Button>
+							</div>
+						</form>
+					</div>
+					<div class="git-hub-details right">
+						<div class="headingMedium">GitHub Credentials</div>
+						<div class="git-hub-details-content">
+							<p>
+								You can link your <a href="http://www.github.com" class="underline">GitHub</a> account to your Code2Cloud account.
+								After linking your accounts, you can sign in to Code2Cloud using either your Code2Cloud credentials or your GitHub credentials.
+							</p>
+							<g:HTMLPanel ui:field="linkGithubPanel" debugId="linkGithubPanel">
+								<div class="text-center ">
+									<g:FormPanel debugId="githubForm" ui:field="githubForm" method="POST" action="api/signin/github">
+										<g:Button debugId="githubButton" ui:field="githubButton" addStyleNames="button special login">Link Your GitHub Account</g:Button>
+									</g:FormPanel>
+								</div>
+							</g:HTMLPanel>
+							<g:HTMLPanel debugId="githubLinkedPanel" ui:field="githubLinkedPanel" visible="false">
+								<div class="text-center git-linked">
+									<span class="icon linked"/>
+									<p class="misc-icon valid">
+										<span/>
+										<g:Label debugId="githubLinkedLabel" ui:field="githubLinkedLabel"/>
+									</p>
+									<div class="clear"/>
+								</div>
+								<div class="text-center ">
+									<div class="headingSmall">Now Create Your Code2Cloud Account</div>
+									<p>To complete Sign Up, enter account information in the form to the left to create your Code2Cloud account.</p>
+								</div>
+							</g:HTMLPanel>
+						</div>
+					</div>
+					<div class="clear"/>
+		</g:HTMLPanel>
+	</a:FormSectionPanel>
+	</g:HTMLPanel>
+</ui:UiBinder>

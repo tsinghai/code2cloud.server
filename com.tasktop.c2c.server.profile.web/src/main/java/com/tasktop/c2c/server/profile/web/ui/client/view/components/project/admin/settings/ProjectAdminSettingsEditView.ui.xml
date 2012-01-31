@@ -1,0 +1,52 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<ui:style field="local">
+		.gwt-Button-Local {
+			border-radius: 0;
+			text-transform: none;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+
+		<form id="project-admin" class="add-form edit project-admin left" action="" method="post">
+			<h4>Properties</h4>
+			<fieldset>
+				<label class="left">Name:</label>
+				<div>
+					<g:TextBox ui:field="projectName" addStyleNames="text"/>
+				</div>
+			</fieldset>
+			<fieldset>
+				<label class="left">Description:</label>
+				<p>
+					<g:TextArea ui:field="projectDescription" addStyleNames="text"/>
+				</p>
+			</fieldset>
+			<fieldset>
+				<label>Privacy:</label>
+				<div>
+					<p>
+						<g:RadioButton name="privacy" ui:field="privacyPublicOption"/>
+						Public
+					</p>
+					<p>
+						<g:RadioButton name="privacy" ui:field="privacyPrivateOption"/>
+						Private
+					</p>
+				</div>
+			</fieldset>
+			<div class="clear"/>
+			<fieldset>
+				<label>&#160;</label>
+				<div class="save">
+					<g:Button ui:field="cancelEditButton" addStyleNames="button {local.gwt-Button-Local}"
+							  text="Cancel"/>
+					<g:Button ui:field="saveButton" addStyleNames="button special {local.gwt-Button-Local}"
+							  text="Save Changes"/>
+				</div>
+			</fieldset>
+			<div class="clear"/>
+		</form>
+
+	</g:HTMLPanel>
+</ui:UiBinder>

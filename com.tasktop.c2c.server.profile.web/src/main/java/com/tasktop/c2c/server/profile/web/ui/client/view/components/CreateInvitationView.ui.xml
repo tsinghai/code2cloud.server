@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:a='urn:import:com.tasktop.c2c.server.common.web.client.widgets'>
+	<g:HTMLPanel>
+		<g:FlowPanel ui:field="invitations"/>
+		<h2>Create Code2Cloud System Invitations</h2>
+		<div>
+			Invitations recipients (CSV):<br/>
+			<g:TextArea ui:field="invitationRecipients" /><br/>
+			Format (one per line):<br/>
+			First, Last, email@example.com
+		</div>
+		<g:CheckBox ui:field="sendEmail">Send Invitation Emails</g:CheckBox>
+		<div>
+			<g:Button ui:field="createInvitationsButton">Create invitations</g:Button>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

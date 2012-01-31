@@ -1,0 +1,10 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'
+			 xmlns:p='com.tasktop.c2c.server.profile.web.ui.client.view.components.account.profile'>
+	<g:HTMLPanel>
+<!-- 			<p:AccountNotificationsReadOnlyView ui:field="accountNotificationsReadOnlyView"/> -->
+<!-- 			<p:AccountNotificationsEditView ui:field="accountNotificationsEditView"/> -->
+	<g:FlowPanel ui:field="panel"/>
+	
+	</g:HTMLPanel>
+</ui:UiBinder>

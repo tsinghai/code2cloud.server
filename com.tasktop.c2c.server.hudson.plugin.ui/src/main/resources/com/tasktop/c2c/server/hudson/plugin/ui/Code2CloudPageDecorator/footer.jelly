@@ -1,0 +1,12 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+	<![CDATA[ <script type="text/javascript">
+		var pageUrl = decodeURIComponent(window.location.toString());
+		var applicationRoot = pageUrl.split('/s/')[0];
+
+		var HUDSONVARS = new Array();
+		HUDSONVARS['anon-user'] = ${it.anon};
+
+		/* Emit Script tag - break it up, because some browsers do funny things if they see an intact script tag */
+		document.write('<sc' + 'ri' + 'pt type="text/javas' + 'cr' + 'ipt" src="' + applicationRoot + '/scripts/hudson-cfcode.js"></' + 'sc' + 'ri' + 'pt>');
+	</script> ]]>
+</j:jelly>

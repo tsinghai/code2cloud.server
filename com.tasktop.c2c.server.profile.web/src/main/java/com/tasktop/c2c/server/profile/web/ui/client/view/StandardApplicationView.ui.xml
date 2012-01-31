@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:tt="urn:import:com.tasktop.c2c.server.profile.web.ui.client.view.components">
+	   
+		<g:HTMLPanel>
+			<div class="header-wrapper">
+				<g:SimplePanel ui:field="headerContainer"/>
+				<g:SimplePanel ui:field="menuContainer"/>
+			</div>
+			<div class="container">
+				<g:SimplePanel ui:field="contentContainer" />
+			</div>
+
+		    <div class="footer-stretch">
+		      <div class="footer">
+		        <div class="social-media-logos left">
+		          <a class="twitter" href="" target="_blank">Twitter</a>
+		          <a class="facebook" href="" target="_blank">Facebook</a>
+		          <a class="youtube" href="" target="_blank">You Tube</a>
+		        </div>
+		        <div class="links right">
+		          <a href="https://tasktop.com/support/faq/index.php#code2cloud" target="_blank">FAQ</a>
+		          |
+		          <a href="" target="_blank">Forums</a>
+		          |
+		          <a href="" target="_blank">Support</a>
+		          |
+		          <a href="" target="_blank">Blog</a>
+		          |
+		          <a href="" target="_blank">Terms</a>
+		          |
+		          <a href="" target="_blank">Legal</a>
+		          |
+		          <a href="" target="_blank">Privacy</a>
+		        <div class="copyright">
+		          Copyright &copy; <g:Label ui:field="year"/>. <a href="http://www.tasktop.com/" target="_blank">Tasktop Technologies</a>. All rights reserved.
+		        </div>
+		        </div>
+		        <div class="clear"></div>
+		      </div>
+		    </div>		
+
+		</g:HTMLPanel>
+</ui:UiBinder>

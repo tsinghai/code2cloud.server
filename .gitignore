@@ -1,0 +1,10 @@
+.DS_Store
+*.war
+*.class
+*.refactorings
+*/bin/
+org.cloudfoundry.code.server/org.cloudfoundry.code.server.profile.web/.gwt/.gwt-log
+*.ipr
+*.iml
+*.iws
+.idea

@@ -1,0 +1,2542 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet author="taskdb" id="createAttachDataTable">
+		<createTable tableName="attach_data">
+			<column name="id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="thedata" type="LONGBLOB">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createAttachmentsTable">
+		<createTable tableName="attachments">
+			<column autoIncrement="true" name="attach_id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="bug_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="creation_ts" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="modification_time" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="TINYTEXT">
+				<constraints nullable="false" />
+			</column>
+			<column name="mimetype" type="TINYTEXT">
+				<constraints nullable="false" />
+			</column>
+			<column name="ispatch" type="TINYINT" />
+			<column defaultValue="" name="filename" type="VARCHAR(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="submitter_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="isobsolete" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="isprivate" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="isurl" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+    	<modifySql dbms="hsqldb">
+         	<replace replace="TINYTEXT" with="VARCHAR(255)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugGroupMapTable">
+		<createTable tableName="bug_group_map">
+			<column name="bug_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="group_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugSeeAlsoTable">
+		<createTable tableName="bug_see_also">
+			<column name="bug_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="value" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugSeverityTable">
+		<createTable tableName="bug_severity">
+			<column autoIncrement="true" name="id" type="SMALLINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="value" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="sortkey" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="isactive" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="visibility_value_id" type="SMALLINT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugStatusTable">
+		<createTable tableName="bug_status">
+			<column autoIncrement="true" name="id" type="SMALLINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="value" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="sortkey" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="isactive" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="visibility_value_id" type="SMALLINT" />
+			<column defaultValueNumeric="1" name="is_open" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsTable">
+		<createTable tableName="bugs">
+			<column autoIncrement="true" name="bug_id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="assigned_to" type="MEDIUMINT" />
+			<column name="bug_file_loc" type="MEDIUMTEXT" />
+			<column defaultValue="" name="bug_severity" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="bug_status" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column name="creation_ts" type="DATETIME" />
+			<column name="delta_ts" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="short_desc" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="op_sys" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="priority" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column name="product_id" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="rep_platform" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column name="reporter" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="version" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column name="component_id" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="resolution" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="---" name="target_milestone" type="VARCHAR(20)">
+				<constraints nullable="false" />
+			</column>
+			<column name="qa_contact" type="MEDIUMINT" />
+			<column name="status_whiteboard" type="MEDIUMTEXT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="votes" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="keywords" type="MEDIUMTEXT">
+				<constraints nullable="false" />
+			</column>
+			<column name="lastdiffed" type="DATETIME" />
+			<column name="everconfirmed" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="reporter_accessible"
+				type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="cclist_accessible" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0.00" name="estimated_time" type="DECIMAL(7,2)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0.00" name="remaining_time" type="DECIMAL(7,2)">
+				<constraints nullable="false" />
+			</column>
+			<column name="deadline" type="DATETIME" />
+			<column name="alias" type="VARCHAR(20)" />
+			<column defaultValue="Task" name="cf_tasktype" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="---" name="cf_iteration" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="cf_task_relations" type="MEDIUMTEXT" />
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+    	 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMTEXT" with="VARCHAR(8000)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsActivityTable">
+		<createTable tableName="bugs_activity">
+			<column name="bug_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="attach_id" type="MEDIUMINT" />
+			<column name="who" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="bug_when" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="fieldid" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="added" type="VARCHAR(255)" />
+			<column name="removed" type="TINYTEXT" />
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+    	<modifySql dbms="hsqldb">
+         	<replace replace="TINYTEXT" with="VARCHAR(255)"/>
+    	</modifySql>
+	</changeSet>
+	<!-- TODO need a DB-agnostic way to enable fulltext indexing. This is in 
+		SQL specifically to use MyISAM, as fulltext index does not work with InnoDB -->
+	<changeSet author="taskdb" id="createBugsFullTextTable">
+		<createTable tableName="bugs_fulltext">
+			<column name="bug_id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+		<column name="short_desc" type="VARCHAR(255)">
+		<constraints nullable="false" />
+			</column>
+			<column name="comments" type="MEDIUMTEXT"/>
+			<column name="comments_noprivate" type="MEDIUMTEXT"/>
+		</createTable>
+		<modifySql dbms="mysql">
+        	<replace replace="PRIMARY KEY (`bug_id`))" with="PRIMARY KEY (`bug_id`),
+			FULLTEXT KEY
+			bugs_fulltext_short_desc_idx (short_desc),
+			FULLTEXT KEY
+			bugs_fulltext_comments_idx (comments),
+			FULLTEXT KEY
+			bugs_fulltext_comments_noprivate_idx (comments_noprivate))ENGINE=MyISAM DEFAULT CHARSET=utf8 "/>
+    	</modifySql>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMTEXT" with="VARCHAR(8000)"/>
+    	</modifySql>
+    	 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createBzSchemaTable">
+		<createTable tableName="bz_schema">
+			<column name="schema_data" type="LONGBLOB">
+				<constraints nullable="false" />
+			</column>
+			<column name="version" type="DECIMAL(3,2)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createCategoryGroupMapTable">
+		<createTable tableName="category_group_map">
+			<column name="category_id" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="group_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createCCTable">
+		<createTable tableName="cc">
+			<column name="bug_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="who" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createCfIterationTable">
+		<createTable tableName="cf_iteration">
+			<column autoIncrement="true" name="id" type="SMALLINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="value" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="sortkey" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="isactive" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="visibility_value_id" type="SMALLINT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createCfTaskTypeTable">
+		<createTable tableName="cf_tasktype">
+			<column autoIncrement="true" name="id" type="SMALLINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="value" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="sortkey" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="isactive" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="visibility_value_id" type="SMALLINT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createClassificationsTable">
+		<createTable tableName="classifications">
+			<column autoIncrement="true" name="id" type="SMALLINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="name" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="MEDIUMTEXT" />
+			<column defaultValueNumeric="0" name="sortkey" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMTEXT" with="VARCHAR(8000)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createComponentCCTable">
+		<createTable tableName="component_cc">
+			<column name="user_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="component_id" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createComponentsTable">
+		<createTable tableName="components">
+			<column autoIncrement="true" name="id" type="SMALLINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="name" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column name="product_id" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="initialowner" type="MEDIUMINT" />
+			<column name="initialqacontact" type="MEDIUMINT" />
+			<column name="description" type="MEDIUMTEXT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMTEXT" with="VARCHAR(8000)"/>
+    	</modifySql>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createDepsTable">
+		<createTable tableName="dependencies">
+			<column name="blocked" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="dependson" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createDuplicatesTable">
+		<createTable tableName="duplicates">
+			<column name="dupe_of" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="dupe" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createEmailSettingTable">
+		<createTable tableName="email_setting">
+			<column name="user_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="relationship" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="event" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createFieldDefsTable">
+		<createTable tableName="fielddefs">
+			<column autoIncrement="true" name="id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="name" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="type" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="custom" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="TINYTEXT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="mailhead" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="sortkey" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="obsolete" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="enter_bug" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="buglist" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="visibility_field_id" type="MEDIUMINT" />
+			<column name="visibility_value_id" type="SMALLINT" />
+			<column name="value_field_id" type="MEDIUMINT" />
+		</createTable>
+		<modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+    	<modifySql dbms="hsqldb">
+         	<replace replace="TINYTEXT" with="VARCHAR(255)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagExclusionsTable">
+		<createTable tableName="flagexclusions">
+			<column name="type_id" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="product_id" type="SMALLINT" />
+			<column name="component_id" type="SMALLINT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagInclusionsTable">
+		<createTable tableName="flaginclusions">
+			<column name="type_id" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="product_id" type="SMALLINT" />
+			<column name="component_id" type="SMALLINT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagsTable">
+		<createTable tableName="flags">
+			<column autoIncrement="true" name="id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="type_id" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="status" type="CHAR(1)">
+				<constraints nullable="false" />
+			</column>
+			<column name="bug_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="attach_id" type="MEDIUMINT" />
+			<column name="creation_date" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="modification_date" type="DATETIME" />
+			<column name="setter_id" type="MEDIUMINT" />
+			<column name="requestee_id" type="MEDIUMINT" />
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagTypesTable">
+		<createTable tableName="flagtypes">
+			<column autoIncrement="true" name="id" type="SMALLINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="name" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="MEDIUMTEXT">
+				<constraints nullable="false" />
+			</column>
+			<column name="cc_list" type="VARCHAR(200)" />
+			<column defaultValue="b" name="target_type" type="CHAR(1)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="is_active" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="is_requestable" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="is_requesteeble" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="is_multiplicable" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="sortkey" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="grant_group_id" type="MEDIUMINT" />
+			<column name="request_group_id" type="MEDIUMINT" />
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMTEXT" with="VARCHAR(8000)"/>
+    	</modifySql>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createGroupControlMapTable">
+		<createTable tableName="group_control_map">
+			<column name="group_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="product_id" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="entry" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="membercontrol" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="othercontrol" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="canedit" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="editcomponents" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="editbugs" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="canconfirm" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createGroupGroupMapTable">
+		<createTable tableName="group_group_map">
+			<column name="member_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="grantor_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="grant_type" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createGroupsTable">
+		<createTable tableName="groups">
+			<column autoIncrement="true" name="id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="MEDIUMTEXT">
+				<constraints nullable="false" />
+			</column>
+			<column name="isbuggroup" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="userregexp" type="TINYTEXT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="isactive" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="icon_url" type="TINYTEXT" />
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMTEXT" with="VARCHAR(8000)"/>
+    	</modifySql>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+    	<modifySql dbms="hsqldb">
+         	<replace replace="TINYTEXT" with="VARCHAR(255)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createKeywordDefsTable">
+		<createTable tableName="keyworddefs">
+			<column autoIncrement="true" name="id" type="SMALLINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="name" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="MEDIUMTEXT" />
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMTEXT" with="VARCHAR(8000)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createKeywordsTable">
+		<createTable tableName="keywords">
+			<column name="bug_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="keywordid" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createLoginFailureTable">
+		<createTable tableName="login_failure">
+			<column name="user_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="login_time" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="ip_addr" type="VARCHAR(40)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createLoginCookiesTable">
+		<createTable tableName="logincookies">
+			<column defaultValue="" name="cookie" type="VARCHAR(16)">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="userid" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="ipaddr" type="VARCHAR(40)" />
+			<column name="lastused" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createLongdescsTable">
+		<createTable tableName="longdescs">
+			<column autoIncrement="true" name="comment_id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="bug_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="who" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="bug_when" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0.00" name="work_time" type="DECIMAL(7,2)">
+				<constraints nullable="false" />
+			</column>
+			<column name="thetext" type="MEDIUMTEXT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="isprivate" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="already_wrapped" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="type" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="extra_data" type="VARCHAR(255)" />
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+    	 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMTEXT" with="VARCHAR(8000)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createMilestonesTable">
+		<createTable tableName="milestones">
+			<column autoIncrement="true" name="id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="product_id" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="value" type="VARCHAR(20)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="sortkey" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createNamedQueriesTable">
+		<createTable tableName="namedqueries">
+			<column autoIncrement="true" name="id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="userid" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="name" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column name="query" type="MEDIUMTEXT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="query_type" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+    	 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMTEXT" with="VARCHAR(8000)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createNamedQueriesLinkInFooterTable">
+		<createTable tableName="namedqueries_link_in_footer">
+			<column name="namedquery_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="user_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createNamedQueryGroupMapTable">
+		<createTable tableName="namedquery_group_map">
+			<column name="namedquery_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="group_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createOpSysTable">
+		<createTable tableName="op_sys">
+			<column autoIncrement="true" name="id" type="SMALLINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="value" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="sortkey" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="isactive" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="visibility_value_id" type="SMALLINT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createPriorityTable">
+		<createTable tableName="priority">
+			<column autoIncrement="true" name="id" type="SMALLINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="value" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="sortkey" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="isactive" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="visibility_value_id" type="SMALLINT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createProductsTable">
+		<createTable tableName="products">
+			<column autoIncrement="true" name="id" type="SMALLINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="name" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="classification_id" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="MEDIUMTEXT" />
+			<column defaultValueNumeric="1" name="isactive" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="votesperuser" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="10000" name="maxvotesperbug"
+				type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="votestoconfirm" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="---" name="defaultmilestone" type="VARCHAR(20)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="allows_unconfirmed"
+				type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMTEXT" with="VARCHAR(8000)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createProfileSettingTable">
+		<createTable tableName="profile_setting">
+			<column name="user_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="setting_name" type="VARCHAR(32)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="setting_value" type="VARCHAR(32)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createProfilesTable">
+		<createTable tableName="profiles">
+			<column autoIncrement="true" name="userid" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="login_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="cryptpassword" type="VARCHAR(128)" />
+			<column defaultValue="" name="realname" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="disabledtext" type="MEDIUMTEXT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="disable_mail" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="mybugslink" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="extern_id" type="VARCHAR(64)" />
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+    	 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMTEXT" with="VARCHAR(8000)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createProfilesActivityTable">
+		<createTable tableName="profiles_activity">
+			<column name="userid" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="who" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="profiles_when" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="fieldid" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="oldvalue" type="TINYTEXT" />
+			<column name="newvalue" type="TINYTEXT" />
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+    	<modifySql dbms="hsqldb">
+         	<replace replace="TINYTEXT" with="VARCHAR(255)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createQuipsTable">
+		<createTable tableName="quips">
+			<column autoIncrement="true" name="quipid" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="userid" type="MEDIUMINT" />
+			<column name="quip" type="MEDIUMTEXT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="approved" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+    	 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMTEXT" with="VARCHAR(8000)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createRepPlatformTable">
+		<createTable tableName="rep_platform">
+			<column autoIncrement="true" name="id" type="SMALLINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="value" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="sortkey" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="isactive" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="visibility_value_id" type="SMALLINT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createResolutionTable">
+		<createTable tableName="resolution">
+			<column autoIncrement="true" name="id" type="SMALLINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="value" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="sortkey" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="isactive" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="visibility_value_id" type="SMALLINT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createSchemaVersionTable">
+		<createTable tableName="schema_version">
+			<column defaultValue="" name="version" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createSeriesTable">
+		<createTable tableName="series">
+			<column autoIncrement="true" name="series_id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="creator" type="MEDIUMINT" />
+			<column name="category" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="subcategory" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="name" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column name="frequency" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="query" type="MEDIUMTEXT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="is_public" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+    	 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMTEXT" with="VARCHAR(8000)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createSeriesCategoriesTable">
+		<createTable tableName="series_categories">
+			<column autoIncrement="true" name="id" type="SMALLINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="name" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createSeriesDataTable">
+		<createTable tableName="series_data">
+			<column name="series_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="series_date" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="series_value" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createSettingTable">
+		<createTable tableName="setting">
+			<column defaultValue="" name="name" type="VARCHAR(32)">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="default_value" type="VARCHAR(32)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="1" name="is_enabled" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="subclass" type="VARCHAR(32)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createSettingValueTable">
+		<createTable tableName="setting_value">
+			<column defaultValue="" name="name" type="VARCHAR(32)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="value" type="VARCHAR(32)">
+				<constraints nullable="false" />
+			</column>
+			<column name="sortindex" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createStatusWorkflowTable">
+		<createTable tableName="status_workflow">
+			<column name="old_status" type="SMALLINT" />
+			<column name="new_status" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="require_comment" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createTokensTable">
+		<createTable tableName="tokens">
+			<column name="userid" type="MEDIUMINT" />
+			<column name="issuedate" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="token" type="VARCHAR(16)">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="tokentype" type="VARCHAR(8)">
+				<constraints nullable="false" />
+			</column>
+			<column name="eventdata" type="TINYTEXT" />
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+    	<modifySql dbms="hsqldb">
+         	<replace replace="TINYTEXT" with="VARCHAR(255)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createTsErrorTable">
+		<createTable tableName="ts_error">
+			<column name="error_time" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="jobid" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="message" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="funcid" type="INT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createTsExitStatusTable">
+		<createTable tableName="ts_exitstatus">
+			<column autoIncrement="true" name="jobid" type="INT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValueNumeric="0" name="funcid" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="status" type="SMALLINT" />
+			<column name="completion_time" type="INT" />
+			<column name="delete_after" type="INT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createTsFuncMapTable">
+		<createTable tableName="ts_funcmap">
+			<column autoIncrement="true" name="funcid" type="INT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="funcname" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createTsJobTable">
+		<createTable tableName="ts_job">
+			<column autoIncrement="true" name="jobid" type="INT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="funcid" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="arg" type="LONGBLOB" />
+			<column name="uniqkey" type="VARCHAR(255)" />
+			<column name="insert_time" type="INT" />
+			<column name="run_after" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="grabbed_until" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="priority" type="SMALLINT" />
+			<column name="coalesce" type="VARCHAR(255)" />
+		</createTable>
+		<modifySql dbms="hsqldb">
+         	<replace replace="coalesce" with="&quot;coalesce&quot;"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createTsNoteTable">
+		<createTable tableName="ts_note">
+			<column name="jobid" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="notekey" type="VARCHAR(255)" />
+			<column name="value" type="LONGBLOB" />
+		</createTable>
+	</changeSet>
+	<changeSet author="taskdb" id="createUserGroupMapTable">
+		<createTable tableName="user_group_map">
+			<column name="user_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="group_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="isbless" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="grant_type" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createVersionsTable">
+		<createTable tableName="versions">
+			<column autoIncrement="true" name="id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="value" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column name="product_id" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createVotesTable">
+		<createTable tableName="votes">
+			<column name="who" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="bug_id" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="vote_count" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createWatchTable">
+		<createTable tableName="watch">
+			<column name="watcher" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="watched" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createWhineEventsTable">
+		<createTable tableName="whine_events">
+			<column autoIncrement="true" name="id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="owner_userid" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="subject" type="VARCHAR(128)" />
+			<column name="body" type="MEDIUMTEXT" />
+			<column defaultValueNumeric="0" name="mailifnobugs" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+    	 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMTEXT" with="VARCHAR(8000)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createWhineQueriesTable">
+		<createTable tableName="whine_queries">
+			<column autoIncrement="true" name="id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="eventid" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="query_name" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="sortkey" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="onemailperbug" type="TINYINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="title" type="VARCHAR(128)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createWhineSchedulesTable">
+		<createTable tableName="whine_schedules">
+			<column autoIncrement="true" name="id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="eventid" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="run_day" type="VARCHAR(32)" />
+			<column name="run_time" type="VARCHAR(32)" />
+			<column name="run_next" type="DATETIME" />
+			<column name="mailto" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueNumeric="0" name="mailto_type" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createAttachmentsCreationTsIndex">
+		<createIndex indexName="attachments_creation_ts_idx"
+			tableName="attachments" unique="false">
+			<column name="creation_ts" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createAttachmentsModTimeIndex">
+		<createIndex indexName="attachments_modification_time_idx"
+			tableName="attachments" unique="false">
+			<column name="modification_time" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createAttachmentsSubmitterIndex">
+		<createIndex indexName="attachments_submitter_id_idx"
+			tableName="attachments" unique="false">
+			<column name="submitter_id" />
+			<column name="bug_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugGroupMapBugIndex">
+		<createIndex indexName="bug_group_map_bug_id_idx"
+			tableName="bug_group_map" unique="true">
+			<column name="bug_id" />
+			<column name="group_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugSeeAlsoBugIndex">
+		<createIndex indexName="bug_see_also_bug_id_idx"
+			tableName="bug_see_also" unique="true">
+			<column name="bug_id" />
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugSevSortKeyIndex">
+		<createIndex indexName="bug_severity_sortkey_idx"
+			tableName="bug_severity" unique="false">
+			<column name="sortkey" />
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugSevValueIndex">
+		<createIndex indexName="bug_severity_value_idx" tableName="bug_severity"
+			unique="true">
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugSevVisValueIndex">
+		<createIndex indexName="bug_severity_visibility_value_id_idx"
+			tableName="bug_severity" unique="false">
+			<column name="visibility_value_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugStatusSortKeyIndex">
+		<createIndex indexName="bug_status_sortkey_idx" tableName="bug_status"
+			unique="false">
+			<column name="sortkey" />
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugStatusValueIndex">
+		<createIndex indexName="bug_status_value_idx" tableName="bug_status"
+			unique="true">
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugStatusVisValueIndex">
+		<createIndex indexName="bug_status_visibility_value_id_idx"
+			tableName="bug_status" unique="false">
+			<column name="visibility_value_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugAliasIndex">
+		<createIndex indexName="bugs_alias_idx" tableName="bugs"
+			unique="true">
+			<column name="alias" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsBugSevIndex">
+		<createIndex indexName="bugs_bug_severity_idx" tableName="bugs"
+			unique="false">
+			<column name="bug_severity" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsBugStatusIndex">
+		<createIndex indexName="bugs_bug_status_idx" tableName="bugs"
+			unique="false">
+			<column name="bug_status" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsCreationTsIndex">
+		<createIndex indexName="bugs_creation_ts_idx" tableName="bugs"
+			unique="false">
+			<column name="creation_ts" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsDeltaTsIndex">
+		<createIndex indexName="bugs_delta_ts_idx" tableName="bugs"
+			unique="false">
+			<column name="delta_ts" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsOpSysIndex">
+		<createIndex indexName="bugs_op_sys_idx" tableName="bugs"
+			unique="false">
+			<column name="op_sys" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsPriorityIndex">
+		<createIndex indexName="bugs_priority_idx" tableName="bugs"
+			unique="false">
+			<column name="priority" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsQaContactIndex">
+		<createIndex indexName="bugs_qa_contact_idx" tableName="bugs"
+			unique="false">
+			<column name="qa_contact" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsResolutionIndex">
+		<createIndex indexName="bugs_resolution_idx" tableName="bugs"
+			unique="false">
+			<column name="resolution" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsTargetMilestoneIndex">
+		<createIndex indexName="bugs_target_milestone_idx"
+			tableName="bugs" unique="false">
+			<column name="target_milestone" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsVersionIndex">
+		<createIndex indexName="bugs_version_idx" tableName="bugs"
+			unique="false">
+			<column name="version" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsVotesIndex">
+		<createIndex indexName="bugs_votes_idx" tableName="bugs"
+			unique="false">
+			<column name="votes" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsActivityAddedIndex">
+		<createIndex indexName="bugs_activity_added_idx"
+			tableName="bugs_activity" unique="false">
+			<column name="added" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsActivityBugWhenIndex">
+		<createIndex indexName="bugs_activity_bug_when_idx"
+			tableName="bugs_activity" unique="false">
+			<column name="bug_when" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createCatGroupMapCatIndex">
+		<createIndex indexName="category_group_map_category_id_idx"
+			tableName="category_group_map" unique="true">
+			<column name="category_id" />
+			<column name="group_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createCCBugIndex">
+		<createIndex indexName="cc_bug_id_idx" tableName="cc"
+			unique="true">
+			<column name="bug_id" />
+			<column name="who" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createIterationSortkeyIndex">
+		<createIndex indexName="cf_iteration_sortkey_idx"
+			tableName="cf_iteration" unique="false">
+			<column name="sortkey" />
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createIterationValueIndex">
+		<createIndex indexName="cf_iteration_value_idx" tableName="cf_iteration"
+			unique="true">
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createIterationVisValueIndex">
+		<createIndex indexName="cf_iteration_visibility_value_id_idx"
+			tableName="cf_iteration" unique="false">
+			<column name="visibility_value_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createTaskTypeSortkeyIndex">
+		<createIndex indexName="cf_tasktype_sortkey_idx"
+			tableName="cf_tasktype" unique="false">
+			<column name="sortkey" />
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createTaskTypeValueIndex">
+		<createIndex indexName="cf_tasktype_value_idx" tableName="cf_tasktype"
+			unique="true">
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createTaskTypeVisValueIndex">
+		<createIndex indexName="cf_tasktype_visibility_value_id_idx"
+			tableName="cf_tasktype" unique="false">
+			<column name="visibility_value_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createClassificationsNameIndex">
+		<createIndex indexName="classifications_name_idx"
+			tableName="classifications" unique="true">
+			<column name="name" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createComponentCCUserIndex">
+		<createIndex indexName="component_cc_user_id_idx"
+			tableName="component_cc" unique="true">
+			<column name="component_id" />
+			<column name="user_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createComponentsNameIndex">
+		<createIndex indexName="components_name_idx" tableName="components"
+			unique="false">
+			<column name="name" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createComponentsProductIndex">
+		<createIndex indexName="components_product_id_idx"
+			tableName="components" unique="true">
+			<column name="product_id" />
+			<column name="name" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb"
+		id="createComponentsInitialQaContactProfilesIndex">
+		<createIndex indexName="fk_components_initialqacontact_profiles_userid"
+			tableName="components" unique="false">
+			<column name="initialqacontact" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createEmailSettingUserIndex">
+		<createIndex indexName="email_setting_user_id_idx"
+			tableName="email_setting" unique="true">
+			<column name="user_id" />
+			<column name="relationship" />
+			<column name="event" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createFieldDefsNameIndex">
+		<createIndex indexName="fielddefs_name_idx" tableName="fielddefs"
+			unique="true">
+			<column name="name" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createFieldDefsSortkeyIndex">
+		<createIndex indexName="fielddefs_sortkey_idx" tableName="fielddefs"
+			unique="false">
+			<column name="sortkey" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagExclusionsTypeIndex">
+		<createIndex indexName="flagexclusions_type_id_idx"
+			tableName="flagexclusions" unique="false">
+			<column name="type_id" />
+			<column name="product_id" />
+			<column name="component_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagInclusionsTypeIndex">
+		<createIndex indexName="flaginclusions_type_id_idx"
+			tableName="flaginclusions" unique="false">
+			<column name="type_id" />
+			<column name="product_id" />
+			<column name="component_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagsBugIndex">
+		<createIndex indexName="flags_bug_id_idx" tableName="flags"
+			unique="false">
+			<column name="bug_id" />
+			<column name="attach_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagtypesGrantGroupIndex">
+		<createIndex indexName="fk_flagtypes_grant_group_id_groups_id"
+			tableName="flagtypes" unique="false">
+			<column name="grant_group_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagtypesRequestGroupIndex">
+		<createIndex indexName="fk_flagtypes_request_group_id_groups_id"
+			tableName="flagtypes" unique="false">
+			<column name="request_group_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createGroupControlMapProductIndex">
+		<createIndex indexName="group_control_map_product_id_idx"
+			tableName="group_control_map" unique="true">
+			<column name="product_id" />
+			<column name="group_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createGroupMapMemberIndex">
+		<createIndex indexName="group_group_map_member_id_idx"
+			tableName="group_group_map" unique="true">
+			<column name="member_id" />
+			<column name="grantor_id" />
+			<column name="grant_type" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createGroupsNameIndex">
+		<createIndex indexName="groups_name_idx" tableName="groups"
+			unique="true">
+			<column name="name" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createKeywordsDefsNameIndex">
+		<createIndex indexName="keyworddefs_name_idx" tableName="keyworddefs"
+			unique="true">
+			<column name="name" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createKeywordsBugIndex">
+		<createIndex indexName="keywords_bug_id_idx" tableName="keywords"
+			unique="true">
+			<column name="bug_id" />
+			<column name="keywordid" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createLoginCookiesLastUsedIndex">
+		<createIndex indexName="logincookies_lastused_idx"
+			tableName="logincookies" unique="false">
+			<column name="lastused" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createLongDescBugWhenIndex">
+		<createIndex indexName="longdescs_bug_when_idx" tableName="longdescs"
+			unique="false">
+			<column name="bug_when" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createLongDescsWhoIndex">
+		<createIndex indexName="longdescs_who_idx" tableName="longdescs"
+			unique="false">
+			<column name="who" />
+			<column name="bug_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createMilestonesProductIndex">
+		<createIndex indexName="milestones_product_id_idx"
+			tableName="milestones" unique="true">
+			<column name="product_id" />
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createNamedQueriesUserIndex">
+		<createIndex indexName="namedqueries_userid_idx"
+			tableName="namedqueries" unique="true">
+			<column name="userid" />
+			<column name="name" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createNamedQueriesLinkInFooterIndex">
+		<createIndex indexName="namedqueries_link_in_footer_id_idx"
+			tableName="namedqueries_link_in_footer" unique="true">
+			<column name="namedquery_id" />
+			<column name="user_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createOpSysSortkeyIndex">
+		<createIndex indexName="op_sys_sortkey_idx" tableName="op_sys"
+			unique="false">
+			<column name="sortkey" />
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createOpSysValueIndex">
+		<createIndex indexName="op_sys_value_idx" tableName="op_sys"
+			unique="true">
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createOpSysVisValueIndex">
+		<createIndex indexName="op_sys_visibility_value_id_idx"
+			tableName="op_sys" unique="false">
+			<column name="visibility_value_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createPrioritySortkeyIndex">
+		<createIndex indexName="priority_sortkey_idx" tableName="priority"
+			unique="false">
+			<column name="sortkey" />
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createPriorityValueIndex">
+		<createIndex indexName="priority_value_idx" tableName="priority"
+			unique="true">
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createPriorityVisValueIndex">
+		<createIndex indexName="priority_visibility_value_id_idx"
+			tableName="priority" unique="false">
+			<column name="visibility_value_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createProductsNameIndex">
+		<createIndex indexName="products_name_idx" tableName="products"
+			unique="true">
+			<column name="name" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createProfileSettingValueIndex">
+		<createIndex indexName="profile_setting_value_unique_idx"
+			tableName="profile_setting" unique="true">
+			<column name="user_id" />
+			<column name="setting_name" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createProfilesExternIdIndex">
+		<createIndex indexName="profiles_extern_id_idx" tableName="profiles"
+			unique="true">
+			<column name="extern_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createProfilesLoginNameIndex">
+		<createIndex indexName="profiles_login_name_idx"
+			tableName="profiles" unique="true">
+			<column name="login_name" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createProfilesActivityProfilesWhenIndex">
+		<createIndex indexName="profiles_activity_profiles_when_idx"
+			tableName="profiles_activity" unique="false">
+			<column name="profiles_when" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createQuipsUserIndex">
+		<createIndex indexName="fk_quips_userid_profiles_userid"
+			tableName="quips" unique="false">
+			<column name="userid" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createRepPlatformSortkeyIndex">
+		<createIndex indexName="rep_platform_sortkey_idx"
+			tableName="rep_platform" unique="false">
+			<column name="sortkey" />
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createRepPlatformValueIndex">
+		<createIndex indexName="rep_platform_value_idx" tableName="rep_platform"
+			unique="true">
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createRepPlatformVisValueIndex">
+		<createIndex indexName="rep_platform_visibility_value_id_idx"
+			tableName="rep_platform" unique="false">
+			<column name="visibility_value_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createResolutionSortkeyIndex">
+		<createIndex indexName="resolution_sortkey_idx" tableName="resolution"
+			unique="false">
+			<column name="sortkey" />
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createResolutionValueIndex">
+		<createIndex indexName="resolution_value_idx" tableName="resolution"
+			unique="true">
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createResolutionVisValueIndex">
+		<createIndex indexName="resolution_visibility_value_id_idx"
+			tableName="resolution" unique="false">
+			<column name="visibility_value_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createSeriesCreatorIndex">
+		<createIndex indexName="series_creator_idx" tableName="series"
+			unique="true">
+			<column name="creator" />
+			<column name="category" />
+			<column name="subcategory" />
+			<column name="name" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createSeriesCategoriesNameIndex">
+		<createIndex indexName="series_categories_name_idx"
+			tableName="series_categories" unique="true">
+			<column name="name" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createSeriesDataSeriesIndex">
+		<createIndex indexName="series_data_series_id_idx"
+			tableName="series_data" unique="true">
+			<column name="series_id" />
+			<column name="series_date" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createSettingValueNsUniqueIndex">
+		<createIndex indexName="setting_value_ns_unique_idx"
+			tableName="setting_value" unique="true">
+			<column name="name" />
+			<column name="sortindex" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createSettingValueNvUniqueIndex">
+		<createIndex indexName="setting_value_nv_unique_idx"
+			tableName="setting_value" unique="true">
+			<column name="name" />
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createStatusWorkflowIndex">
+		<createIndex indexName="status_workflow_idx" tableName="status_workflow"
+			unique="true">
+			<column name="old_status" />
+			<column name="new_status" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createTsErrorErrorTimeIndex">
+		<createIndex indexName="ts_error_error_time_idx"
+			tableName="ts_error" unique="false">
+			<column name="error_time" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createTsErrorFuncIndex">
+		<createIndex indexName="ts_error_funcid_idx" tableName="ts_error"
+			unique="false">
+			<column name="funcid" />
+			<column name="error_time" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createTsErrorJobIndex">
+		<createIndex indexName="ts_error_jobid_idx" tableName="ts_error"
+			unique="false">
+			<column name="jobid" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createTsExitStatusDeleteAfterIndex">
+		<createIndex indexName="ts_exitstatus_delete_after_idx"
+			tableName="ts_exitstatus" unique="false">
+			<column name="delete_after" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createTsExitStatusFuncIndex">
+		<createIndex indexName="ts_exitstatus_funcid_idx"
+			tableName="ts_exitstatus" unique="false">
+			<column name="funcid" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createTsFuncMapFunNameIndex">
+		<createIndex indexName="ts_funcmap_funcname_idx"
+			tableName="ts_funcmap" unique="true">
+			<column name="funcname" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createTsJobCoalesceIndex">
+		<createIndex indexName="ts_job_coalesce_idx" tableName="ts_job"
+			unique="false">
+			<column name="coalesce" />
+			<column name="funcid" />
+		</createIndex>
+		<modifySql dbms="hsqldb">
+         	<replace replace="coalesce" with="&quot;coalesce&quot;"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="taskdb" id="createTsJobFuncIndex">
+		<createIndex indexName="ts_job_funcid_idx" tableName="ts_job"
+			unique="true">
+			<column name="funcid" />
+			<column name="uniqkey" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createTsJobRunAfterIndex">
+		<createIndex indexName="ts_job_run_after_idx" tableName="ts_job"
+			unique="false">
+			<column name="run_after" />
+			<column name="funcid" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createTsNoteJobIndex">
+		<createIndex indexName="ts_note_jobid_idx" tableName="ts_note"
+			unique="true">
+			<column name="jobid" />
+			<column name="notekey" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createUserGroupMapIndex">
+		<createIndex indexName="user_group_map_user_id_idx"
+			tableName="user_group_map" unique="true">
+			<column name="user_id" />
+			<column name="group_id" />
+			<column name="grant_type" />
+			<column name="isbless" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createVersionsProductIndex">
+		<createIndex indexName="versions_product_id_idx"
+			tableName="versions" unique="true">
+			<column name="product_id" />
+			<column name="value" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createWatchWatcherIndex">
+		<createIndex indexName="watch_watcher_idx" tableName="watch"
+			unique="true">
+			<column name="watcher" />
+			<column name="watched" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="taskdb" id="createWhineSchedulesRunNextIndex">
+		<createIndex indexName="whine_schedules_run_next_idx"
+			tableName="whine_schedules" unique="false">
+			<column name="run_next" />
+		</createIndex>
+	</changeSet>
+
+	<changeSet author="taskdb" id="createAttachDataAttachFK">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="attach_data" constraintName="fk_attach_data_id_attachments_attach_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="attach_id"
+			referencedTableName="attachments" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createAttachBugFK">
+		<addForeignKeyConstraint baseColumnNames="bug_id"
+			baseTableName="attachments" constraintName="fk_attachments_bug_id_bugs_bug_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="bug_id"
+			referencedTableName="bugs" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createAttachSubmitterFK">
+		<addForeignKeyConstraint baseColumnNames="submitter_id"
+			baseTableName="attachments" constraintName="fk_attachments_submitter_id_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createBugGroupMapFK">
+		<addForeignKeyConstraint baseColumnNames="bug_id"
+			baseTableName="bug_group_map" constraintName="fk_bug_group_map_bug_id_bugs_bug_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="bug_id"
+			referencedTableName="bugs" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createBugGroupMapGroupFK">
+		<addForeignKeyConstraint baseColumnNames="group_id"
+			baseTableName="bug_group_map" constraintName="fk_bug_group_map_group_id_groups_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="groups"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsAssignedToFK">
+		<addForeignKeyConstraint baseColumnNames="assigned_to"
+			baseTableName="bugs" constraintName="fk_bugs_assigned_to_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsComponentsFK">
+		<addForeignKeyConstraint baseColumnNames="component_id"
+			baseTableName="bugs" constraintName="fk_bugs_component_id_components_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="components"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsProductFK">
+		<addForeignKeyConstraint baseColumnNames="product_id"
+			baseTableName="bugs" constraintName="fk_bugs_product_id_products_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="products"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsReporterProfilesFK">
+		<addForeignKeyConstraint baseColumnNames="reporter"
+			baseTableName="bugs" constraintName="fk_bugs_reporter_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsActivityAttachFK">
+		<addForeignKeyConstraint baseColumnNames="attach_id"
+			baseTableName="bugs_activity" constraintName="fk_bugs_activity_attach_id_attachments_attach_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="attach_id"
+			referencedTableName="attachments" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsActivityBugsFK">
+		<addForeignKeyConstraint baseColumnNames="bug_id"
+			baseTableName="bugs_activity" constraintName="fk_bugs_activity_bug_id_bugs_bug_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="bug_id"
+			referencedTableName="bugs" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsActivityFieldFK">
+		<addForeignKeyConstraint baseColumnNames="fieldid"
+			baseTableName="bugs_activity" constraintName="fk_bugs_activity_fieldid_fielddefs_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="fielddefs"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createBugsActivityWhoFK">
+		<addForeignKeyConstraint baseColumnNames="who"
+			baseTableName="bugs_activity" constraintName="fk_bugs_activity_who_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createCategoryGroupMapSeriesFK">
+		<addForeignKeyConstraint baseColumnNames="category_id"
+			baseTableName="category_group_map"
+			constraintName="fk_category_group_map_category_id_series_categories_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="series_categories"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createCategoryGroupMapGroupsFK">
+		<addForeignKeyConstraint baseColumnNames="group_id"
+			baseTableName="category_group_map" constraintName="fk_category_group_map_group_id_groups_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="groups"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createCCBugsFK">
+		<addForeignKeyConstraint baseColumnNames="bug_id"
+			baseTableName="cc" constraintName="fk_cc_bug_id_bugs_bug_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="bug_id"
+			referencedTableName="bugs" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createCCWhoFK">
+		<addForeignKeyConstraint baseColumnNames="who"
+			baseTableName="cc" constraintName="fk_cc_who_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createComponentCcComponentFK">
+		<addForeignKeyConstraint baseColumnNames="component_id"
+			baseTableName="component_cc" constraintName="fk_component_cc_component_id_components_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="components"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createComponentCCUserFK">
+		<addForeignKeyConstraint baseColumnNames="user_id"
+			baseTableName="component_cc" constraintName="fk_component_cc_user_id_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createComponentIntialOwnerFK">
+		<addForeignKeyConstraint baseColumnNames="initialowner"
+			baseTableName="components" constraintName="fk_components_initialowner_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createComponentProductFK">
+		<addForeignKeyConstraint baseColumnNames="product_id"
+			baseTableName="components" constraintName="fk_components_product_id_products_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="products"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createDepsBlockedBugsFK">
+		<addForeignKeyConstraint baseColumnNames="blocked"
+			baseTableName="dependencies" constraintName="fk_dependencies_blocked_bugs_bug_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="bug_id"
+			referencedTableName="bugs" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createDepsDependsOnBugsFK">
+		<addForeignKeyConstraint baseColumnNames="dependson"
+			baseTableName="dependencies" constraintName="fk_dependencies_dependson_bugs_bug_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="bug_id"
+			referencedTableName="bugs" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createDuplicatesDupeBugFK">
+		<addForeignKeyConstraint baseColumnNames="dupe"
+			baseTableName="duplicates" constraintName="fk_duplicates_dupe_bugs_bug_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="bug_id"
+			referencedTableName="bugs" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createDuplicatesDupeOfBugsFK">
+		<addForeignKeyConstraint baseColumnNames="dupe_of"
+			baseTableName="duplicates" constraintName="fk_duplicates_dupe_of_bugs_bug_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="bug_id"
+			referencedTableName="bugs" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createEmailSettingUserFK">
+		<addForeignKeyConstraint baseColumnNames="user_id"
+			baseTableName="email_setting" constraintName="fk_email_setting_user_id_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createFieldDefsValueFK">
+		<addForeignKeyConstraint baseColumnNames="value_field_id"
+			baseTableName="fielddefs" constraintName="fk_fielddefs_value_field_id_fielddefs_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="fielddefs"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createFieldDefsVisFK">
+		<addForeignKeyConstraint baseColumnNames="visibility_field_id"
+			baseTableName="fielddefs" constraintName="fk_fielddefs_visibility_field_id_fielddefs_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="fielddefs"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagExclusionsComponentFK">
+		<addForeignKeyConstraint baseColumnNames="component_id"
+			baseTableName="flagexclusions" constraintName="fk_flagexclusions_component_id_components_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="components"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagExclusionsProductFK">
+		<addForeignKeyConstraint baseColumnNames="product_id"
+			baseTableName="flagexclusions" constraintName="fk_flagexclusions_product_id_products_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="products"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagExclusionsTypeFK">
+		<addForeignKeyConstraint baseColumnNames="type_id"
+			baseTableName="flagexclusions" constraintName="fk_flagexclusions_type_id_flagtypes_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="flagtypes"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagInclusionsComponentFK">
+		<addForeignKeyConstraint baseColumnNames="component_id"
+			baseTableName="flaginclusions" constraintName="fk_flaginclusions_component_id_components_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="components"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagInclusionsProductFK">
+		<addForeignKeyConstraint baseColumnNames="product_id"
+			baseTableName="flaginclusions" constraintName="fk_flaginclusions_product_id_products_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="products"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagInclusionsTypeFK">
+		<addForeignKeyConstraint baseColumnNames="type_id"
+			baseTableName="flaginclusions" constraintName="fk_flaginclusions_type_id_flagtypes_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="flagtypes"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagsAttachFK">
+		<addForeignKeyConstraint baseColumnNames="attach_id"
+			baseTableName="flags" constraintName="fk_flags_attach_id_attachments_attach_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="attach_id"
+			referencedTableName="attachments" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagsBugsFK">
+		<addForeignKeyConstraint baseColumnNames="bug_id"
+			baseTableName="flags" constraintName="fk_flags_bug_id_bugs_bug_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="bug_id"
+			referencedTableName="bugs" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagsRequesteeProfilesFK">
+		<addForeignKeyConstraint baseColumnNames="requestee_id"
+			baseTableName="flags" constraintName="fk_flags_requestee_id_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagsSetterProfileFK">
+		<addForeignKeyConstraint baseColumnNames="setter_id"
+			baseTableName="flags" constraintName="fk_flags_setter_id_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createFlagsTypeFK">
+		<addForeignKeyConstraint baseColumnNames="type_id"
+			baseTableName="flags" constraintName="fk_flags_type_id_flagtypes_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="flagtypes"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createGroupControlGroupFK">
+		<addForeignKeyConstraint baseColumnNames="group_id"
+			baseTableName="group_control_map" constraintName="fk_group_control_map_group_id_groups_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="groups"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createGroupControlProductFK">
+		<addForeignKeyConstraint baseColumnNames="product_id"
+			baseTableName="group_control_map" constraintName="fk_group_control_map_product_id_products_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="products"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createGroupMapGrantorFK">
+		<addForeignKeyConstraint baseColumnNames="grantor_id"
+			baseTableName="group_group_map" constraintName="fk_group_group_map_grantor_id_groups_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="groups"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createGroupMapMemberFK">
+		<addForeignKeyConstraint baseColumnNames="member_id"
+			baseTableName="group_group_map" constraintName="fk_group_group_map_member_id_groups_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="groups"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createKeywordsBugFK">
+		<addForeignKeyConstraint baseColumnNames="bug_id"
+			baseTableName="keywords" constraintName="fk_keywords_bug_id_bugs_bug_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="bug_id"
+			referencedTableName="bugs" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createKeywordsDefFK">
+		<addForeignKeyConstraint baseColumnNames="keywordid"
+			baseTableName="keywords" constraintName="fk_keywords_keywordid_keyworddefs_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="keyworddefs"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createLoginFailureUserFK">
+		<addForeignKeyConstraint baseColumnNames="user_id"
+			baseTableName="login_failure" constraintName="fk_login_failure_user_id_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createLoginCookiesUserFk">
+		<addForeignKeyConstraint baseColumnNames="userid"
+			baseTableName="logincookies" constraintName="fk_logincookies_userid_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createLongdescsBugFK">
+		<addForeignKeyConstraint baseColumnNames="bug_id"
+			baseTableName="longdescs" constraintName="fk_longdescs_bug_id_bugs_bug_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="bug_id"
+			referencedTableName="bugs" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createLongdescsWhoFK">
+		<addForeignKeyConstraint baseColumnNames="who"
+			baseTableName="longdescs" constraintName="fk_longdescs_who_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createMilestonesProductFK">
+		<addForeignKeyConstraint baseColumnNames="product_id"
+			baseTableName="milestones" constraintName="fk_milestones_product_id_products_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="products"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createNamedQueriesUserFK">
+		<addForeignKeyConstraint baseColumnNames="userid"
+			baseTableName="namedqueries" constraintName="fk_namedqueries_userid_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createNamedQueriesLinkInFooterQueryFK">
+		<addForeignKeyConstraint baseColumnNames="namedquery_id"
+			baseTableName="namedqueries_link_in_footer"
+			constraintName="fk_namedqueries_link_in_footer_namedquery_id_namedqueries_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="namedqueries"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createNamedQueriesLinkInFooterUserFK">
+		<addForeignKeyConstraint baseColumnNames="user_id"
+			baseTableName="namedqueries_link_in_footer"
+			constraintName="fk_namedqueries_link_in_footer_user_id_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createNamedQueryGroupFK">
+		<addForeignKeyConstraint baseColumnNames="group_id"
+			baseTableName="namedquery_group_map" constraintName="fk_namedquery_group_map_group_id_groups_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="groups"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createNamedQueryGroupQueryFK">
+		<addForeignKeyConstraint baseColumnNames="namedquery_id"
+			baseTableName="namedquery_group_map" constraintName="fk_namedquery_group_map_namedquery_id_namedqueries_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="namedqueries"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createProductsClassificationFK">
+		<addForeignKeyConstraint baseColumnNames="classification_id"
+			baseTableName="products" constraintName="fk_products_classification_id_classifications_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="classifications"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createProfileSettingFK">
+		<addForeignKeyConstraint baseColumnNames="setting_name"
+			baseTableName="profile_setting" constraintName="fk_profile_setting_setting_name_setting_name"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="name" referencedTableName="setting"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createProfileSettingUserFK">
+		<addForeignKeyConstraint baseColumnNames="user_id"
+			baseTableName="profile_setting" constraintName="fk_profile_setting_user_id_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createProfileActivityFieldFK">
+		<addForeignKeyConstraint baseColumnNames="fieldid"
+			baseTableName="profiles_activity" constraintName="fk_profiles_activity_fieldid_fielddefs_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="fielddefs"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createProfileActivityUserFK">
+		<addForeignKeyConstraint baseColumnNames="userid"
+			baseTableName="profiles_activity" constraintName="fk_profiles_activity_userid_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createProfileActivityWhoFK">
+		<addForeignKeyConstraint baseColumnNames="who"
+			baseTableName="profiles_activity" constraintName="fk_profiles_activity_who_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createSeriesCategoryFK">
+		<addForeignKeyConstraint baseColumnNames="category"
+			baseTableName="series" constraintName="fk_series_category_series_categories_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="series_categories"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createSeriesCreatorUserFK">
+		<addForeignKeyConstraint baseColumnNames="creator"
+			baseTableName="series" constraintName="fk_series_creator_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createSeriesSubcategorySeriesFK">
+		<addForeignKeyConstraint baseColumnNames="subcategory"
+			baseTableName="series" constraintName="fk_series_subcategory_series_categories_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="series_categories"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createSeriesDataSeriesFK">
+		<addForeignKeyConstraint baseColumnNames="series_id"
+			baseTableName="series_data" constraintName="fk_series_data_series_id_series_series_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="series_id"
+			referencedTableName="series" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createSettingValueNameFK">
+		<addForeignKeyConstraint baseColumnNames="name"
+			baseTableName="setting_value" constraintName="fk_setting_value_name_setting_name"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="name" referencedTableName="setting"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createStatusWorkflowNewStatusFK">
+		<addForeignKeyConstraint baseColumnNames="new_status"
+			baseTableName="status_workflow" constraintName="fk_status_workflow_new_status_bug_status_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="bug_status"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createStatusWorksflowOldStatusFK">
+		<addForeignKeyConstraint baseColumnNames="old_status"
+			baseTableName="status_workflow" constraintName="fk_status_workflow_old_status_bug_status_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="bug_status"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createTokensUserFK">
+		<addForeignKeyConstraint baseColumnNames="userid"
+			baseTableName="tokens" constraintName="fk_tokens_userid_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createUserGroupMapGroupFK">
+		<addForeignKeyConstraint baseColumnNames="group_id"
+			baseTableName="user_group_map" constraintName="fk_user_group_map_group_id_groups_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="groups"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createUserGroupMapUserFK">
+		<addForeignKeyConstraint baseColumnNames="user_id"
+			baseTableName="user_group_map" constraintName="fk_user_group_map_user_id_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createVersionsProductFk">
+		<addForeignKeyConstraint baseColumnNames="product_id"
+			baseTableName="versions" constraintName="fk_versions_product_id_products_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="products"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createVotesBugFK">
+		<addForeignKeyConstraint baseColumnNames="bug_id"
+			baseTableName="votes" constraintName="fk_votes_bug_id_bugs_bug_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="bug_id"
+			referencedTableName="bugs" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createVotesWhoFK">
+		<addForeignKeyConstraint baseColumnNames="who"
+			baseTableName="votes" constraintName="fk_votes_who_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createWatchedUserFK">
+		<addForeignKeyConstraint baseColumnNames="watched"
+			baseTableName="watch" constraintName="fk_watch_watched_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createWatcherUserFK">
+		<addForeignKeyConstraint baseColumnNames="watcher"
+			baseTableName="watch" constraintName="fk_watch_watcher_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createWhineEventOwnerFK">
+		<addForeignKeyConstraint baseColumnNames="owner_userid"
+			baseTableName="whine_events" constraintName="fk_whine_events_owner_userid_profiles_userid"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="userid"
+			referencedTableName="profiles" referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createWhineQueriesEventFK">
+		<addForeignKeyConstraint baseColumnNames="eventid"
+			baseTableName="whine_queries" constraintName="fk_whine_queries_eventid_whine_events_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="whine_events"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="taskdb" id="createWhineSchedulesEventFK">
+		<addForeignKeyConstraint baseColumnNames="eventid"
+			baseTableName="whine_schedules" constraintName="fk_whine_schedules_eventid_whine_events_id"
+			deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="whine_events"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="cmorgan" id="createSavedTaskQueryTable">
+		<createTable tableName="savedquery">
+			<column autoIncrement="true" name="id" type="MEDIUMINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="userid" type="MEDIUMINT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="name" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column name="queryString" type="MEDIUMTEXT">
+				<constraints nullable="false" />
+			</column>
+			<column name="sortField" type="VARCHAR(64)"/>
+			<column name="sortOrder" type="VARCHAR(64)"/>
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMINT" with="INT"/>
+    	</modifySql>
+    	 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMTEXT" with="VARCHAR(8000)"/>
+    	</modifySql>
+	</changeSet>
+	<changeSet author="cmorgan" id="allowNullEsitmate-task2769">
+		<sql>ALTER TABLE bugs MODIFY estimated_time DECIMAL(7,2) DEFAULT NULL</sql>
+	</changeSet>
+</databaseChangeLog>

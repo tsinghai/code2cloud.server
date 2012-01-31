@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:d='urn:import:com.tasktop.c2c.server.profile.web.ui.client.view.deployment'>
+	<g:HTMLPanel>
+	<div class="content right">
+	  <div class="deployment">
+	    <div class="deployment-heading">
+			    <h2 class="left">Create Deployment</h2>
+<!-- 			    					<div class="save"> -->
+<!-- 	  <button class="right button disabled" disabled="disabled">Create</button> -->
+<!-- 	  <button class="right button">Cancel</button> -->
+<!-- 	</div> -->
+			    <div class="clear"></div>
+			  </div>
+  					  
+	<div class="name edit">
+    <h3></h3>
+	<fieldset>
+		<label>Name:</label>
+		<div>
+			<g:TextBox ui:field="name"/>
+		</div>
+	</fieldset>
+	</div>
+	<div class="credentials edit">
+	<h3>Credentials</h3>
+	<d:CredentialsEditView ui:field="credentialsEditView"/>
+	</div>
+	<div class="save">						
+	  <g:Button ui:field="saveButton" styleName="right button special">Create Deployment</g:Button>
+   	  <g:Button ui:field="cancelButton" styleName="right button">Cancel</g:Button>
+ 	</div>
+	</div>
+	</div>
+	</g:HTMLPanel>
+</ui:UiBinder>	

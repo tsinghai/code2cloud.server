@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="ajpHeaderFilter" class="com.tasktop.c2c.server.web.proxy.CookieHeaderFilter">
+		<!-- property name="next">
+			<bean class="com.tasktop.c2c.server.web.proxy.ExcludeHeaderFilter">
+				<property name="excludedRequestHeaders">
+					<set value-type="java.lang.String">
+						<value></value>
+					</set>
+				</property>
+			</bean>
+		</property -->
+	</bean>
+
+	<bean id="ajpProxy" class="com.tasktop.c2c.server.web.proxy.AjpProxy">
+		<property name="headerFilter" ref="ajpHeaderFilter"/>
+		<property name="socketPool">
+			<bean class="org.apache.commons.pool.impl.GenericKeyedObjectPool">
+				<constructor-arg>
+				 	<bean class="com.tasktop.c2c.server.web.proxy.ajp.AjpPoolableConnectionFactory"></bean>
+				</constructor-arg>
+				<property name="lifo" value="true"></property>
+				<property name="maxActive" value="50"></property>
+				<property name="maxIdle" value="5"></property>
+				<property name="maxWait" value="60000"></property>
+				<property name="minEvictableIdleTimeMillis" value="1000"></property>
+				<property name="testOnBorrow" value="true"></property>
+				<property name="testWhileIdle" value="true"></property>
+				<property name="timeBetweenEvictionRunsMillis" value="30000"></property>
+			</bean>
+		</property>
+	</bean>
+
+
+</beans>

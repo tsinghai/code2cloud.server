@@ -1,0 +1,3 @@
+Random text
+A${a.key}B
+a.key

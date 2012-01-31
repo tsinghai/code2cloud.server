@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:com.tasktop.c2c.server.tasks.client.widgets.wiki"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel>
+		<li class="comment">
+  			<div class="avatar small left"><g:Image ui:field="avatarImage" /></div>
+  			<div class="comment-details">
+  				<a class="comment-author"><g:Anchor ui:field="commentHeaderAnchor" /></a>
+  				<div class="comment-actions">
+  				<span class="comment-number"><g:Label ui:field="commentNumber" /></span>
+  				-
+  				<span class="comment-timestamp"><g:Label ui:field="commentDate" /></span>
+  				<g:HTMLPanel ui:field="replyPanel" addStyleNames="comment-reply">
+  				-
+	  				<g:Anchor ui:field="commentReply">Reply</g:Anchor>
+				</g:HTMLPanel>
+  				</div>
+  				<p>
+  				<w:WikiHTMLPanel ui:field="commentText" addStyleNames="wikiContent"/>
+  				</p>
+  			</div>
+	  	</li>
+	</g:HTMLPanel>
+	
+</ui:UiBinder>

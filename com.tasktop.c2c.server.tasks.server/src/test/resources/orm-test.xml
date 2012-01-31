@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<entity-mappings
+	xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.eclipse.org/eclipselink/xsds/persistence/orm http://www.eclipse.org/eclipselink/xsds/eclipselink_orm_1_2.xsd"
+	version="1.2">
+	
+    <persistence-unit-metadata>
+        <persistence-unit-defaults>
+            <delimited-identifiers/>
+        </persistence-unit-defaults>
+    </persistence-unit-metadata>
+	<object-type-converter name="booleanToByte" data-type="java.lang.Byte" object-type="java.lang.Boolean">
+		<conversion-value data-value="1" object-value="true"/>
+		<conversion-value data-value="0" object-value="false"/>
+	</object-type-converter>
+</entity-mappings>

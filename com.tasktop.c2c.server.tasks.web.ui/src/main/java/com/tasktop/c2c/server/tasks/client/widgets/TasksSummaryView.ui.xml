@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ui:UiBinder SYSTEM 'http://dl.google.com/gwt/DTD/xhtml.ent'>
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:tt='urn:import:com.tasktop.c2c.server.common.web.client.widgets'>
+	<g:HTMLPanel>
+		<h2 class="task-summary-product-header" ui:field="taskSummaryTitle"/>
+		<g:FlowPanel ui:field="taskSummaryPanel"/>
+	</g:HTMLPanel>
+</ui:UiBinder>

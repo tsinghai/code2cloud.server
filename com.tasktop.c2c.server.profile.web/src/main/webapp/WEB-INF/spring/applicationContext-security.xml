@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:s="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	
+	<context:property-placeholder
+		location="/WEB-INF/spring/*.properties, file:///home/calm/.cloudalm/etc/*.properties, file:///opt/cloudalm/etc/*.properties, file:///home/cloudalm/etc/*.properties"  
+		ignore-resource-not-found="true"
+	/>
+			
+	<bean id="authenticationServiceAuthenticationProvider"
+		class="com.tasktop.c2c.server.auth.service.AuthenticationServiceAuthenticationProvider"
+		autowire="byType"
+		p:authenticationService-ref="authenticationService"
+	/>
+	
+	<bean id="trustedHostAuthenticationProvider"
+		class="com.tasktop.c2c.server.profile.web.TrustedHostAuthenticationProvider"
+	/>
+
+	<bean id="trustedHostAuthenticationProcessingFilter"
+		class="com.tasktop.c2c.server.auth.service.TrustedHostAuthenticationProcessingFilter"
+		p:authenticationManager-ref="authenticationManager"
+	/>
+
+	<bean id="rememberMeAuthenticationProvider"
+		class="org.springframework.security.authentication.RememberMeAuthenticationProvider"
+		autowire="byType"
+		p:key="#{rememberMeServices.key}"
+	/>
+
+	<bean id="rememberMeServices"
+		class="com.tasktop.c2c.server.auth.service.EncodedPasswordTokenBasedRememberMeServices"
+		autowire="byType"
+		p:key="${alm.rememberMeServices.key}"
+		p:alwaysRemember="true"
+	/>
+	
+	<bean id="authRoleSecurityFilter" class="com.tasktop.c2c.server.auth.service.AuthenticationRoleProcessingFilter"
+		p:authenticationManager-ref="authenticationManager"
+		p:userDetailsService-ref="authenticationService"
+		p:rememberMeKey="#{rememberMeServices.key}"
+	/>
+	
+	<bean id="rememberMeAuthFilter" class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter"
+		p:authenticationManager-ref="authenticationManager"
+		p:rememberMeServices-ref="rememberMeServices"
+	/>
+
+	<s:http use-expressions="true" realm="Code2Cloud" create-session="always">
+		<s:http-basic />
+		<s:anonymous />
+		<s:session-management />
+		<s:custom-filter ref="trustedHostAuthenticationProcessingFilter" after="BASIC_AUTH_FILTER"/>
+		<s:custom-filter ref="rememberMeAuthFilter" position="REMEMBER_ME_FILTER"/>
+		<s:custom-filter ref="authRoleSecurityFilter" after="LAST"/> <!-- Make this the last filter, after all authentication is done. -->
+		
+		<s:intercept-url pattern="/api/connect/**" access="permitAll"/> 
+		<s:intercept-url pattern="/api/signin/**" access="permitAll"/> 
+		<s:intercept-url pattern="/api/signup" access="permitAll"/> 
+		<s:intercept-url pattern="/api/**" access="isAuthenticated()"/> <!-- rest of api requires auth -->
+		<s:intercept-url pattern="/**" access="permitAll"/> <!--  Everything else is ok for anon -->
+	</s:http>
+
+
+	<s:authentication-manager alias="authenticationManager">
+		<s:authentication-provider ref="authenticationServiceAuthenticationProvider"/>
+		<s:authentication-provider ref="trustedHostAuthenticationProvider"/>
+		<s:authentication-provider ref="rememberMeAuthenticationProvider"/>
+	</s:authentication-manager>
+
+</beans>

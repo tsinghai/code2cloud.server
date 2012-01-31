@@ -1,0 +1,53 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:d='urn:import:com.tasktop.c2c.server.profile.web.ui.client.view.deployment'>
+		<ui:style>
+		.popup {
+			width: 350px;
+			padding: 15px;
+		}
+
+		.popup fieldset {
+			clear: both;
+			padding: 0 0 10px 10px;
+		}
+
+		.popup fieldset label {
+			float: left;
+			width: 70px;
+			margin-right: 5px;
+		}
+
+		.popup fieldset > div {
+			float: left;
+			text-align: right;
+			margin-right: 5px;
+		}
+
+		.popup fieldset div b {
+			font-weight: bolder;
+		}
+	</ui:style>
+	<g:HTMLPanel styleName="{style.popup}">
+		<fieldset>
+			<label>Name:</label>
+			<div>
+				<g:TextBox ui:field="name"/>
+			</div>
+		</fieldset>
+		<fieldset>
+			<label>Type:</label>
+
+			<div>
+				<d:ObjectListBox ui:field="type"/>
+			</div>
+		</fieldset>
+<!-- 		<g:FlowPanel ui:field="errorPanel"/> -->
+		<div class="clear"></div>
+		<div class="center">
+			<g:Button ui:field="cancelButton" styleName="button ">Cancel</g:Button>
+			<g:Button ui:field="saveButton" styleName="button special">Save</g:Button>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

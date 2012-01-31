@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:c="urn:import:com.tasktop.c2c.server.common.web.client.widgets">
+	<g:HTMLPanel>
+		<g:VerticalPanel>
+			<g:HTMLPanel styleName="filter">
+				<div class="left">
+				<div class="search-results-for">
+					<g:Label ui:field="queryInfoLabel"/>
+					<g:Anchor ui:field="saveQueryAnchor">Save</g:Anchor>
+					<g:Anchor ui:field="editQueryAnchor">Edit</g:Anchor>
+				</div>
+				</div>
+				<div class="right">
+					<g:Button ui:field="newTask" addStyleNames="button special">New Task</g:Button>
+				</div>
+				<div class="clear"></div>
+			</g:HTMLPanel>
+			<g:FlowPanel ui:field="tasksPanel"/>
+	
+			<g:HTMLPanel styleName="pagination">
+				<div class="export left">
+					Export: <g:Anchor ui:field="exportCsvAnchor">CSV</g:Anchor> | <g:Anchor ui:field="exportJsonAnchor">JSON</g:Anchor> 
+				</div>
+				<c:Pager ui:field="pager"/>
+				<div class="clear"></div>
+			</g:HTMLPanel>
+			
+		</g:VerticalPanel>
+	</g:HTMLPanel>
+</ui:UiBinder>

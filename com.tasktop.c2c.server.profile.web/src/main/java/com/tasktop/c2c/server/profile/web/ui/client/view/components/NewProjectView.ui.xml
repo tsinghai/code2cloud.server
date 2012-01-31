@@ -1,0 +1,54 @@
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+			 xmlns:g="urn:import:com.google.gwt.user.client.ui"
+		xmlns:a="urn:import:com.tasktop.c2c.server.common.web.client.widgets">
+	<g:HTMLPanel>
+		<g:FlowPanel ui:field="maxProjectsMessagePanel" styleName="warningMessage signUpMessage" visible="false">
+			<g:Label>Unable to create project at this time. Please try again later.</g:Label>
+		</g:FlowPanel>
+		<a:FormSectionPanel>
+			<g:FlowPanel>
+				<g:HTMLPanel ui:field="newProjectForm" styleName="add-form">
+					<div class="project-create edit">
+  		  			<div class="headingMedium">Project Details</div>
+					<fieldset>
+						<label>Name:</label>
+						<div>
+							<g:TextBox styleName="text" name="project-name" ui:field="name"/>
+						</div>
+					</fieldset>
+					<fieldset>
+						<label>Description:</label>
+						<div>
+							<g:TextArea styleName="text" ui:field="description"/>
+						</div>
+					</fieldset>
+					<fieldset>
+						<label>Privacy:</label>
+						<div>
+							<p>
+								<g:RadioButton styleName="radio" name="privacy" ui:field="publicProjectButton" checked="false"/>
+								Public
+							</p>
+							<p>
+								<g:RadioButton styleName="radio" name="privacy" ui:field="privateProjectButton" checked="true"/>
+								Private
+							</p>
+						</div>
+					</fieldset>
+					<div class="clear"/>
+					<fieldset>
+						<label>&#160;</label>
+						<div class="button-wrap">
+							<g:Button styleName="button" ui:field="cancelButton">Cancel</g:Button>
+							<g:Button styleName="button special" ui:field="createButton">Create Project</g:Button>
+						</div>
+					</fieldset>
+					<div class="clear"/>
+					</div>
+					<div class="clear"/>
+				</g:HTMLPanel>
+			</g:FlowPanel>
+		</a:FormSectionPanel>
+
+	</g:HTMLPanel>
+</ui:UiBinder>

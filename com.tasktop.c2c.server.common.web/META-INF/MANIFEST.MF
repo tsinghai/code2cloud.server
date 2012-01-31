@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Common api
+Bundle-SymbolicName: com.tasktop.c2c.server.common.web
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Tasktop Technologies Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.tasktop.c2c.server.common.web.client.event,
+ com.tasktop.c2c.server.common.web.client.presenter,
+ com.tasktop.c2c.server.common.web.server,
+ com.tasktop.c2c.server.common.web.shared,
+ com.tasktop.c2c.server.common.web.tests.client.navigation,
+ com.tasktop.c2c.server.common.web

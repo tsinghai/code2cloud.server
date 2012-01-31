@@ -1,0 +1,46 @@
+.adminProfileCell {
+}
+
+.profileListPanel {
+}
+
+.profileList {
+}
+
+profileListFilter {
+}
+
+.profileEditPanel {
+}
+
+div.profileListPanel {
+	display: inline-block;
+	width: 300px;
+}
+
+.adminProfileCell > div > img {
+	display: inline;
+	float: left;
+	padding: 4px; 
+}
+
+.adminProfileCell > div {
+	display: block;
+}
+
+div.profileEditPanel {
+	margin: 5px;
+	display: inline;
+	float: right;
+	width: 660px;
+}
+
+.profileListFilter li {
+	float: left;
+}
+
+div.profileListFilter {
+	border-bottom: 1px;
+	border-style: solid;
+	padding: 5px;
+}

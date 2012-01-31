@@ -1,0 +1,17 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'
+			 xmlns:cellview="urn:import:com.google.gwt.user.cellview.client">
+
+	<g:HTMLPanel>
+		<div class="clear"/>
+		<div class="menu-items">
+			<div class="top">
+				<h5>Fields
+					<g:Anchor addStyleNames="right action add-deployment" ui:field="newField">+</g:Anchor>
+				</h5>
+			</div>
+			<cellview:CellList ui:field="fieldList"/>
+			<div class="bottom"/>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

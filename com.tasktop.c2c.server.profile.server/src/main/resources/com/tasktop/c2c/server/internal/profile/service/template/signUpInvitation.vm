@@ -1,0 +1,36 @@
+Hello,
+
+This is your invitation to sign up for ${AppName}. To accept this invitation, please visit:
+
+${URL}
+
+Once you sign up, you can access ${AppName} and start creating and sharing projects!
+
+------------------------------------------------
+To use ${AppName} via a Web Browser:
+------------------------------------------------
+
+1. Go to ${AppBaseUrl}
+
+2. Enter your credentials to sign in
+
+------------------------------------------------
+To use ${AppName} via the SpringSource Tool Suite (STS):
+------------------------------------------------
+
+1. Start with the most recent version of STS (2.5 minimum) available for download:
+   http://www.springsource.com/products/eclipse-downloads
+
+2. Install ${AppName} from the following update site:
+   ${UpdateSite}
+
+3. Once installed, from the STS Dashboard select the ${AppName} tab
+
+4. Select the "Sign up or Sign in to ${AppName}" link and enter your credentials
+
+5. Create a project or browse your existing projects to view dashboards, monitor builds, deploy artifacts to local servers and more
+
+
+Thank you for using ${AppName}. Happy Coding!
+
+- The ${AppName} Team

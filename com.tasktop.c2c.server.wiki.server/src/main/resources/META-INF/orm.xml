@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<entity-mappings
+	xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.eclipse.org/eclipselink/xsds/persistence/orm http://www.eclipse.org/eclipselink/xsds/eclipselink_orm_1_2.xsd"
+	version="1.2">
+	
+    <persistence-unit-metadata>
+        <persistence-unit-defaults>
+            <delimited-identifiers/>
+        </persistence-unit-defaults>
+    </persistence-unit-metadata>
+    <mapped-superclass class="com.tasktop.c2c.server.internal.wiki.server.domain.BaseEntity"/>
+    <entity class="com.tasktop.c2c.server.internal.wiki.server.domain.Page"/>
+    <entity class="com.tasktop.c2c.server.internal.wiki.server.domain.Person"/>
+    <entity class="com.tasktop.c2c.server.internal.wiki.server.domain.PageContent">
+    	<attribute-override name="content">
+    		<column column-definition="TEXT" nullable="false"/>
+    	</attribute-override>
+    	<attribute-override name="renderedContent">
+    		<column column-definition="TEXT" nullable="false"/>
+    	</attribute-override>
+    </entity>
+    <entity class="com.tasktop.c2c.server.internal.wiki.server.domain.Attachment"/>
+    <entity class="com.tasktop.c2c.server.internal.wiki.server.domain.AttachmentContent">
+    	<attribute-override name="content">
+    		<column column-definition="MEDIUMBLOB" nullable="false"/>
+    	</attribute-override>
+    </entity>
+</entity-mappings>

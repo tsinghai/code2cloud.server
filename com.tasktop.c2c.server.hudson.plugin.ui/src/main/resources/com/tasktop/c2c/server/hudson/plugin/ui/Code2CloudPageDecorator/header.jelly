@@ -1,0 +1,31 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+	<![CDATA[
+	<meta http-equiv="X-UA-Compatible" content="IE=100"> 
+	<script type="text/javascript">
+		var pageUrl = decodeURIComponent(window.location.toString());
+		var applicationRoot = pageUrl.split('/s/')[0];
+		var applicationId = pageUrl.split('/s/')[1].split('/')[0];
+
+		/* Set page title */
+		document.title = 'Builds for ' + applicationId + ' - Code2Cloud';
+
+		/* Set page favicon */
+		var headTag = document.getElementsByTagName('head')[0];
+		var headElms = headTag.getElementsByTagName('*');
+		for(i = 0; i < headElms.length; i++) {
+			var theLink = headElms[i];
+			if(theLink.rel == 'icon' || theLink.rel == 'shortcut icon')
+				headTag.removeChild(theLink);
+		}
+		document.write('<link rel="shortcut icon" type="image/x-icon" href="' + applicationRoot + '/content/favicon_png.png">');
+
+		/* Set page CSS */
+		document.write('<link rel="stylesheet" type="text/css" href="' + applicationRoot + '/styles/reset.css">');
+		document.write('<link rel="stylesheet" type="text/css" href="' + applicationRoot + '/styles/main-sb.css">');
+	</script>
+    <style type="text/css" title="loading-CSS">
+    	/* Start by hiding the body contents - this will be overridden when the page reformat JS runs, ensuring that the page is not visible before the new UI is ready. */
+    	body { visibility: hidden }
+    </style>
+	 ]]>
+</j:jelly>

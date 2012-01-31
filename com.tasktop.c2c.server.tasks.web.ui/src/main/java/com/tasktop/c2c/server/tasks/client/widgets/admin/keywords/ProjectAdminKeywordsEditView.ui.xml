@@ -1,0 +1,40 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'
+			 xmlns:cellview="urn:import:com.google.gwt.user.cellview.client"
+			 xmlns:tt="urn:import:com.tasktop.c2c.server.profile.web.ui.client.view.components">
+	<g:HTMLPanel>
+		<div class="deployment">
+			<div class="deployment-heading">
+				<h2 class="left">Tag Details</h2>
+				<div class="save">
+					<g:Button addStyleNames="right button special" ui:field="upperSaveButton">Save</g:Button>
+					<g:Button addStyleNames="right button" ui:field="upperCancelButton">Cancel</g:Button>
+				</div>
+				<div class="clear"/>
+			</div>
+			<div class="deployment-details edit">
+				<!-- CLASS NAME IS NOT USED IN STYLES.CLASS NAME JUST FOR REFERENCE -->
+				<h3/>
+				<div class="clear"/>
+				<fieldset>
+					<label>Name:</label>
+					<div>
+						<g:TextBox ui:field="keywordName"/>
+					</div>
+				</fieldset>
+				<fieldset>
+					<label>Description:</label>
+					<div class="description">
+						<g:TextArea ui:field="keywordDescription" styleName="text"/>
+					</div>
+				</fieldset>
+				<div class="clear"/>
+			</div>
+			<div class="save">
+				<g:Button addStyleNames="right button special" ui:field="lowerSaveButton">Save</g:Button>
+				<g:Button addStyleNames="right button" ui:field="lowerCancelButton">Cancel</g:Button>
+				<div class="clear"/>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

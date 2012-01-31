@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+/**********************************************************************
+ * Code2Cloud
+ *
+ * Updated: 28 June 2011
+ *
+ * IE7 fixes & workarounds
+ **********************************************************************/
+ 
+ 
+ .tasks .closed {
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)" !important;
+	filter: alpha(opacity=20) !important;
+}
+
+.overlay {
+  filter: alpha(opacity=50) !important;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)" !important;
+}
+
+.project-filter .button {
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#e6e6e6',GradientType=0 ); /* IE6-9 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#e6e6e6',GradientType=0 )"; /* IE6-9 */
+}
+
+.project-filter .button.selected {
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dfe1e5', endColorstr='#b9bbbf',GradientType=0 ); /* IE6-9 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#dfe1e5', endColorstr='#b9bbbf',GradientType=0 )"; /* IE6-9 */
+}
+
+.button.special {
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6dabdb', endColorstr='#4d85b6',GradientType=0 ); /* IE6-9 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#6dabdb', endColorstr='#4d85b6',GradientType=0 )"; /* IE6-9 */
+}
+
+.button.special:hover {
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#78b4e2', endColorstr='#568ebf',GradientType=0 ); /* IE6-9 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#78b4e2', endColorstr='#568ebf',GradientType=0 )"; /* IE6-9 */
+}
+
+.button.watch {
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9f1d5', endColorstr='#cce1a3',GradientType=0 ); /* IE6-9 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9f1d5', endColorstr='#cce1a3',GradientType=0 )"; /* IE6-9 */	
+}
+
+.project-nav-wrapper {
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1f1f1', endColorstr='#e6e6e6',GradientType=0 ); /* IE6-9 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1f1f1', endColorstr='#e6e6e6',GradientType=0 )"; /* IE6-9 */
+	behavior: url(styles/PIE.htc);
+}
+
+a.project-nav-item {
+	filter: none;
+	-ms-filter: none;
+}
+
+.task-form .removable-input-item {
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9f4ff', endColorstr='#d2e0ee',GradientType=0 ); /* IE6-9 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9f4ff', endColorstr='#d2e0ee',GradientType=0 )"; /* IE6-9 */
+}
+
+.header {
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d85b6', endColorstr='#2b5480',GradientType=0 ); /* IE6-9 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d85b6', endColorstr='#2b5480',GradientType=0 )"; /* IE6-9 */
+}
+
+.header .search-button,
+.search-tasks .search-button {
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#cfcfcf',GradientType=0 ); /* IE6-9 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#cfcfcf',GradientType=0 )"; /* IE6-9 */
+}
+
+.button {
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */	
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#e5e5e5',GradientType=0 )"; /* IE6-9 */	
+}
+
+.inline-tabs .button {
+  filter: none;
+  -ms-filter: none;
+}
+
+.disabled {
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+  filter: alpha(opacity=30);
+}
+
+.project-nav-item.working {
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+  filter: alpha(opacity=40);
+}
+
+.social-icon:hover span.pending {
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+
+.modalOverlay {
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+
+.menu > ul fieldset div.edit span {
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+
+.menu > ul fieldset div.edit:hover span {
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+}
+
+.menu > ul fieldset div.edit:hover {
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+}
+
+.menu .search-button .search-button-img {
+	margin-left: -4px;
+	margin-top: 2px;
+}
+
+.header-nav .search-button .search-button-img {
+	margin-top: 0px;
+	margin-left: -2px;
+}

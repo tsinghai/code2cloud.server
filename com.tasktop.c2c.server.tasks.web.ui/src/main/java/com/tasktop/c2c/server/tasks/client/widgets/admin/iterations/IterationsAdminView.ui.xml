@@ -1,0 +1,19 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'
+			 xmlns:cellview="urn:import:com.google.gwt.user.cellview.client"
+			 xmlns:tt="urn:import:com.tasktop.c2c.server.profile.web.ui.client.view.components">
+	<g:HTMLPanel>
+		<div class="deployment">
+			<div class="deployment-heading">
+				<div class="save">
+					<g:Button addStyleNames="left button special" ui:field="newIteration">Add Iteration</g:Button>
+				</div>
+				<div class="right">
+					<p> Hide Inactive: <g:CheckBox ui:field="hideInActive"/> </p>				
+				</div>
+			</div>
+			<div class="clear"/>
+			<cellview:CellTable ui:field="cellTable"/>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

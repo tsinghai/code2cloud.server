@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' 
+	xmlns:p="urn:import:com.tasktop.c2c.server.common.web.client.widgets.chooser.person" 
+	xmlns:c="urn:import:com.tasktop.c2c.server.profile.web.ui.client.view.components"
+	xmlns:h="urn:import:com.tasktop.c2c.server.common.web.client.widgets.hyperlink">
+		<g:HTMLPanel>
+			<div class="project-action commits">
+			  <a class="social-icon"></a>
+			  <p class="oneline">
+	   			<g:Anchor ui:field='expandButton' styleName="button right"></g:Anchor>
+			  	<p:PersonLabel ui:field="personLabel"/>
+				Committed
+				<g:Label ui:field='commitLabel'/>
+	   			<span class="date"><g:Label ui:field='dateLabel'/></span>
+			    <br/>
+			    <h:HyperlinkingLabel ui:field="expandingTextLabel"/>
+			  </p>
+				<div class="spacer clear small"></div>
+			</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

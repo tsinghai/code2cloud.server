@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans	xmlns="http://www.springframework.org/schema/beans"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<import resource="classpath:META-INF/spring/applicationContext-multiUserRestClient.xml"/>
+	<import resource="classpath:META-INF/spring/applicationContext-restServer.xml"/>
+	<import resource="classpath:applicationContext-profileService.xml"/>
+	<import resource="classpath:applicationContext-deploymentService.xml"/>
+
+	<context:property-placeholder location="classpath*:/config/*.properties, classpath*:/META-INF/spring/*.properties, classpath*:/*-test.properties, file:///opt/cloudalm-test/etc/*.properties"/>
+
+
+	<context:component-scan base-package="com.tasktop.c2c.server.profile.tests,com.tasktop.c2c.server.internal.auth.service,com.tasktop.c2c.server.internal.profile.service">
+	</context:component-scan>
+
+	<bean class="com.tasktop.c2c.server.common.tests.jpa.SingletonTestEntityManagerFactory" 
+		id="entityManagerFactory" depends-on="liquibase">
+		<property name="delegate">
+			<bean
+				class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+				<property name="dataSource" ref="dataSource" />
+				<property name="persistenceXmlLocation" value="classpath:/persistence-test.xml"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+		<property name="scopes">
+			<map>
+				<entry key="request">
+					<bean class="com.tasktop.c2c.server.common.tests.util.TestScope" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- mail configuation -->
+	<bean id="mailSender" class="com.tasktop.c2c.server.common.service.MockJavaMailSenderImpl"/>
+
+	<bean id="taskServiceProvider" class="com.tasktop.c2c.server.profile.tests.mock.MockTaskServiceProvider"/>
+	
+	<bean id="jobService" class="com.tasktop.c2c.server.common.service.MockJobService" scope="request"/>
+
+	<!-- this is a template message that we can pre-load with default state -->
+	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="${alm.mailSender.from}"/>
+	</bean>
+		
+	<bean class="com.tasktop.c2c.server.common.tests.util.WebApplicationContainerBean" id="webApplicationContainerBean"/>
+	
+	<bean class="com.tasktop.c2c.server.profile.service.HudsonServiceClient">
+		<property name="restTemplate" ref="basicAuthRestTemplate"/>
+	</bean>
+		
+	<!--  This is not really correct (Db is not mysql), but it allows the context to be loaded, and the service is not used in these tests -->
+	<alias name="dataSource" alias="mysqlDataSource"/>
+	
+	<bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase" >
+      <property name="dataSource" ref="dataSource" />
+      <property name="changeLog" value="classpath:data/liquibase-profile-db-master.xml" />
+	 </bean>
+	
+</beans>

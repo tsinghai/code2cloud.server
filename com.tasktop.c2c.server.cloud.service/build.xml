@@ -1,0 +1,18 @@
+<project name="com.tasktop.c2c.server.common.service" default="all">
+
+	<property name="qualifier" value="dev"/>
+	<property name="bundle.symbolicName" value="com.tasktop.c2c.server.cloud.service"/>
+	<property name="bundle.version" value="1.0.0.${qualifier}"/>
+
+	<path id="compile.classpath">
+		<fileset dir="../com.tasktop.c2c.server.profile.lib">
+			<include name="spring/*.jar"/>
+			<include name="jclouds/*.jar"/>
+			<include name="jpa/*.jar"/>
+			<exclude name="**/*-sources*.jar"/>
+		</fileset>
+		<pathelement location="../com.tasktop.c2c.server.profile.domain/bin"/>
+	</path>
+	
+	<import file="../com.tasktop.c2c.server.profile.build/build-bundle.xml"/>
+</project>

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ui:UiBinder SYSTEM 'http://dl.google.com/gwt/DTD/xhtml.ent'>
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:c='urn:import:com.tasktop.c2c.server.profile.web.ui.client.view.components'
+	xmlns:graphs="urn:import:com.tasktop.c2c.server.profile.web.ui.client.graphs">
+	<g:HTMLPanel styleName="project-detail-container">
+		<div class="three-column">
+			<div class="column first left">
+				<div class="project-latest-activity build-status">
+					<h4>Build Status</h4>
+					<c:HudsonStatusView ui:field='hudsonStatusView' />
+				</div>
+			</div>
+			<div class="column left">
+				<div class="project-latest-activity author-commits">
+					<h4>Commits By Author (60 Days)</h4>
+						<g:FlowPanel ui:field="commitsByAuthorPanel" styleName="commit-graph"/>
+				</div>
+			</div>
+
+			<div class="column left last">
+				<div class="project-latest-activity author-activity">
+					<h4>Activity (60 Days)</h4>
+					<g:FlowPanel ui:field="activityTimelinePanel" styleName="activity-graph"/>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div class="spacer"></div>
+		<div id="recent-activity">
+			<c:FilteringActivityView ui:field='activityView' />
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

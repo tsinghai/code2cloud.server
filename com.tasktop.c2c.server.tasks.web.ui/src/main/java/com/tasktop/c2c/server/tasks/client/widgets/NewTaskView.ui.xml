@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:t="urn:import:com.tasktop.c2c.server.tasks.client.widgets"
+	xmlns:c="urn:import:com.tasktop.c2c.server.common.web.client.widgets.chooser"
+	xmlns:tw="urn:import:com.tasktop.c2c.server.tasks.client.widgets.wiki">
+	<g:HTMLPanel styleName="project-detail-container">
+		<!-- New Task Form starts -->
+		<div id="new-task" class="task-form">
+			<div class="deployment">
+				<div class="deployment-heading">
+					<h2>
+						<g:Label ui:field="newTaskHeader"/>
+						<g:Button ui:field="saveTaskButton2" addStyleNames="button special right">Create
+							Task</g:Button>
+						<g:Button ui:field="cancelButton2" addStyleNames="button right">Cancel</g:Button>
+					</h2>
+					<div class="clear"></div>
+				</div>
+				<div class="new-task edit">
+					<h3></h3>
+					<fieldset>
+						<div class="item">
+							<label>Type</label>
+							<g:ValueListBox ui:field="taskType" styleName="left" />
+							<div class="clear"></div>
+						</div>
+						<div class="item">
+							<label>Summary</label>
+							<g:TextBox ui:field="shortDescription" styleName="input summary left" />
+							<div class="clear"></div>
+						</div>
+						<div class="item">
+							<label>Status</label>
+							<t:StatusEditorView ui:field="statusEditor" />
+						</div>
+						<div class="item">
+							<label>Priority</label>
+							<g:ValueListBox ui:field="priority" />
+						</div>
+						<div class="item">
+							<label>Severity</label>
+							<g:ValueListBox ui:field="severity" />
+						</div>
+						<div class="item">
+							<label><g:Label ui:field="tagsLabel">Tags</g:Label></label>
+							<c:MultiValueChooser ui:field="keywords" styleName="text long date left"/>
+						</div>
+					</fieldset>
+				</div>
+				<div class="details edit">
+					<h3>Details</h3>
+					<fieldset>
+						<g:VerticalPanel ui:field="detailsContainer" />
+					</fieldset>
+				</div>
+				<div class="people edit">
+					<h3>People</h3>
+					<fieldset>
+						<g:HTMLPanel>
+							<table class="taskPeople">
+								<tr>
+									<th>
+										<g:Label ui:field="taskOwnerLabel">Owner</g:Label>
+									</th>
+									<td>
+										<t:SingleTaskProfileChooser ui:field="assignee" styleName="text long date left"/>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<g:Label ui:field="watcherLabel">CC</g:Label>
+									</th>
+									<td>
+										<t:MultipleTaskProfileChooser ui:field="watchers" styleName="text long date left"/>
+									</td>
+								</tr>
+							</table>
+						</g:HTMLPanel>
+					</fieldset>
+				</div>
+				<div class="description edit">
+					<h3>Description</h3>
+					<fieldset>
+						<tw:EditWikiPanel ui:field="description"
+							visibleLines="7" />
+					</fieldset>
+				</div>
+				<div class="save right top-margin">
+					<g:Button addStyleNames="button special right" ui:field="saveTaskButton">Create
+						Task</g:Button>
+					<g:Button addStyleNames="button" ui:field="cancelButton">Cancel</g:Button>
+				</div>
+			</div>
+		</div>
+		<!--Task End -->
+	</g:HTMLPanel>
+</ui:UiBinder>

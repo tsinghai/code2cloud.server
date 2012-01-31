@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel addStyleNames="mole-container">
+		<div class="mole-text">
+			<g:HTMLPanel ui:field="mole" addStyleNames="mole">
+				<div class="mole-text">
+					<g:SimplePanel ui:field="notificationContentPanel"/>
+				</div>
+				<g:Anchor ui:field="actionButton" addStyleNames="mole-action"/>
+			</g:HTMLPanel>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

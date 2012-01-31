@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="profile">
+	<!-- Inherit the core Web Toolkit stuff.                        -->
+	<inherits name="com.google.gwt.user.User"/>
+	<inherits name="com.google.gwt.uibinder.UiBinder"/>
+
+	<!-- Inherit the default GWT style sheet.  You can change       -->
+	<!-- the theme of your GWT application by uncommenting          -->
+	<!-- any one of the following lines.                            -->
+	<inherits name="com.google.gwt.user.theme.standard.StandardResources"/>
+	<!-- <inherits name="com.google.gwt.user.theme.chrome.Chrome"/> -->
+	<!-- <inherits name="com.google.gwt.user.theme.dark.Dark"/>     -->
+
+	<!-- Other module inherits                                      -->
+	<inherits name="com.googlecode.gchart.GChart"/>
+	<!--  inherits name="com.googlecode.gwt.math.Math"/ -->
+	<inherits name="com.google.gwt.debug.Debug"/>
+	<inherits name="com.google.gwt.json.JSON"/>
+	<inherits name="com.google.gwt.logging.Logging"/>
+	<inherits name="com.tasktop.c2c.server.common.web.CommonWeb"/>
+	<inherits name="com.tasktop.c2c.server.profile.domain.ProfileDomain"/>
+	<inherits name="com.tasktop.c2c.server.tasks.domain.TaskDomain"/>
+	<inherits name="com.tasktop.c2c.server.deployment.domain.DeploymentDomain"/>
+	<inherits name="com.tasktop.c2c.server.common.service.domain.CommonDomain"/>
+	<inherits name="com.tasktop.c2c.server.cloud.domain.CloudDomain"/>
+	<inherits name="com.google.gwt.visualization.Visualization"/>
+		<inherits name="com.tasktop.c2c.server.profile.web.ProfileUi"/>
+	<inherits name="com.tasktop.c2c.server.wiki.WikiApi"/>
+	<inherits name="com.tasktop.c2c.server.tasks.TaskUi"/>
+	<!-- FIXME Remove once wiki.web.ui is merged -->
+	<inherits name="com.tasktop.c2c.server.wiki.web.ui.WikiUi"/>
+	<inherits name="com.google.gwt.place.Place"/>
+	<inherits name="com.google.gwt.activity.Activity"/>
+	<inherits name="com.google.gwt.inject.Inject"/>
+	<inherits name="net.customware.gwt.dispatch.Dispatch"/>
+
+	<!-- set-configuration-property name="gwt.persistentunitcache" value="true"/-->
+	<set-configuration-property name="UiBinder.useSafeHtmlTemplates" value="true"/>
+	<set-property name="gwt.logging.logLevel" value="FINEST"/>
+    <set-property name="gwt.logging.enabled" value="TRUE"/>
+	<set-property name="gwt.logging.popupHandler" value="DISABLED"/>
+
+	<set-property name="compiler.stackMode" value="emulated"/>
+  	<set-configuration-property name="compiler.emulatedStack.recordLineNumbers" value="true"/>
+  	<set-configuration-property name="compiler.emulatedStack.recordFileNames" value="true"/>
+
+	<!-- Specify the app entry point class.                         -->
+	<entry-point class="com.tasktop.c2c.server.profile.web.ui.client.ProfileEntryPoint"/>
+
+	<!-- Specify the paths for translatable code                    -->
+	<source path="client">
+		<exclude name="**/*Test.java"/>
+		 <exclude name="**/test/*"/>
+	</source>
+
+
+	<!--  Comment in to cut down build time. -->
+	<!--  <set-property name="user.agent" value="gecko"/>-->
+
+</module>

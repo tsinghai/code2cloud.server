@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<import resource="classpath:applicationContext-wikiService.xml"/>
+	<!--  FIXME really need the client? -->
+	<import resource="classpath:META-INF/spring/applicationContext-multiUserRestClient.xml"/>
+	<import resource="classpath:META-INF/spring/applicationContext-restServer.xml"/>
+
+	<!-- centralized properties paths for: app, os x dev environments, vcloud self host -->
+	<context:property-placeholder location="classpath*:/config/*.properties, /WEB-INF/spring/*.properties, file:///opt/cloudalm/etc/*.properties, file:///opt/code2cloud/etc/*.properties"  
+		ignore-resource-not-found="true"/>
+
+	<bean
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		id="wikiDomain"
+		p:dataSource-ref="dataSource"
+	/>
+	
+	<bean id="tenancyContextIntegrationFilter" class="org.springframework.tenancy.web.TenancyContextIntegrationFilter">
+		<property name="tenantIdentificationStrategyChain">
+			<list>
+				<bean class="org.springframework.tenancy.web.HeaderTenantIdentificationStrategy">
+					<property name="headerName">
+					<util:constant static-field="com.tasktop.c2c.server.common.service.web.HeaderConstants.TENANT_HEADER"/>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<security:global-method-security secured-annotations="enabled" />
+	
+</beans>

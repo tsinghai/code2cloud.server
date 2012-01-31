@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel>
+		<form id="project-admin" class="add-form edit project-admin left"
+			action="" method="post">
+			<h4>Properties</h4>
+			<fieldset>
+				<label class="left">Name:</label>
+				<div><g:TextBox styleName="text" name="name" ui:field="name" /></div>
+			</fieldset>
+			<fieldset>
+				<label class="left">Description:</label>
+				<p><g:TextArea styleName="text" ui:field="description" /></p>
+			</fieldset>
+			<fieldset>
+				<label>Privacy:</label>
+				<div>
+					<p><g:RadioButton ui:field="publicProjectButton" name="privacy" />Public</p>
+					<p><g:RadioButton ui:field="privateProjectButton" name="privacy" />Private</p>
+				</div>
+			</fieldset>
+			<div class="clear"></div>
+			<fieldset>
+				<label>&nbsp;</label>
+				<div class="save">
+					<!-- <input type="button" class="button" value="Cancel"/> -->
+					<g:Button ui:field="saveButton" styleName="button special">Save Changes</g:Button>
+				</div>
+			</fieldset>
+			<div class="clear"></div>
+		</form>
+		<div class="project-help right">
+			<p class="note">Note: Setting a Project as "Public" makes the project code, wiki docs, tasks and builds publicly available.</p>
+		</div>
+		<div class="clear"></div>
+	</g:HTMLPanel>
+</ui:UiBinder>

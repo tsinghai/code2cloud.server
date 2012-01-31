@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+		xmlns:p='urn:import:com.tasktop.c2c.server.common.web.client.widgets'
+		xmlns:c='urn:import:com.tasktop.c2c.server.profile.web.ui.client.view.components'
+        xmlns:g="urn:import:com.google.gwt.user.client.ui">
+        <g:HTMLPanel>
+        <!--  FIXME Now the filter controls (Public|Watcher..) are in the header, so i can't really lay out here. -->
+                         
+        <div class="discover page-menu no-padding">
+          <div class="left" ui:field="filterDivElement">
+            <ul class="project-filter right">
+                          <li><g:Anchor ui:field="publicFilterAnchor" styleName="button first">Public</g:Anchor></li>
+                          <li><g:Anchor ui:field="watcherFilterAnchor" styleName="button">Watcher</g:Anchor></li>
+                          <li><g:Anchor ui:field="memberFilterAnchor" styleName="button">Member</g:Anchor></li>
+                          <li><g:Anchor ui:field="ownerFilterAnchor" styleName="button">Owner</g:Anchor></li>
+                          <li><g:Anchor ui:field="allFilterAnchor" styleName="button last">All</g:Anchor></li>
+                  </ul>
+          </div>
+          <div class="right">
+          <a ui:field="createAnchorElement" class="button special right"><span>Create Project</span></a>
+          </div>
+          <div class="clear"></div>
+ 			</div>
+
+	         <div class="clear"></div>
+
+			<div class="project-detail-container discover">
+				<div class="discover-project-wrap">
+					
+					<g:HTMLPanel styleName="discover-popup-wrap active" ui:field="projectPopupWrapper">
+						<g:FlowPanel ui:field="projectsPanel" styleName="discover-project-list"/>
+						
+						<!--  Popup -->
+						<g:HTMLPanel styleName="discover-popup-content" ui:field="projectPopup" visible="false">
+							<div class="close">
+								<g:Anchor ui:field="closeLink" styleName="misc-icon close right"><span></span>Close</g:Anchor>
+							</div>
+							<h2>
+								<g:Anchor ui:field="projectTitle"/>
+								<g:Anchor ui:field="watchLink" styleName="button watch right"><span></span>Watch</g:Anchor>
+							</h2>
+							<div class="clear"></div>
+							<div class="nav-bar" style="display:none">
+								<c:ProjectIconPanel ui:field="iconPanel" addStyles="left"/>
+								 <div class="clear"></div>
+							</div>
+							<p ui:field="projectDesc"></p>
+							<div class="activities">
+								<c:SimpleActivityView ui:field='activityView'/>	
+							</div>
+						</g:HTMLPanel>
+						
+						<div class="discover-dashboard">
+                                  <h2>Welcome to Code2Cloud!</h2>
+                                  <p>
+                                  Code2Cloud is an online service for <em>creating, hosting, and deploying software development projects</em>. In just a
+                                  few clicks, you can create your own project ready to store <em>source code</em> (Git), track <em>tasks and issues</em>, create <em>wiki documentation</em>,
+                                  set up <em>continuous integration</em> (Hudson), and <em>deploy</em> to a local server
+                                  or your <em>Cloud Foundry</em> instance. All of these tools come <em>pre-integrated</em> to work together, so you don't
+                                  have to build or maintain the tools you're using to build the world's next greatest application.
+                                          </p>
+                                          <p>
+                                        Want to participate in a project you see, or create your own public or private project?
+                                        Code2Cloud is currently in beta and is accepting requests to join.
+                                        <em>Just send your first name, last name, and email address to <a href="mailto:dev-c2c@tasktop.com">dev-c2c@tasktop.com</a>.</em>
+                                  </p>
+                                </div>
+						<div class="clear"></div>
+					</g:HTMLPanel>
+				</div>
+				<div class="pagination">
+				<p:Pager ui:field="pager"/>
+      			</div>
+				<div class="clear"></div>
+			</div>
+        </g:HTMLPanel>
+</ui:UiBinder>

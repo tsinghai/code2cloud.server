@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel styleName="file-uploaded">
+		<g:Anchor ui:field="name"/> <g:Label ui:field="size"/> <g:Label ui:field="modificationDate"/> <g:Label ui:field="user"/>
+		<div class="clear"></div>
+	</g:HTMLPanel>
+</ui:UiBinder>

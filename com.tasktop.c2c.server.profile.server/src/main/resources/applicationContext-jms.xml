@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:jms="http://www.springframework.org/schema/jms"
+    xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.0.xsd">
+       
+
+  	<!-- JMS ConnectionFactory to use -->
+  	<bean id="amqConnectionFactory"
+  		class="org.apache.activemq.ActiveMQConnectionFactory"
+  		p:brokerURL="vm://broker?create=false" depends-on="brokerService"/>
+  	
+	<bean id="brokerService"
+		class="org.apache.activemq.broker.BrokerService"
+		init-method="start"
+		destroy-method="stop"
+		p:brokerName="broker"
+		p:useJmx="true">
+		<property name="schedulerSupport" value="false"/> <!--  WORKAROUND for task-880 -->
+		<property name="persistenceAdapter">
+			<bean class="org.apache.activemq.store.kahadb.KahaDBStore"
+				p:directory="${alm.activeMQ.dataDir}">
+			</bean>
+		</property>
+	</bean>
+  	<!-- A cached connection to wrap the ActiveMQ connection -->
+  	<bean id="cachedConnectionFactory"
+	  	class="org.springframework.jms.connection.CachingConnectionFactory"
+	    p:targetConnectionFactory-ref="amqConnectionFactory"
+	    p:sessionCacheSize="10"
+	/>
+
+  	<!-- A destination in ActiveMQ -->
+  	<bean id="jobQueue" class="org.apache.activemq.command.ActiveMQQueue">
+    	<constructor-arg value="asynchronousJobQueue" />
+  	</bean>
+ 
+ 	<!-- A JmsTemplate instance that uses the cached connection and destination. Declared as session transacted -->
+	<bean id="producerTemplate"
+		class="org.springframework.jms.core.JmsTemplate"
+	    p:connectionFactory-ref="cachedConnectionFactory"
+	    p:defaultDestination-ref="jobQueue"
+	    p:sessionTransacted="true"
+	/>
+	    
+	<!-- a POJO that uses Spring JmsTemplate -->
+  	<bean id="producer"
+  		class="com.tasktop.c2c.server.internal.profile.service.jms.JobServiceBean"
+  		p:template-ref="producerTemplate"
+  	/>
+  	
+  	<!-- The Spring message listener container configuration -->
+	<bean id="jobMessageListener"
+		class="com.tasktop.c2c.server.internal.profile.service.jms.JobMessageListener"
+	/>
+
+	<jms:listener-container
+    	container-type="default"
+    	connection-factory="amqConnectionFactory"
+    	transaction-manager="transactionManager" concurrency="2-10" cache="connection">
+  		<jms:listener destination="asynchronousJobQueue" 
+  			ref="jobMessageListener"
+  			method="onMessage"  selector="Type = 'DEFAULT'" 
+  		/>
+	</jms:listener-container>
+	
+	<jms:listener-container
+    	container-type="default"
+    	connection-factory="amqConnectionFactory"
+    	transaction-manager="transactionManager" concurrency="2-10" cache="connection">
+  		<jms:listener destination="asynchronousJobQueue" 
+  			ref="jobMessageListener"
+  			method="onMessage"  selector="Type = 'SHORT'" 
+  		/>
+	</jms:listener-container>
+	
+	<jms:listener-container
+    	container-type="default"
+    	connection-factory="amqConnectionFactory"
+    	transaction-manager="transactionManager" concurrency="2-10" cache="connection">
+  		<jms:listener destination="asynchronousJobQueue" 
+  			ref="jobMessageListener"
+  			method="onMessage"  selector="Type = 'EMAIL'" 
+  		/>
+	</jms:listener-container>
+
+</beans>

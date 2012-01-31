@@ -1,0 +1,1507 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet author="taskdb" id="insertSeverities">
+		<insert tableName="bug_severity">
+			<column name="id" value="1" />
+			<column name="value" value="blocker" />
+			<column name="sortkey" value="100" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="bug_severity">
+			<column name="id" value="2" />
+			<column name="value" value="critical" />
+			<column name="sortkey" value="200" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="bug_severity">
+			<column name="id" value="3" />
+			<column name="value" value="major" />
+			<column name="sortkey" value="300" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="bug_severity">
+			<column name="id" value="4" />
+			<column name="value" value="normal" />
+			<column name="sortkey" value="400" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="bug_severity">
+			<column name="id" value="5" />
+			<column name="value" value="minor" />
+			<column name="sortkey" value="500" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="bug_severity">
+			<column name="id" value="6" />
+			<column name="value" value="trivial" />
+			<column name="sortkey" value="600" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="bug_severity">
+			<column name="id" value="7" />
+			<column name="value" value="enhancement" />
+			<column name="sortkey" value="700" />
+			<column name="isactive" value="1" />
+		</insert>
+	</changeSet>
+	<changeSet author="taskdb" id="insertStatuses">
+		<insert tableName="bug_status">
+			<column name="id" value="1" />
+			<column name="value" value="UNCONFIRMED" />
+			<column name="sortkey" value="100" />
+			<column name="isactive" value="1" />
+			<column name="is_open" value="1" />
+		</insert>
+		<insert tableName="bug_status">
+			<column name="id" value="2" />
+			<column name="value" value="NEW" />
+			<column name="sortkey" value="200" />
+			<column name="isactive" value="1" />
+			<column name="is_open" value="1" />
+		</insert>
+		<insert tableName="bug_status">
+			<column name="id" value="3" />
+			<column name="value" value="ASSIGNED" />
+			<column name="sortkey" value="300" />
+			<column name="isactive" value="1" />
+			<column name="is_open" value="1" />
+		</insert>
+		<insert tableName="bug_status">
+			<column name="id" value="4" />
+			<column name="value" value="REOPENED" />
+			<column name="sortkey" value="400" />
+			<column name="isactive" value="1" />
+			<column name="is_open" value="1" />
+		</insert>
+		<insert tableName="bug_status">
+			<column name="id" value="5" />
+			<column name="value" value="RESOLVED" />
+			<column name="sortkey" value="500" />
+			<column name="isactive" value="1" />
+			<column name="is_open" value="0" />
+		</insert>
+		<insert tableName="bug_status">
+			<column name="id" value="6" />
+			<column name="value" value="VERIFIED" />
+			<column name="sortkey" value="600" />
+			<column name="isactive" value="1" />
+			<column name="is_open" value="0" />
+		</insert>
+		<insert tableName="bug_status">
+			<column name="id" value="7" />
+			<column name="value" value="CLOSED" />
+			<column name="sortkey" value="700" />
+			<column name="isactive" value="1" />
+			<column name="is_open" value="0" />
+		</insert>
+	</changeSet>
+	<changeSet author="taskdb" id="insertClassifications">
+		<insert tableName="classifications">
+			<column name="id" value="1" />
+			<column name="name" value="Unclassified" />
+			<column name="description" value="Not assigned to any classification" />
+			<column name="sortkey" value="0" />
+		</insert>
+	</changeSet>
+
+	<changeSet author="taskdb" id="insertProducts">
+		<insert tableName="products">
+			<column name="id" value="1" />
+			<column name="name" value="Default" />
+			<column name="classification_id" value="1" />
+			<column name="description" value="default product" />
+			<column name="isactive" value="1" />
+			<column name="votesperuser" value="0" />
+			<column name="maxvotesperbug" value="10000" />
+			<column name="votestoconfirm" value="0" />
+			<column name="defaultmilestone" value="---" />
+			<column name="allows_unconfirmed" value="0" />
+		</insert>
+	</changeSet>
+
+	<changeSet author="taskdb" id="insertComponents">
+		<insert tableName="components">
+			<column name="id" value="1" />
+			<column name="name" value="Default" />
+			<column name="product_id" value="1" />
+			<column name="description" value="default component" />
+		</insert>
+	</changeSet>
+
+	<changeSet author="taskdb" id="insertFieldDefs">
+		<insert tableName="fielddefs">
+			<column name="id" value="1" />
+			<column name="name" value='bug_id' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Bug #' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="100" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="2" />
+			<column name="name" value='short_desc' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Summary' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="200" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="3" />
+			<column name="name" value='classification' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Classification' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="300" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="4" />
+			<column name="name" value='product' />
+			<column name="type" value="2" />
+			<column name="custom" value="0" />
+			<column name="description" value='Product' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="400" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="5" />
+			<column name="name" value='version' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Version' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="500" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="6" />
+			<column name="name" value='rep_platform' />
+			<column name="type" value="2" />
+			<column name="custom" value="0" />
+			<column name="description" value='Platform' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="600" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="7" />
+			<column name="name" value='bug_file_loc' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='URL' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="700" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="8" />
+			<column name="name" value='op_sys' />
+			<column name="type" value="2" />
+			<column name="custom" value="0" />
+			<column name="description" value='OS/Version' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="800" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="9" />
+			<column name="name" value='bug_status' />
+			<column name="type" value="2" />
+			<column name="custom" value="0" />
+			<column name="description" value='Status' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="900" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="10" />
+			<column name="name" value='status_whiteboard' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Status Whiteboard' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="1000" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="11" />
+			<column name="name" value='keywords' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Tags' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="1100" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="12" />
+			<column name="name" value='resolution' />
+			<column name="type" value="2" />
+			<column name="custom" value="0" />
+			<column name="description" value='Resolution' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="1200" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="13" />
+			<column name="name" value='bug_severity' />
+			<column name="type" value="2" />
+			<column name="custom" value="0" />
+			<column name="description" value='Severity' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="1300" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="14" />
+			<column name="name" value='priority' />
+			<column name="type" value="2" />
+			<column name="custom" value="0" />
+			<column name="description" value='Priority' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="1400" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="15" />
+			<column name="name" value='component' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Component' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="1500" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="16" />
+			<column name="name" value='assigned_to' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Owner' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="1600" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="17" />
+			<column name="name" value='reporter' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='ReportedBy' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="1700" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="18" />
+			<column name="name" value='votes' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Votes' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="1800" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="19" />
+			<column name="name" value='qa_contact' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='QAContact' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="1900" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="20" />
+			<column name="name" value='cc' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='CC' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="2000" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="21" />
+			<column name="name" value='dependson' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Parent' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="2100" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="22" />
+			<column name="name" value='blocked' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Subtasks' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="2200" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="23" />
+			<column name="name" value='attachments.description' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Attachment description' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="2300" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="24" />
+			<column name="name" value='attachments.filename' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Attachment filename' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="2400" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="25" />
+			<column name="name" value='attachments.mimetype' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Attachment mime type' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="2500" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="26" />
+			<column name="name" value='attachments.ispatch' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Attachment is patch' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="2600" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="27" />
+			<column name="name" value='attachments.isobsolete' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Attachment is obsolete' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="2700" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="28" />
+			<column name="name" value='attachments.isprivate' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Attachment is private' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="2800" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="29" />
+			<column name="name" value='attachments.submitter' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Attachment creator' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="2900" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="30" />
+			<column name="name" value='target_milestone' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Release' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="3000" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="31" />
+			<column name="name" value='creation_ts' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Creation date' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="3100" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="32" />
+			<column name="name" value='delta_ts' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Last changed date' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="3200" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="33" />
+			<column name="name" value='longdesc' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Comment' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="3300" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="34" />
+			<column name="name" value='longdescs.isprivate' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Comment is private' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="3400" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="35" />
+			<column name="name" value='alias' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Alias' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="3500" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="36" />
+			<column name="name" value='everconfirmed' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Ever Confirmed' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="3600" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="37" />
+			<column name="name" value='reporter_accessible' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Reporter Accessible' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="3700" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="38" />
+			<column name="name" value='cclist_accessible' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='CC Accessible' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="3800" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="39" />
+			<column name="name" value='bug_group' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Group' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="3900" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="40" />
+			<column name="name" value='estimated_time' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Estimate' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="4000" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="41" />
+			<column name="name" value='remaining_time' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Remaining Hours' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="4100" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="42" />
+			<column name="name" value='deadline' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Deadline' />
+			<column name="mailhead" value="1" />
+			<column name="sortkey" value="4200" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="43" />
+			<column name="name" value='commenter' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Commenter' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="4300" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="44" />
+			<column name="name" value='flagtypes.name' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Flags' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="4400" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="45" />
+			<column name="name" value='requestees.login_name' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Flag Requestee' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="4500" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="46" />
+			<column name="name" value='setters.login_name' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Flag Setter' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="4600" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="47" />
+			<column name="name" value='work_time' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Hours Worked' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="4700" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="48" />
+			<column name="name" value='percentage_complete' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Percentage Complete' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="4800" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="49" />
+			<column name="name" value='content' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Content' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="4900" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="50" />
+			<column name="name" value='attach_data.thedata' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Attachment data' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="5000" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="51" />
+			<column name="name" value='attachments.isurl' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Attachment is a URL' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="5100" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="52" />
+			<column name="name" value='owner_idle_time' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Time Since Assignee Touched' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="5200" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="53" />
+			<column name="name" value='see_also' />
+			<column name="type" value="7" />
+			<column name="custom" value="0" />
+			<column name="description" value='See Also' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="5300" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="54" />
+			<column name="name" value='days_elapsed' />
+			<column name="type" value="0" />
+			<column name="custom" value="0" />
+			<column name="description" value='Days since bug changed' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="5400" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="0" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="60" />
+			<column name="name" value='cf_task_relations' />
+			<column name="type" value="4" />
+			<column name="custom" value="1" />
+			<column name="description" value='Associations' />
+			<column name="mailhead" value="0" />
+			<column name="sortkey" value="60" />
+			<column name="obsolete" value="0" />
+			<column name="enter_bug" value="0" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="61" />
+			<column name="name" value='cf_tasktype' />
+			<column name="type" value="2" />
+			<column name="custom" value="1" />
+			<column name="description" value='Task' />
+			<column name="sortkey" value="70" />
+			<column name="enter_bug" value="1" />
+			<column name="buglist" value="1" />
+		</insert>
+		<insert tableName="fielddefs">
+			<column name="id" value="62" />
+			<column name="name" value='cf_iteration' />
+			<column name="type" value="2" />
+			<column name="custom" value="1" />
+			<column name="description" value='Iteration' />
+			<column name="sortkey" value="71" />
+			<column name="enter_bug" value="1" />
+			<column name="buglist" value="1" />
+		</insert>
+	</changeSet>
+	<changeSet author="taskdb" id="insertGroups">
+		<insert tableName="groups">
+			<column name="id" value="1" />
+			<column name="name" value='admin' />
+			<column name="description" value='Administrators' />
+			<column name="isbuggroup" value="0" />
+			<column name="userregexp" value='' />
+			<column name="isactive" value="1" />
+			<column name="icon_url" value="NULL" />
+		</insert>
+		<insert tableName="groups">
+			<column name="id" value="2" />
+			<column name="name" value='tweakparams' />
+			<column name="description" value='Can change Parameters' />
+			<column name="isbuggroup" value="0" />
+			<column name="userregexp" value='' />
+			<column name="isactive" value="1" />
+			<column name="icon_url" value="NULL" />
+		</insert>
+		<insert tableName="groups">
+			<column name="id" value="3" />
+			<column name="name" value='editusers' />
+			<column name="description" value='Can edit or disable users' />
+			<column name="isbuggroup" value="0" />
+			<column name="userregexp" value='' />
+			<column name="isactive" value="1" />
+			<column name="icon_url" value="NULL" />
+		</insert>
+		<insert tableName="groups">
+			<column name="id" value="4" />
+			<column name="name" value='creategroups' />
+			<column name="description" value='Can create and destroy groups' />
+			<column name="isbuggroup" value="0" />
+			<column name="userregexp" value='' />
+			<column name="isactive" value="1" />
+			<column name="icon_url" value="NULL" />
+		</insert>
+		<insert tableName="groups">
+			<column name="id" value="5" />
+			<column name="name" value='editclassifications' />
+			<column name="description" value='Can create, destroy, and edit classifications' />
+			<column name="isbuggroup" value="0" />
+			<column name="userregexp" value='' />
+			<column name="isactive" value="1" />
+			<column name="icon_url" value="NULL" />
+		</insert>
+		<insert tableName="groups">
+			<column name="id" value="6" />
+			<column name="name" value='editcomponents' />
+			<column name="description" value='Can create, destroy, and edit components' />
+			<column name="isbuggroup" value="0" />
+			<column name="userregexp" value='' />
+			<column name="isactive" value="1" />
+			<column name="icon_url" value="NULL" />
+		</insert>
+		<insert tableName="groups">
+			<column name="id" value="7" />
+			<column name="name" value='editkeywords' />
+			<column name="description" value='Can create, destroy, and edit keywords' />
+			<column name="isbuggroup" value="0" />
+			<column name="userregexp" value='' />
+			<column name="isactive" value="1" />
+			<column name="icon_url" value="NULL" />
+		</insert>
+		<insert tableName="groups">
+			<column name="id" value="8" />
+			<column name="name" value='editbugs' />
+			<column name="description" value='Can edit all bug fields' />
+			<column name="isbuggroup" value="0" />
+			<column name="userregexp" value='.*' />
+			<column name="isactive" value="1" />
+			<column name="icon_url" value="NULL" />
+		</insert>
+		<insert tableName="groups">
+			<column name="id" value="9" />
+			<column name="name" value='canconfirm' />
+			<column name="description" value='Can confirm a bug or mark it a duplicate' />
+			<column name="isbuggroup" value="0" />
+			<column name="userregexp" value='' />
+			<column name="isactive" value="1" />
+			<column name="icon_url" value="NULL" />
+		</insert>
+		<insert tableName="groups">
+			<column name="id" value="10" />
+			<column name="name" value='bz_canusewhines' />
+			<column name="description" value='User can configure whine reports for self' />
+			<column name="isbuggroup" value="0" />
+			<column name="userregexp" value='' />
+			<column name="isactive" value="1" />
+			<column name="icon_url" value="NULL" />
+		</insert>
+		<insert tableName="groups">
+			<column name="id" value="11" />
+			<column name="name" value='bz_sudoers' />
+			<column name="description" value='Can perform actions as other users' />
+			<column name="isbuggroup" value="0" />
+			<column name="userregexp" value='' />
+			<column name="isactive" value="1" />
+			<column name="icon_url" value="NULL" />
+		</insert>
+		<insert tableName="groups">
+			<column name="id" value="12" />
+			<column name="name" value='bz_canusewhineatothers' />
+			<column name="description" value='Can configure whine reports for other users' />
+			<column name="isbuggroup" value="0" />
+			<column name="userregexp" value='' />
+			<column name="isactive" value="1" />
+			<column name="icon_url" value="NULL" />
+		</insert>
+		<insert tableName="groups">
+			<column name="id" value="13" />
+			<column name="name" value='bz_sudo_protect' />
+			<column name="description" value='Can not be impersonated by other users' />
+			<column name="isbuggroup" value="0" />
+			<column name="userregexp" value='' />
+			<column name="isactive" value="1" />
+			<column name="icon_url" value="NULL" />
+		</insert>
+	</changeSet>
+	<changeSet author="taskdb" id="insertGroupMappings">
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="1" />
+			<column name="grant_type" value="0" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="1" />
+			<column name="grant_type" value="1" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="1" />
+			<column name="grant_type" value="2" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="2" />
+			<column name="grant_type" value="0" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="2" />
+			<column name="grant_type" value="1" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="2" />
+			<column name="grant_type" value="2" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="3" />
+			<column name="grant_type" value="0" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="3" />
+			<column name="grant_type" value="1" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="3" />
+			<column name="grant_type" value="2" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="4" />
+			<column name="grant_type" value="0" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="4" />
+			<column name="grant_type" value="1" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="4" />
+			<column name="grant_type" value="2" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="5" />
+			<column name="grant_type" value="0" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="5" />
+			<column name="grant_type" value="1" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="5" />
+			<column name="grant_type" value="2" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="6" />
+			<column name="grant_type" value="0" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="6" />
+			<column name="grant_type" value="1" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="6" />
+			<column name="grant_type" value="2" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="7" />
+			<column name="grant_type" value="0" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="7" />
+			<column name="grant_type" value="1" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="7" />
+			<column name="grant_type" value="2" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="8" />
+			<column name="grant_type" value="0" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="8" />
+			<column name="grant_type" value="1" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="8" />
+			<column name="grant_type" value="2" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="9" />
+			<column name="grant_type" value="0" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="9" />
+			<column name="grant_type" value="1" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="9" />
+			<column name="grant_type" value="2" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="10" />
+			<column name="grant_type" value="0" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="10" />
+			<column name="grant_type" value="1" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="10" />
+			<column name="grant_type" value="2" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="12" />
+			<column name="grantor_id" value="10" />
+			<column name="grant_type" value="0" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="11" />
+			<column name="grant_type" value="0" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="11" />
+			<column name="grant_type" value="1" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="11" />
+			<column name="grant_type" value="2" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="12" />
+			<column name="grant_type" value="0" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="12" />
+			<column name="grant_type" value="1" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="12" />
+			<column name="grant_type" value="2" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="13" />
+			<column name="grant_type" value="0" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="13" />
+			<column name="grant_type" value="1" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="1" />
+			<column name="grantor_id" value="13" />
+			<column name="grant_type" value="2" />
+		</insert>
+		<insert tableName="group_group_map">
+			<column name="member_id" value="11" />
+			<column name="grantor_id" value="13" />
+			<column name="grant_type" value="0" />
+		</insert>
+	</changeSet>
+	<changeSet author="taskdb" id="insertKeywordDefs">
+		<insert tableName="keyworddefs">
+			<column name="id" value="1" />
+			<column name="name" value="Plan" />
+			<column name="description" value="Plan" />
+		</insert>
+		<insert tableName="keyworddefs">
+			<column name="id" value="2" />
+			<column name="name" value="Release" />
+			<column name="description" value="Release" />
+		</insert>
+		<insert tableName="keyworddefs">
+			<column name="id" value="3" />
+			<column name="name" value="Epic" />
+			<column name="description" value="Epic" />
+		</insert>
+	</changeSet>
+	<changeSet author="taskdb" id="insertMilestones">
+		<insert tableName="milestones">
+			<column name="id" value="1" />
+			<column name="product_id" value="1" />
+			<column name="value" value="---" />
+			<column name="sortkey" value="0" />
+		</insert>
+		<insert tableName="milestones">
+			<column name="id" value="2" />
+			<column name="product_id" value="1" />
+			<column name="value" value="0.0.1" />
+			<column name="sortkey" value="10" />
+		</insert>
+	</changeSet>
+	<changeSet author="taskdb" id="insertOpSys">
+		<insert tableName="op_sys">
+			<column name="id" value="1" />
+			<column name="value" value='All' />
+			<column name="sortkey" value="100" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="op_sys">
+			<column name="id" value="2" />
+			<column name="value" value='Windows' />
+			<column name="sortkey" value="200" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="op_sys">
+			<column name="id" value="3" />
+			<column name="value" value='Mac OS' />
+			<column name="sortkey" value="300" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="op_sys">
+			<column name="id" value="4" />
+			<column name="value" value='Linux' />
+			<column name="sortkey" value="400" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="op_sys">
+			<column name="id" value="5" />
+			<column name="value" value='Other' />
+			<column name="sortkey" value="500" />
+			<column name="isactive" value="1" />
+		</insert>
+	</changeSet>
+	<changeSet author="taskdb" id="insertPriorities">
+		<insert tableName="priority">
+			<column name="id" value="1" />
+			<column name="value" value='Highest' />
+			<column name="sortkey" value="100" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="priority">
+			<column name="id" value="2" />
+			<column name="value" value='High' />
+			<column name="sortkey" value="200" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="priority">
+			<column name="id" value="3" />
+			<column name="value" value='Normal' />
+			<column name="sortkey" value="300" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="priority">
+			<column name="id" value="4" />
+			<column name="value" value='Low' />
+			<column name="sortkey" value="400" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="priority">
+			<column name="id" value="5" />
+			<column name="value" value='Lowest' />
+			<column name="sortkey" value="500" />
+			<column name="isactive" value="1" />
+		</insert>
+	</changeSet>
+	<changeSet author="taskdb" id="insertRepPlatforms">
+		<insert tableName="rep_platform">
+			<column name="id" value="1" />
+			<column name="value" value='All' />
+			<column name="sortkey" value="100" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="rep_platform">
+			<column name="id" value="2" />
+			<column name="value" value='PC' />
+			<column name="sortkey" value="200" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="rep_platform">
+			<column name="id" value="3" />
+			<column name="value" value='Macintosh' />
+			<column name="sortkey" value="300" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="rep_platform">
+			<column name="id" value="4" />
+			<column name="value" value='Other' />
+			<column name="sortkey" value="400" />
+			<column name="isactive" value="1" />
+		</insert>
+	</changeSet>
+	<changeSet author="taskdb" id="insertResolutions">
+		<insert tableName="resolution">
+			<column name="id" value="1" />
+			<column name="value" value='' />
+			<column name="sortkey" value="100" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="resolution">
+			<column name="id" value="2" />
+			<column name="value" value='FIXED' />
+			<column name="sortkey" value="200" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="resolution">
+			<column name="id" value="3" />
+			<column name="value" value='INVALID' />
+			<column name="sortkey" value="300" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="resolution">
+			<column name="id" value="4" />
+			<column name="value" value='WONTFIX' />
+			<column name="sortkey" value="400" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="resolution">
+			<column name="id" value="5" />
+			<column name="value" value='DUPLICATE' />
+			<column name="sortkey" value="500" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="resolution">
+			<column name="id" value="6" />
+			<column name="value" value='WORKSFORME' />
+			<column name="sortkey" value="600" />
+			<column name="isactive" value="1" />
+		</insert>
+		<insert tableName="resolution">
+			<column name="id" value="7" />
+			<column name="value" value='MOVED' />
+			<column name="sortkey" value="700" />
+			<column name="isactive" value="1" />
+		</insert>
+	</changeSet>
+	<changeSet author="taskdb" id="insertStatusWorkflows">
+		<insert tableName="status_workflow">
+			<column name="old_status" value="NULL" />
+			<column name="new_status" value="1" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="NULL" />
+			<column name="new_status" value="2" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="NULL" />
+			<column name="new_status" value="3" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="1" />
+			<column name="new_status" value="2" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="1" />
+			<column name="new_status" value="3" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="1" />
+			<column name="new_status" value="5" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="2" />
+			<column name="new_status" value="3" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="2" />
+			<column name="new_status" value="5" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="3" />
+			<column name="new_status" value="2" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="3" />
+			<column name="new_status" value="5" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="4" />
+			<column name="new_status" value="2" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="4" />
+			<column name="new_status" value="3" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="4" />
+			<column name="new_status" value="5" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="5" />
+			<column name="new_status" value="1" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="5" />
+			<column name="new_status" value="4" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="5" />
+			<column name="new_status" value="6" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="5" />
+			<column name="new_status" value="7" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="6" />
+			<column name="new_status" value="1" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="6" />
+			<column name="new_status" value="4" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="6" />
+			<column name="new_status" value="7" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="7" />
+			<column name="new_status" value="1" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="7" />
+			<column name="new_status" value="4" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="6" />
+			<column name="new_status" value="5" />
+			<column name="require_comment" value="0" />
+		</insert>
+		<insert tableName="status_workflow">
+			<column name="old_status" value="7" />
+			<column name="new_status" value="5" />
+			<column name="require_comment" value="0" />
+		</insert>
+	</changeSet>
+	<changeSet author="taskdb" id="insertTaskTypes">
+		<insert tableName="cf_tasktype">
+			<column name="value" value="Task" />
+			<column name="sortkey" value="0" />
+		</insert>
+		<insert tableName="cf_tasktype">
+			<column name="value" value="Defect" />
+			<column name="sortkey" value="10" />
+		</insert>
+		<insert tableName="cf_tasktype">
+			<column name="value" value="Feature" />
+			<column name="sortkey" value="20" />
+		</insert>
+	</changeSet>
+	<changeSet author="taskdb" id="insertIterations">
+		<insert tableName="cf_iteration">
+			<column name="value" value="---" />
+			<column name="sortkey" value="0" />
+		</insert>
+		<insert tableName="cf_iteration">
+			<column name="value" value="1" />
+			<column name="sortkey" value="10" />
+		</insert>
+		<insert tableName="cf_iteration">
+			<column name="value" value="2" />
+			<column name="sortkey" value="20" />
+		</insert>
+		<insert tableName="cf_iteration">
+			<column name="value" value="3" />
+			<column name="sortkey" value="30" />
+		</insert>
+		<insert tableName="cf_iteration">
+			<column name="value" value="4" />
+			<column name="sortkey" value="40" />
+		</insert>
+		<insert tableName="cf_iteration">
+			<column name="value" value="5" />
+			<column name="sortkey" value="50" />
+		</insert>
+		<insert tableName="cf_iteration">
+			<column name="value" value="6" />
+			<column name="sortkey" value="60" />
+		</insert>
+		<insert tableName="cf_iteration">
+			<column name="value" value="7" />
+			<column name="sortkey" value="70" />
+		</insert>
+		<insert tableName="cf_iteration">
+			<column name="value" value="8" />
+			<column name="sortkey" value="80" />
+		</insert>
+		<insert tableName="cf_iteration">
+			<column name="value" value="9" />
+			<column name="sortkey" value="90" />
+		</insert>
+		<insert tableName="cf_iteration">
+			<column name="value" value="10" />
+			<column name="sortkey" value="100" />
+		</insert>
+	</changeSet>
+	
+	<changeSet author="cmorgan" id="task-2312-statusAndResolutionCleanup">
+		<update tableName="resolution">
+			<column name="value" value="NEEDINFO"/>
+			<where>value='MOVED'</where>
+		</update>
+		<delete tableName="status_workflow">
+			<where>old_status IS NOT NULL AND new_status=1</where>
+		</delete>	
+	</changeSet>
+	
+	<changeSet author="cmorgan" id="task-2451-foundInRelease">
+		<update tableName="fielddefs">
+			<column name="description" value="Found in Release"/>
+			<where>name='version'</where>
+		</update>
+	</changeSet>
+	
+</databaseChangeLog>

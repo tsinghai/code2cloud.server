@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Cloud Service
+Bundle-SymbolicName: com.tasktop.c2c.server.cloud.service
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Tasktop Technologies Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.tasktop.c2c.server.cloud.service,
+ com.tasktop.c2c.server.internal.cloud.service.terremark;x-internal:=true
+Require-Bundle: com.tasktop.c2c.server.common.service;bundle-version="0.1.0"

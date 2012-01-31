@@ -1,0 +1,367 @@
+@charset "UTF-8";
+
+.account-options {
+	right: -59px;
+	top: -2px;
+	border-width: 1px 1px 0px;
+}
+
+.project-selected {
+	color: #44454A; /* This is to override a GWT CellList selection style which turns the text white */
+}
+
+/* TaskPeople added for styling of task PeopleChooser */
+table.taskPeople {
+}
+
+.taskPeople td {
+	padding: 3px 0;
+}
+
+.taskPeople th {
+	vertical-align: middle;
+}
+
+/** Items used to style the Tasks table pager element **/
+#task-list-actions-bottom {
+	padding: 2px 0 0 0;
+	border-top: 1px solid #999999;
+	margin-top: 3px;
+}
+
+#task-list-actions-left {
+	float: left;
+}
+
+#task-list-actions-right {
+	float: right;
+	margin: -3px 0 0 0;
+}
+
+.tasks div.severity-head {
+  width: 17px;
+  height: auto;
+  background: url("i/listglyph_severity.png") no-repeat center center;
+  margin: 0 auto;
+  text-indent: -9999px;
+}
+
+.tasks div.priority-head {
+  width: 7px;
+  height: auto;
+  background: url("i/listglyph_priorities.png") no-repeat center center;
+  margin: 0 auto;
+  text-indent: -9999px;
+}
+
+/* These are here because the selector is different than that found in the SourceBits CSS. */
+.discover-project {
+	background: none;
+}
+
+.project-options li a {
+	width: auto;
+	float: none;
+}
+
+.project-options {
+	z-index: 99;
+	right: 155px;
+	top: -15px;
+	position: relative;
+	border: 1px solid #E1E1DF;
+	border-bottom-width: 2px;
+	background: #fff;
+	width: 200px;
+}
+
+.project-options li {
+	margin: 0;
+	float: none;
+}
+
+.project-options a {
+	display: block;
+	padding: 4px 10px;
+	text-align: right;
+}
+
+.project-options a:hover {
+	background: #FEFFE2;
+}
+
+/**/
+
+.project-pop-up {
+	display: inherit;
+}
+
+.add-repo-popup {
+	/*     position: absolute;  REMOVED because we put in a GWT dialoge panel and call .center()*/
+	position: inherit;
+}
+
+.button.account-menu img {
+	vertical-align: middle;
+}
+
+/* Wiki Content fixes */
+.wikiContent {
+	padding-bottom: 15px;
+}
+
+.wikiContent pre {
+	display: block;
+	white-space: pre;
+	background-color: #FEFFE2;
+	border: 1px solid #B7B7B7;
+	margin: 10px 0 10px 10px;
+	padding: 0 5px;
+	overflow-x: scroll;
+}
+
+/* Rework the SB styling because it is missing the div (which is present in gwt hyperlink) */
+.project-contents h2 div {
+	float: none;
+	font-size: 16px;
+}
+
+/* Override extraneous background colour of incorrect size.*/
+.commit-graph {
+	background: #fff;
+}
+
+.activity-graph {
+	background: #fff;
+}
+
+.components td {
+	vertical-align: middle !important;
+}
+
+.components select {
+	width: 98% !important;
+}
+
+.releases td {
+	vertical-align: middle !important;
+}
+
+ul.password-requirements {
+	list-style: disc;
+	margin-left: 25px;
+}
+
+.dialogMiddleCenter {
+	padding: 0px !important;
+}
+
+.profile label,
+.auth label {
+	width: 110px;
+}
+
+.deployment-details {
+	margin-bottom: 10px;
+}
+
+.profile-div fieldset label {
+	display: inline-block;
+	margin-bottom: 0;
+	margin-top: 5px;
+	vertical-align: top;
+	width: 110px;
+}
+
+.github {
+	margin-top: 20px;
+}
+
+.ssh-keys {
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
+
+input.search {
+	display: block;
+	float: left;
+	width: 98px;
+	height: 20px;
+	border: none;
+	line-height: 16px;
+	padding: 2px 0 0 8px;
+	margin: 0;
+	background: url("i/search-field.png") no-repeat;
+}
+
+.search-button {
+	display: block;
+	float: left;
+	width: 31px;
+	height: 20px;
+	margin: 0;
+	border: 0;
+	background: url("i/search-button.png") no-repeat;
+	text-indent: -9999px;
+	cursor: pointer;
+}
+
+input.tasks-search, input.wiki-search {
+	background: url("i/long-search-field.png") no-repeat !important;
+	width: 156px !important;
+}
+
+.tasks-advanced-search {
+	cursor: pointer;
+	display: block;
+	font-size: 11px;
+	padding-right: 10px;
+	text-align: right;
+}
+
+table.taskList img {
+	vertical-align: middle !important;
+}
+
+#task-list-actions-right {
+	float: right;
+	margin: 3px 0 0;
+}
+
+.wiki-search-panel {
+	display: inline-block;
+	padding-bottom: 5px;
+}
+
+table.taskList td {
+	border-style: none;
+}
+
+.delete-disabled {
+	display: block;
+	width: 20px;
+	height: 20px;
+	float: left;
+	background-image: url("i/delete-disabled.png");
+	background-repeat: no-repeat;
+	margin-right: 5px;
+	margin-left: 1px;
+}
+
+.gwt-Label {
+	display: inline;
+}
+
+.summary-item {
+	width: 731px;
+	margin: 0 20px 10px;
+}
+
+.summary-item label {
+  display: block;
+}
+
+.summary-item .text {
+	width: 731px;
+}
+
+.people-item {
+	width: 731px;
+	margin: 0 20px 10px;
+}
+
+.people-item label {
+	display: inline;
+}
+
+.product-item .gwt-ListBox {
+	width: 120px;
+}
+
+.product-item .gwt-Label {
+	display: block;
+}
+
+.mole-container {
+	display: block;
+	font-family: arial, sans-serif;
+	font-size: 13px;
+	height: 0px;
+	left: auto;
+	margin: auto;
+	position: fixed;
+	text-align: center;
+	top: auto;
+	visibility: visible;
+	width: 100%;
+	z-index: 1000;
+}
+
+.mole {
+	background: #FEF7CB none scroll;
+	background-clip: border-box;
+	background-origin: padding-box;
+	border: 1px solid #FFE475;
+	border-radius: 0px 0px 2px 2px;
+	color: #333;
+	display: block;
+	font-family: arial, sans-serif;
+	font-size: 13px;
+	height: auto;
+	left: auto;
+	margin: 0px;
+	padding: 2px 10px;
+	position: static;
+	text-align: center;
+	top: auto;
+	visibility: visible;
+	width: auto;
+	z-index: auto;
+}
+
+.mole-text {
+	font-weight: bold;
+	position: relative;
+	display: inline-block;
+}
+
+.mole-action {
+	padding-left: 10px;
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+    font-weight: normal;
+    text-decoration: underline;
+}
+      /*navy*/
+.success-mole {
+    background: none repeat scroll 0 0 #CCFFCC;
+	border: 1px solid #FFE475;
+    color: #333;
+}
+
+.success-mole a {
+	color: navy;
+}
+
+.error-mole {
+	background: #f22424 none scroll;
+	border: 1px solid #990000;
+	color: white;
+}
+
+.error-mole a {
+	color: lightyellow;
+}
+
+.task-properties {
+	overflow: hidden;
+}
+
+.wiki-content-heading h2 {
+	display: inline;
+}
+
+.wiki-content-heading h2 div {
+	display: inline
+}

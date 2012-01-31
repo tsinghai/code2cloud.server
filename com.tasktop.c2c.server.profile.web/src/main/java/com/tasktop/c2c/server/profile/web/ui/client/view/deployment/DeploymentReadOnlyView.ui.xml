@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:d='urn:import:com.tasktop.c2c.server.profile.web.ui.client.view.deployment'>
+	<g:HTMLPanel>
+	
+	
+	<div class="content right"> 
+					  <div class="deployment"> 
+					    <div class="deployment-heading"> 
+  					    <h2 class="left"><g:Label ui:field="title"/><span>(<g:Label ui:field="status" />)</span></h2>
+  					    <g:Anchor ui:field="editButton" styleName="right edit misc-icon"> <span></span>Edit</g:Anchor>
+  					    <div class="clear"></div> 
+  					  </div> 
+  						<div class="deployment-controls"> 
+  							<div class="left"> 
+  							<g:Anchor ui:field='startButton' styleName="misc-icon large start-deployment"><span></span>Start</g:Anchor>
+							<g:Anchor ui:field='stopButton' styleName="misc-icon large stop-deployment"><span></span>Stop</g:Anchor>
+							<g:Anchor ui:field='restartButton' styleName="misc-icon large restart-deployment"><span></span>Restart</g:Anchor>
+			  							
+  							</div> 
+  							<div class="right"> 
+								<g:Anchor ui:field='deleteButton' styleName="button">Delete</g:Anchor>
+  							</div> 
+  							<div class="clear"></div> 
+  						</div>  						
+		<div class="credentials">  
+			<span class="drop-down-icon"></span><h3>Credentials</h3>
+			<div class="clear"></div>
+			<d:CredentialsReadOnlyView ui:field="credentialsReadOnlyView"/>
+		</div>
+		<div class="settings">  
+			<span class="drop-down-icon"></span><h3>Settings</h3>
+			<div class="clear"></div>
+			<d:SettingsReadOnlyView ui:field="settingsReadOnlyView"/>
+		</div>
+		<div class="services">  
+			<span class="drop-down-icon"></span><h3>Services</h3>
+			<div class="clear"></div>
+			<d:ServicesReadOnlyView ui:field="servicesReadOnlyView"/>
+		</div>
+		<div class="artifact">    
+			<span class="drop-down-icon"></span><h3>Artifact</h3>
+			<div class="clear"></div>
+			<d:ArtifactReadOnlyView ui:field="artifactReadOnlyView"/>
+		</div>
+	
+		
+		
+  						<div class="clear"></div> 
+					  </div> 
+				  </div> 
+				  <div class="clear"></div> 
+
+	
+				
+	</g:HTMLPanel>
+</ui:UiBinder>	

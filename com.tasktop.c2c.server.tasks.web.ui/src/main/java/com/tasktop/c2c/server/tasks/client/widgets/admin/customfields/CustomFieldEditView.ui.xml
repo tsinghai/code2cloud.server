@@ -1,0 +1,58 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'
+			 xmlns:c='urn:import:com.tasktop.c2c.server.tasks.client.widgets.admin.customfields'>
+	<g:HTMLPanel>
+				<div class="deployment">
+			<div class="deployment-heading">
+				<h2 class="left">Field Details</h2>
+				<div class="save">
+					<g:Anchor addStyleNames="left remove" ui:field="deleteButton">Remove</g:Anchor>
+					<g:Button addStyleNames="right button special" ui:field="saveButton">Save</g:Button>
+					<g:Button addStyleNames="right button" ui:field="cancelButton">Cancel</g:Button>
+				</div>
+				<div class="clear"/>
+			</div>
+			<div class="deployment-details edit">
+				<h3/>
+				<div class="clear"/>
+				<fieldset>
+					<label>Name:</label>
+					<div>
+						<g:Label ui:field="name"/>
+					</div>
+				</fieldset>
+				<fieldset>
+					<label>Label:</label>
+					<div>
+						<g:TextBox ui:field="description"/>
+					</div>
+				</fieldset>
+				<fieldset>
+					<label>Type:</label>
+					<div>
+						<g:ValueLabel ui:field="fieldType"/>
+					</div>
+				</fieldset>
+				<fieldset>
+					<label>Available For New Tasks:</label>
+					<div>
+						<g:CheckBox ui:field="availableForNewTasks"/>
+					</div>
+				</fieldset>
+				<fieldset>
+					<label>Obsolete (hidden):</label>
+					<div>
+						<g:CheckBox ui:field="obsolete"/>
+					</div>
+				</fieldset>
+				<fieldset ui:field="fieldValuesContainer">
+					<label>FieldValues:</label>
+					<div>
+						<c:CustomFieldValuesEditor ui:field="values"/>
+					</div>
+				</fieldset>
+				<div class="clear"/>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

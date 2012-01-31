@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel>
+		<g:ValueListBox ui:field='status' />
+		<g:ValueListBox ui:field='resolution'/>
+		<g:SuggestBox ui:field='duplicateOf'/>
+		<div class="clear"/>
+	</g:HTMLPanel>
+</ui:UiBinder>

@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson>
+  <version>code2cloud-1.384</version>
+  <numExecutors>0</numExecutors>
+  <mode>NORMAL</mode>
+  <useSecurity>true</useSecurity>
+  <authorizationStrategy class="hudson.security.GlobalMatrixAuthorizationStrategy">
+    <permission>hudson.model.Hudson.Administer:ROLE_ADMIN</permission>
+    <permission>hudson.model.Hudson.Read:ROLE_ADMIN</permission>
+    <permission>hudson.model.Hudson.Read:ROLE_USER</permission>
+    <permission>hudson.model.Hudson.Read:ROLE_OBSERVER</permission>
+    <permission>hudson.model.Item.Build:ROLE_ADMIN</permission>
+    <permission>hudson.model.Item.Build:ROLE_USER</permission>
+    <permission>hudson.model.Item.Configure:ROLE_ADMIN</permission>
+    <permission>hudson.model.Item.Configure:ROLE_USER</permission>
+    <permission>hudson.model.Item.Create:ROLE_ADMIN</permission>
+    <permission>hudson.model.Item.Create:ROLE_USER</permission>
+    <permission>hudson.model.Item.Delete:ROLE_ADMIN</permission>
+    <permission>hudson.model.Item.Delete:ROLE_USER</permission>
+    <permission>hudson.model.Item.Read:ROLE_ADMIN</permission>
+    <permission>hudson.model.Item.Read:ROLE_USER</permission>
+    <permission>hudson.model.Item.Read:ROLE_OBSERVER</permission>
+    <permission>hudson.model.Item.Workspace:ROLE_ADMIN</permission>
+    <permission>hudson.model.Item.Workspace:ROLE_USER</permission>
+    <permission>hudson.model.Run.Delete:ROLE_ADMIN</permission>
+    <permission>hudson.model.Run.Update:ROLE_ADMIN</permission>
+    <permission>hudson.model.View.Configure:ROLE_ADMIN</permission>
+    <permission>hudson.model.View.Create:ROLE_ADMIN</permission>
+    <permission>hudson.model.View.Delete:ROLE_ADMIN</permission>
+    <permission>hudson.scm.SCM.Tag:ROLE_ADMIN</permission>
+    <permission>hudson.scm.SCM.Tag:ROLE_USER</permission>
+  </authorizationStrategy>
+  <securityRealm class="com.tasktop.c2c.server.hudson.plugin.auth.AlmPreauthenticationSecurityRealm"/>
+  <systemMessage></systemMessage>
+  <jdks/>
+  <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
+  <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
+  <clouds>
+	  <com.tasktop.c2c.server.hudson.plugin.cloud.C2CSlaveCloud>
+	    <name>Code2Cloud Builders</name>
+	    <slavePoolServiceBaseUrl>${profile.url}/hudson</slavePoolServiceBaseUrl>
+	    <sshUser>vcloud</sshUser>
+	    <sshKeyFilePath>/home/vcloud/.ssh/id_dsa</sshKeyFilePath>
+	    <projectIdentifier>${profile.application.identifier}</projectIdentifier>
+	  </com.tasktop.c2c.server.hudson.plugin.cloud.C2CSlaveCloud>
+  </clouds>
+
+  <slaves/>
+  <quietPeriod>5</quietPeriod>
+  <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
+  <views>
+    <hudson.model.AllView>
+      <owner class="hudson" reference="../../.."/>
+      <name>All</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+    </hudson.model.AllView>
+  </views>
+  <primaryView>All</primaryView>
+  <slaveAgentPort>0</slaveAgentPort>
+  <label></label>
+  <nodeProperties/>
+  <globalNodeProperties/>
+  <disabledAdministrativeMonitors/>
+</hudson>

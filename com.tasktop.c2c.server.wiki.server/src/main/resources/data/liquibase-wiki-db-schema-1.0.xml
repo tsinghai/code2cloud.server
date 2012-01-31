@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet author="wikidb" id="createAttachmentTable">
+		<createTable tableName="Attachment">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="creationDate" type="DATETIME" />
+			<column name="mimeType" type="VARCHAR(255)" />
+			<column name="modificationDate" type="DATETIME" />
+			<column defaultValue="" name="name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="version" type="INT" />
+			<column name="lastAttachmentContent_id" type="BIGINT" />
+			<column name="lastAuthor_id" type="BIGINT" />
+			<column name="originalAuthor_id" type="BIGINT" />
+			<column name="page_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="wikidb" id="createAttachmentContentTable">
+		<createTable tableName="AttachmentContent">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="content" type="MEDIUMBLOB" />
+			<column name="creationDate" type="DATETIME" />
+			<column name="modificationDate" type="DATETIME" />
+			<column name="size" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="version" type="INT" />
+			<column name="attachment_id" type="BIGINT" />
+			<column name="author_id" type="BIGINT" />
+		</createTable>
+		 <modifySql dbms="hsqldb">
+         	<replace replace="MEDIUMBLOB" with="VARBINARY(16777215)"/>
+    	</modifySql>	
+	</changeSet>
+	<changeSet author="wikidb" id="createPageTable">
+		<createTable tableName="Page">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="creationDate" type="DATETIME" />
+			<column defaultValue="" name="markupLanguage" type="VARCHAR(32)">
+				<constraints nullable="false" />
+			</column>
+			<column name="modificationDate" type="DATETIME" />
+			<column defaultValue="" name="path" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="version" type="INT" />
+			<column name="lastAuthor_id" type="BIGINT" />
+			<column name="lastPageContent_id" type="BIGINT" />
+			<column name="originalAuthor_id" type="BIGINT" />
+			<column defaultValueBoolean="false" name="deleted" type="BIT" />
+			<column defaultValue="ALL" name="deleteAccess" type="VARCHAR(32)" />
+			<column defaultValue="ALL" name="editAccess" type="VARCHAR(32)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="wikidb" id="createPageContentTable">
+		<createTable tableName="PageContent">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="content" type="TEXT" />
+			<column name="creationDate" type="DATETIME" />
+			<column name="modificationDate" type="DATETIME" />
+			<column name="rendererVersion" type="VARCHAR(255)" />
+			<column name="renderedContent" type="TEXT" />
+			<column name="version" type="INT" />
+			<column name="author_id" type="BIGINT" />
+			<column name="page_id" type="BIGINT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="wikidb" id="createPersonTable">
+		<createTable tableName="Person">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="creationDate" type="DATETIME" />
+			<column defaultValue="" name="identity" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="modificationDate" type="DATETIME" />
+			<column name="name" type="VARCHAR(255)" />
+			<column name="version" type="INT" />
+		</createTable>
+ 	 	<modifySql dbms="hsqldb">
+         	<replace replace="identity" with="IDENTITY"/>
+    	</modifySql>	
+		
+	</changeSet>
+	<changeSet author="wikidb" id="createAttachnentNamePageIndex">
+		<createIndex indexName="UK_Attachment_name_page_id"
+			tableName="Attachment" unique="true">
+			<column name="name" />
+			<column name="page_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="wikidb" id="createPathPageIndex">
+		<createIndex indexName="path" tableName="Page" unique="true">
+			<column name="path" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="wikidb" id="createPersonIdentityIndex">
+		<createIndex indexName="identity" tableName="Person"
+			unique="true">
+			<column name="identity" />
+		</createIndex>
+ 	 	<modifySql dbms="hsqldb">
+         	<replace replace="identity" with="IDENTITY"/>
+    	</modifySql>	
+		
+	</changeSet>
+	<changeSet author="wikidb" id="createAttachmentLastContentFK">
+		<addForeignKeyConstraint baseColumnNames="lastAttachmentContent_id"
+			baseTableName="Attachment" constraintName="FK_Attachment_lastAttachmentContent_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="AttachmentContent"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="wikidb" id="createAttachmentLastAuthorFK">
+		<addForeignKeyConstraint baseColumnNames="lastAuthor_id"
+			baseTableName="Attachment" constraintName="FK_Attachment_lastAuthor_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="Person"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="wikidb" id="createAttachmentOriginalAuthorFK">
+		<addForeignKeyConstraint baseColumnNames="originalAuthor_id"
+			baseTableName="Attachment" constraintName="FK_Attachment_originalAuthor_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="Person"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="wikidb" id="createAttachmentPageFK">
+		<addForeignKeyConstraint baseColumnNames="page_id"
+			baseTableName="Attachment" constraintName="FK_Attachment_page_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="Page"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="wikidb" id="createAttachmentContentAttachmentFK">
+		<addForeignKeyConstraint baseColumnNames="attachment_id"
+			baseTableName="AttachmentContent" constraintName="FK_AttachmentContent_attachment_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="Attachment"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="wikidb" id="createAttachmentContentAuthorFK">
+		<addForeignKeyConstraint baseColumnNames="author_id"
+			baseTableName="AttachmentContent" constraintName="FK_AttachmentContent_author_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="Person"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="wikidb" id="createPageLastAuthorFK">
+		<addForeignKeyConstraint baseColumnNames="lastAuthor_id"
+			baseTableName="Page" constraintName="FK_Page_lastAuthor_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="Person"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="wikidb" id="createPageLastPageContentFK">
+		<addForeignKeyConstraint baseColumnNames="lastPageContent_id"
+			baseTableName="Page" constraintName="FK_Page_lastPageContent_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="PageContent"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="wikidb" id="createPageOriginalAuthorFK">
+		<addForeignKeyConstraint baseColumnNames="originalAuthor_id"
+			baseTableName="Page" constraintName="FK_Page_originalAuthor_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="Person"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="wikidb" id="createPageContentAuthorFK">
+		<addForeignKeyConstraint baseColumnNames="author_id"
+			baseTableName="PageContent" constraintName="FK_PageContent_author_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="Person"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="wikidb" id="createPageContentPageFK">
+		<addForeignKeyConstraint baseColumnNames="page_id"
+			baseTableName="PageContent" constraintName="FK_PageContent_page_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="Page"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="wikidb" id="createSequenceTable">
+		<createTable tableName="SEQUENCE">
+			<column defaultValue="" name="SEQ_NAME" type="VARCHAR(50)">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="SEQ_COUNT" type="DECIMAL(38,0)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="wikidb" id="insertSequenceInfo" >
+		<insert tableName="SEQUENCE">
+			<column name="SEQ_NAME" value="SEQ_GEN" />
+			<column name="SEQ_COUNT" value="0" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>

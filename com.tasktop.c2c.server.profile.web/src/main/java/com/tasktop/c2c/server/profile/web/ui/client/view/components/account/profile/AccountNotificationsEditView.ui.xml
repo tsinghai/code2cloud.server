@@ -1,0 +1,41 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel>
+		<div class="clear"></div><!-- Project Tab Navigation End-->
+			<!-- Account Profile  Contents start-->
+			<div class="deployment">
+				<p>
+Email notifications will be sent to <span style="font-weight:bold"><g:Label ui:field="emailLabel"/></span>.
+				</p>
+			  <div class="notifications edit">
+			    <h3>
+			      <span class="heading left first">&nbsp;</span>
+			      <span class="heading left">Email</span>
+			      <span class="heading right last">Editing</span>
+			      <div class="clear"></div>
+			    </h3>
+			    <div class="row">
+			      <span class="heading left">Task updates, attachments and comments</span>
+			      <span class="checkbox-item left"><g:CheckBox ui:field="emailTaskActivityField"/></span>
+			      <div class="clear"></div>
+	          </div>
+	           <div class="row">
+			      <span class="heading left">New features, tips, and events</span>
+			      <span class="checkbox-item left"><g:CheckBox ui:field="emailNewsAndEventsField"/></span>
+			      <div class="clear"></div>
+	          </div>
+	           <div class="row">
+			      <span class="heading left">Service and system maintenance updates</span>
+			      <span class="checkbox-item left"><g:CheckBox ui:field="emailServiceAndMaintenanceField"/></span>
+			      <div class="clear"></div>
+	          </div>
+          <div class="save">
+				 	<g:Button ui:field="saveButton" styleName="right button special" text="Save"/>
+					<g:Button ui:field="cancelButton" styleName="right button " text="Cancel"/>
+					  <div class="clear"></div>
+				  </div>
+			  </div>
+			</div><!-- Project Tab Contents start-->
+		</g:HTMLPanel>
+</ui:UiBinder>

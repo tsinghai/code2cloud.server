@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:p="http://www.springframework.org/schema/p"
+   	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+       
+	<import resource="classpath:META-INF/spring/applicationContext-restServer.xml"/>
+	<import resource="classpath:applicationContext-profileService.xml"/>
+	<import resource="classpath:applicationContext-deploymentService.xml"/>
+	<import resource="classpath:applicationContext-githubConnector.xml"/>
+	<import resource="classpath:META-INF/spring/applicationContext-authenticationService.xml"/>
+	<import resource="classpath:applicationContext-jms.xml"/>
+	<import resource="classpath:META-INF/spring/applicationContext-httpProxy.xml"/>
+	<import resource="classpath:META-INF/spring/applicationContext-ajpProxy.xml"/>
+    <import resource="classpath:applicationContext-sshService.xml"/>
+    <import resource="classpath:applicationContext-eventService.xml"/>
+
+	<!-- centralized properties paths for: app, dev selfhost, os x dev environments, vcloud self host -->
+	<context:property-placeholder location="classpath*:/config/*.properties, /WEB-INF/spring/*.properties, file:///opt/cloudalm/etc/*.properties, file:///opt/code2cloud/etc/*.properties"  
+		ignore-resource-not-found="true"/>
+
+	<security:global-method-security secured-annotations="enabled" />
+
+	<context:component-scan base-package="com.tasktop.c2c.server.profile.web.ui.server,net.customware.gwt.dispatch.server.spring"/> 
+	<context:annotation-config/>
+	
+	<bean class="net.customware.gwt.dispatch.server.BatchActionHandler"/>
+	
+	<bean class="com.tasktop.c2c.server.profile.web.proxy.ApplicationServiceProxy" id="applicationServiceProxy" autowire="byType">
+		<property name="proxies">
+			<list value-type="com.tasktop.c2c.server.web.proxy.WebProxy">
+				<ref bean="ajpProxy"/>
+				<ref bean="httpProxy"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		id="entityManagerFactory"
+		p:dataSource-ref="dataSource" depends-on="liquibase"
+	/>
+	
+	<bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="changeLog" value="classpath:/data/liquibase-profile-db-master.xml"/>
+	</bean>
+	
+	<!-- mail configuration -->
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl"
+		p:host="${alm.mailSender.host}"
+		p:username="${alm.mailSender.username}"
+		p:password="${alm.mailSender.password}"
+		p:port="${alm.mailSender.port}"
+	>
+  		<property name="javaMailProperties[mail.smtp.starttls.enable]" value="${alm.mailSender.javaMailProperties[mail.smtp.starttls.enable]}"/>
+	</bean>
+
+	<!-- this is a template message that we can pre-load with default state -->
+	<bean id="templateMessage"
+		class="org.springframework.mail.SimpleMailMessage"
+		p:from="${alm.mailSender.from}"
+	/>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    	<property name="basenames">
+    		<array>
+	    		<value>classpath:com/tasktop/code/server/profile/messages</value>
+	    	 	<value>classpath:com/tasktop/code/server/profile/domain/validation/messages</value>
+	    	 	<value>classpath:com/tasktop/code/server/internal/profile/service/messages</value>
+	    	 	<value>classpath:com/tasktop/code/server/tasks/domain/validation/messages</value>
+	    		<value>classpath:messages</value>
+    		</array>
+    	</property>
+	</bean>
+	
+	<!--  For locking service -->
+	<alias name="dataSource" alias="mysqlDataSource"/>
+
+	<!--  AOP Logging -->
+	<bean id="aopLogger" class="com.tasktop.c2c.server.common.service.ServiceLoggingAdvice"/>
+
+	<aop:config>
+		<aop:aspect ref="aopLogger">
+			<aop:pointcut id="serviceCall" expression="bean(profileService) || bean(projectServiceService) || bean(applicationServiceProxy) 
+			|| bean(hudsonSlavePoolService) || bean(authenticationService) || bean(deploymentConfigurationService) || bean(scmService) 
+			|| bean(activityService) || bean(projectArtifactService)"/>
+			<aop:around pointcut-ref="serviceCall" method="doLogging"/>
+		</aop:aspect>
+	</aop:config>
+
+	<bean id="scmUrlTenantIdStrategy"
+		class="org.springframework.tenancy.web.UrlTenantIdentifcationStrategy"
+		p:urlPattern=".*/scm/([^/]*)/.*"
+	/>
+	
+	<bean id="serviceProxyUrlTenantIdStrategy"
+		class="org.springframework.tenancy.web.UrlTenantIdentifcationStrategy"
+		p:urlPattern="${profile.prefix.path}/${profile.serviceProxy.path}/([^/]*)/.*"
+	/>
+
+	<bean id="tenancyContextIntegrationFilter" class="org.springframework.tenancy.web.TenancyContextIntegrationFilter">
+		<property name="tenantIdentificationStrategyChain">
+			<list>
+				<ref bean="serviceProxyUrlTenantIdStrategy"/>
+				<ref bean="scmUrlTenantIdStrategy"/>
+			</list>
+		</property>
+	</bean>
+
+</beans>

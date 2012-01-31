@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel styleName="document clear">
+
+	<h3>
+		<g:Anchor ui:field="title"/>
+	</h3>
+	<p><g:Label ui:field="snippet"/></p>
+	<div class="date-info">
+		<div class="created left">
+			Created: <g:Label ui:field="createdDate"/> by <g:Label ui:field="createdAuthor"/>
+		</div>
+		<div class="changed right">
+			Changed: <g:Label ui:field="modifiedDate"/> by <g:Label ui:field="modifiedAuthor"/>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+	</g:HTMLPanel>
+</ui:UiBinder>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>cloud.api</artifactId>
+	<packaging>jar</packaging>
+	<name>cloud api</name>
+		<parent>
+		<groupId>com.tasktop.c2c.server</groupId>
+		<artifactId>api.parent</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+		<relativePath>../com.tasktop.c2c.server.profile.build/api-parent/pom.xml</relativePath>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.tasktop.c2c.server</groupId>
+			<artifactId>common.api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<!-- sources need to be bundled with the jar so they are visible to GWT's 
+			compiler -->
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.java</include>
+					<include>**/*.gwt.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+	</build>
+</project>

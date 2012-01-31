@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Common API
+Bundle-SymbolicName: com.tasktop.c2c.server.common.api
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Tasktop Technologies
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: com.tasktop.c2c.server.common.service,
+ com.tasktop.c2c.server.common.service.domain,
+ com.tasktop.c2c.server.common.service.domain.criteria,
+ com.tasktop.c2c.server.common.service.http,
+ com.tasktop.c2c.server.common.service.validation,
+ com.tasktop.c2c.server.common.service.web
+Require-Bundle: org.springframework.asm;bundle-version="[3.1.0,3.2.0)",
+ org.springframework.beans;bundle-version="[3.1.0,3.2.0)",
+ org.springframework.context;bundle-version="[3.1.0,3.2.0)",
+ org.springframework.context.support;bundle-version="[3.1.0,3.2.0)",
+ org.springframework.core;bundle-version="[3.1.0,3.2.0)",
+ org.springframework.expression;bundle-version="[3.1.0,3.2.0)",
+ org.springframework.security.core;bundle-version="[3.1.0,3.2.0)",
+ org.springframework.web;bundle-version="[3.1.0,3.2.0)",
+ org.apache.commons.httpclient;bundle-version="3.1.0",
+ org.codehaus.jackson.core;bundle-version="1.7.4",
+ org.codehaus.jackson.mapper;bundle-version="1.7.4"

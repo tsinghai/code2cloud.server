@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:tt="urn:import:com.tasktop.c2c.server.common.web.client.widgets">
+	<g:HTMLPanel>
+			<div class="project-detail-container">
+				<div class="menu left">
+					<div class="search-tasks">
+						<tt:FormSectionPanel>
+							<g:HTMLPanel ui:field="taskSearchFormSectionPanel">
+								<g:TextBox ui:field="taskSearchTextBox" styleName="search" name="q"/>
+								<g:Button ui:field="searchButton" styleName="search-button"><span class="search-button-img">Search</span></g:Button>
+							</g:HTMLPanel>
+						</tt:FormSectionPanel>
+						<g:Anchor ui:field="advancedSearchLink" styleName="right advanced-search-link">Advanced Search</g:Anchor>
+						<div class="clear"/>
+					</div>
+					<div class="menu-items browse">
+						<div class="top"/>
+							<ul>
+								<g:FlowPanel ui:field="predefinedQueryMenuPanel"/>
+							</ul>
+							<ul class="saved-queries">
+								<li><div>Saved</div></li>
+								<g:FlowPanel ui:field="savedQueryMenuPanel"/>
+							</ul>
+						<div class="bottom"></div>
+					</div>
+					<div class="spacer"/>
+				</div>
+				<div class="content right">
+					<g:SimplePanel ui:field="contentPanel" />
+				</div>
+				<div class="clear"/>
+			</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

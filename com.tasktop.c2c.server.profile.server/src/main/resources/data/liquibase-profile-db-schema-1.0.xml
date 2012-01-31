@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet author="profiledb" id="createAgreementTable">
+		<createTable tableName="AGREEMENT">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="TITLE" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="TEXT" type="VARCHAR(5000)">
+				<constraints nullable="false" />
+			</column>
+			<column name="RANK" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueBoolean="false" name="ACTIVE" type="BIT">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATECREATED" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="VERSION" type="INT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="profiledb" id="createAgreementProfileTable">
+		<createTable tableName="AGREEMENTPROFILE">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="DATEAGREED" type="DATE" />
+			<column name="VERSION" type="INT" />
+			<column name="PROFILE_ID" type="BIGINT" />
+			<column name="AGREEMENT_ID" type="BIGINT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="profiledb" id="createConfigurationPropertyTable">
+		<createTable tableName="CONFIGURATIONPROPERTY">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="VERSION" type="INT" />
+			<column defaultValue="" name="NAME" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="VALUE" type="VARCHAR(4096)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="profiledb" id="createDeploymentConfigurationTable">
+		<createTable tableName="DEPLOYMENTCONFIGURATION">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="APIBASEURL" type="VARCHAR(255)" />
+			<column name="APITOKEN" type="VARCHAR(255)" />
+			<column name="BUILDARTIFACTPATH" type="VARCHAR(255)" />
+			<column name="BUILDJOBNAME" type="VARCHAR(255)" />
+			<column name="BUILDJOBNUMBER" type="VARCHAR(255)" />
+			<column defaultValueBoolean="false" name="DEPLOYUNSTABLEBUILDS"
+				type="BIT" />
+			<column name="DEPLOYMENTTYPE" type="VARCHAR(255)" />
+			<column name="LASTDEPLOYMENTDATE" type="DATETIME" />
+			<column name="NAME" type="VARCHAR(255)" />
+			<column name="USERNAME" type="VARCHAR(255)" />
+			<column name="VERSION" type="INT" />
+			<column name="PROJECT_ID" type="BIGINT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="profiledb" id="createEmailVerificationTokenTable">
+		<createTable tableName="EMAILVERIFICATIONTOKEN">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="create_date" type="DATETIME" />
+			<column name="date_used" type="DATETIME" />
+			<column defaultValue="" name="EMAIL" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="TOKEN" type="VARCHAR(255)">
+				<constraints nullable="false" unique="true"/>
+			</column>
+			<column name="VERSION" type="INT" />
+			<column name="PROFILE_ID" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="profiledb" id="createInvitationTokenTable">
+		<createTable tableName="INVITATIONTOKEN">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="token" type="VARCHAR(255)">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="date_used" type="DATETIME" />
+			<column name="create_date" type="DATETIME" />
+			<column name="VERSION" type="INT" />
+			<column defaultValue="" name="email" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="issuing_user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="PROJECT_ID" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="profiledb" id="createInvitationTokenUserIndex">
+		<createIndex indexName="FK_invitationtoken_issuing_user_id"
+			tableName="INVITATIONTOKEN" unique="false">
+			<column name="issuing_user_id" />
+		</createIndex>
+	</changeSet>
+
+	<changeSet author="profiledb" id="createInvitationTokenProjectIndex">
+		<createIndex indexName="FK_INVITATION_PROJECT_ID"
+			tableName="INVITATIONTOKEN" unique="false">
+			<column name="PROJECT_ID" />
+		</createIndex>
+	</changeSet>
+
+	<changeSet author="profiledb" id="createNotificationSettingsTable">
+		<createTable tableName="NOTIFICATIONSETTINGS">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValueBoolean="true" name="EMAILTASKACTIVITY"
+				type="BIT">
+				<constraints nullable="false" />
+			</column>
+			<column name="VERSION" type="INT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="profiledb" id="createPasswordResetTokenTable">
+		<createTable tableName="PASSWORDRESETTOKEN">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="CREATE_DATE" type="DATE" />
+			<column name="DATE_USED" type="DATE" />
+			<column defaultValue="" name="TOKEN" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="VERSION" type="INT" />
+			<column name="PROFILE_ID" type="BIGINT" />
+		</createTable>
+
+	</changeSet>
+	<changeSet author="profiledb" id="createPasswordResetTokenIndex">
+		<createIndex indexName="TOKEN" tableName="PASSWORDRESETTOKEN"
+			unique="true">
+			<column name="TOKEN" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="profiledb" id="createPersistentLoginsTable">
+		<createTable tableName="PERSISTENT_LOGINS">
+			<column defaultValue="" name="username" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="series" type="VARCHAR(64)">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="token" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueComputed="CURRENT_TIMESTAMP" name="last_used"
+				type="TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="profiledb" id="createProfileTable">
+		<createTable tableName="PROFILE">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="LASTNAME" type="VARCHAR(255)" />
+			<column defaultValue="" name="USERNAME" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="EMAIL" type="VARCHAR(255)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="FIRSTNAME" type="VARCHAR(255)" />
+			<column defaultValue="" name="PASSWORD" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="VERSION" type="INT" />
+			<column defaultValueBoolean="false" name="ADMIN" type="BIT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueBoolean="false" name="EMAILVERIFIED" type="BIT" />
+			<column defaultValueBoolean="false" name="SENTWELCOMEEMAIL"
+				type="BIT" />
+			<column name="NOTIFICATIONSETTINGS_ID" type="BIGINT" />
+		</createTable>
+
+	</changeSet>
+	
+	<changeSet author="profiledb" id="createProfileUserIndex">
+		<createIndex indexName="USERNAME" tableName="PROFILE"
+			unique="true">
+			<column name="USERNAME" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="profiledb" id="createProjectTable">
+		<createTable tableName="PROJECT">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="DESCRIPTION" type="VARCHAR(255)" />
+			<column defaultValue="" name="NAME" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="IDENTIFIER" type="VARCHAR(255)">
+				<constraints nullable="false" unique="true"/>
+			</column>
+			<column name="VERSION" type="INT" />
+			<column name="PROJECTSERVICEPROFILE_ID" type="BIGINT" />
+			<column defaultValueBoolean="false" name="IS_PUBLIC" type="BIT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+	</changeSet>
+
+	<changeSet author="profiledb" id="createProjectNameIndex">
+		<createIndex indexName="NAME" tableName="PROJECT" unique="true">
+			<column name="NAME" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="profiledb" id="createProjectProfileTable">
+		<createTable tableName="PROJECTPROFILE">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValueBoolean="false" name="OWNER" type="BIT">
+				<constraints nullable="false" />
+			</column>
+			<column name="VERSION" type="INT" />
+			<column name="PROFILE_ID" type="BIGINT" />
+			<column name="PROJECT_ID" type="BIGINT" />
+			<column defaultValueBoolean="false" name="COMMUNITY" type="BIT">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValueBoolean="false" name="MEMBER" type="BIT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="profiledb" id="createProjectServiceTable">
+		<createTable tableName="PROJECTSERVICE">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="INTERNALPORT" type="INT" />
+			<column name="INTERNALURIPREFIX" type="VARCHAR(255)" />
+			<column name="INTERNALPROTOCOL" type="VARCHAR(255)" />
+			<column name="TYPE" type="VARCHAR(255)" />
+			<column name="URIPATTERN" type="VARCHAR(255)" />
+			<column name="VERSION" type="INT" />
+			<column name="PROJECTSERVICEPROFILE_ID" type="BIGINT" />
+			<column name="SERVICEHOST_ID" type="BIGINT" />
+			<column name="AJPPORT" type="INT" />
+			<column name="EXTERNALURL" type="VARCHAR(255)" />
+			<column name="ALLOCATIONTIME" type="DATETIME" />
+		</createTable>
+	</changeSet>
+	<changeSet author="profiledb" id="createProjectServiceProfileTable">
+		<createTable tableName="PROJECTSERVICEPROFILE">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValueBoolean="false" name="TEMPLATE" type="BIT" />
+			<column name="VERSION" type="INT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="profiledb" id="createScmRepositoryTable">
+		<createTable tableName="SCMREPOSITORY">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="version" type="INT" />
+			<column defaultValue="" name="type" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="location" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="url" type="VARCHAR(4096)">
+				<constraints nullable="false" />
+			</column>
+			<column name="project_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="profiledb" id="createSequenceTable">
+		<createTable tableName="SEQUENCE">
+			<column defaultValue="" name="SEQ_NAME" type="VARCHAR(50)">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="SEQ_COUNT" type="DECIMAL(38,0)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="profiledb" id="createServiceHostTable">
+		<createTable tableName="SERVICEHOST">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="INTERNALNETWORKADDRESS" type="VARCHAR(255)" />
+			<column defaultValueBoolean="false" name="AVAILABLE" type="BIT" />
+			<column name="VERSION" type="INT" />
+			<column name="TYPE" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="profiledb" id="createServiceHostPoolTable">
+		<createTable tableName="SERVICEHOSTPOOL">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="HOSTTYPE" type="VARCHAR(255)" />
+			<column name="PENDINGALLOCATIONS" type="INT" />
+			<column name="PENDINGDELETIONS" type="INT" />
+			<column name="VERSION" type="INT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="profiledb" id="createSignupTokenTable">
+		<createTable tableName="SIGNUPTOKEN">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="create_date" type="DATETIME" />
+			<column name="date_used" type="DATETIME" />
+			<column defaultValue="" name="EMAIL" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="FIRSTNAME" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="LASTNAME" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="token" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="VERSION" type="INT" />
+		</createTable>
+
+	</changeSet>
+
+	<changeSet author="profiledb" id="createSignupTokenIndex">
+		<createIndex indexName="token_idx" tableName="SIGNUPTOKEN"
+			unique="true">
+			<column name="token" />
+		</createIndex>
+	</changeSet>
+
+	<changeSet author="profiledb" id="createSshPublicKeyTable">
+		<createTable tableName="SSHPUBLICKEY">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column defaultValue="" name="ALGORITHM" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="FINGERPRINT" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="KEYDATA" type="LONGBLOB">
+				<constraints nullable="false" />
+			</column>
+			<column name="VERSION" type="INT" />
+			<column name="PROFILE_ID" type="BIGINT" />
+			<column name="NAME" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet author="profiledb" id="createUserConnectionTable">
+		<createTable tableName="UserConnection">
+			<column defaultValue="" name="userId" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="providerId" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column defaultValue="" name="providerUserId" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="rank" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="displayName" type="VARCHAR(1024)" />
+			<column name="profileUrl" type="VARCHAR(1024)" />
+			<column name="imageUrl" type="VARCHAR(1024)" />
+			<column defaultValue="" name="accessToken" type="VARCHAR(1024)">
+				<constraints nullable="false" />
+			</column>
+			<column name="secret" type="VARCHAR(1024)" />
+			<column name="refreshToken" type="VARCHAR(1024)" />
+			<column name="expireTime" type="BIGINT" />
+		</createTable>
+	</changeSet>
+
+	<changeSet author="profiledb" id="createUserConnectionPK">
+		<addPrimaryKey columnNames="userId, providerId, providerUserId"
+			tableName="UserConnection" />
+	</changeSet>
+
+	<changeSet author="profiledb" id="createUserConnectionRankIndex">
+		<createIndex indexName="UserConnectionRank" tableName="UserConnection"
+			unique="true">
+			<column name="userId" />
+			<column name="providerId" />
+			<column name="rank" />
+		</createIndex>
+	</changeSet>
+
+
+	<changeSet author="profiledb" id="createAgreementProfileAgreementFK">
+		<addForeignKeyConstraint baseColumnNames="AGREEMENT_ID"
+			baseTableName="AGREEMENTPROFILE" constraintName="FK_AGREEMENTPROFILE_AGREEMENT_ID"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="AGREEMENT"
+			referencesUniqueColumn="false" />
+	</changeSet>
+
+	<changeSet author="profiledb" id="createAgreementProfileProfileFK">
+		<addForeignKeyConstraint baseColumnNames="PROFILE_ID"
+			baseTableName="AGREEMENTPROFILE" constraintName="FK_AGREEMENTPROFILE_PROFILE_ID"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="PROFILE"
+			referencesUniqueColumn="false" />
+	</changeSet>
+
+	<changeSet author="profiledb" id="createDeployConfigProjectFK">
+		<addForeignKeyConstraint baseColumnNames="PROJECT_ID"
+			baseTableName="DEPLOYMENTCONFIGURATION" constraintName="FK_DEPLOYMENTCONFIGURATION_PROJECT_ID"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="PROJECT"
+			referencesUniqueColumn="false" />
+	</changeSet>
+
+	<changeSet author="profiledb" id="createEmailVerificationTokenProfileFK">
+		<addForeignKeyConstraint baseColumnNames="PROFILE_ID"
+			baseTableName="EMAILVERIFICATIONTOKEN" constraintName="FK_EMAILVERIFICATIONTOKEN_PROFILE_ID"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="PROFILE"
+			referencesUniqueColumn="false" />
+	</changeSet>
+
+	<changeSet author="profiledb" id="createPasswordResetTokenProfileFK">
+		<addForeignKeyConstraint baseColumnNames="PROFILE_ID"
+			baseTableName="PASSWORDRESETTOKEN" constraintName="FK_PASSWORDRESETTOKEN_PROFILE_ID"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="PROFILE"
+			referencesUniqueColumn="false" />
+	</changeSet>
+
+	<changeSet author="profiledb" id="createProfileNotifSettingsFK">
+		<addForeignKeyConstraint baseColumnNames="NOTIFICATIONSETTINGS_ID"
+			baseTableName="PROFILE" constraintName="FK_PROFILE_NOTIFICATIONSETTINGS_ID"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="NOTIFICATIONSETTINGS"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="profiledb" id="createProjSvcProfileFK">
+		<addForeignKeyConstraint baseColumnNames="PROJECTSERVICEPROFILE_ID"
+			baseTableName="PROJECT" constraintName="FK_PROJECT_PROJECTSERVICEPROFILE_ID"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="PROJECTSERVICEPROFILE"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="profiledb" id="createProjProfileProfileFK">
+		<addForeignKeyConstraint baseColumnNames="PROFILE_ID"
+			baseTableName="PROJECTPROFILE" constraintName="FK_PROJECTPROFILE_PROFILE_ID"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="PROFILE"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="profiledb" id="createProjProfileProjectFK">
+		<addForeignKeyConstraint baseColumnNames="PROJECT_ID"
+			baseTableName="PROJECTPROFILE" constraintName="FK_PROJECTPROFILE_PROJECT_ID"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="PROJECT"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="profiledb" id="createProjectSvcProjSvcProfileFK">
+		<addForeignKeyConstraint baseColumnNames="PROJECTSERVICEPROFILE_ID"
+			baseTableName="PROJECTSERVICE" constraintName="FK_PROJECTSERVICE_PROJECTSERVICEPROFILE_ID"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="PROJECTSERVICEPROFILE"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="profiledb" id="createProjSvcSvcHostFK">
+		<addForeignKeyConstraint baseColumnNames="SERVICEHOST_ID"
+			baseTableName="PROJECTSERVICE" constraintName="FK_PROJECTSERVICE_SERVICEHOST_ID"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="SERVICEHOST"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="profiledb" id="createScmRepoProjFK">
+		<addForeignKeyConstraint baseColumnNames="project_id"
+			baseTableName="SCMREPOSITORY" constraintName="FK_SCMREPOSITORY_project_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="PROJECT"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="profiledb" id="createSshPublicKeyProfileFK">
+		<addForeignKeyConstraint baseColumnNames="PROFILE_ID"
+			baseTableName="SSHPUBLICKEY" constraintName="FK_SSHPUBLICKEY_PROFILE_ID"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="PROFILE"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="cmorgan"
+		id="task-2531-addNotificationSettingsEmailColumns">
+		<addColumn tableName="NOTIFICATIONSETTINGS">
+			<column name="EMAILNEWSANDEVENTS" type="BIT"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="EMAILSERVICEANDMAINTENANCE" type="BIT"
+				defaultValue="1">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+	</changeSet>
+	<changeSet author="jhickey" id="task-2639-changeNewsAndEventSettingDefault">
+		<dropDefaultValue tableName="NOTIFICATIONSETTINGS"
+			columnName="EMAILNEWSANDEVENTS" />
+		<addDefaultValue tableName="NOTIFICATIONSETTINGS"
+			columnName="EMAILNEWSANDEVENTS" defaultValue="1" />
+	</changeSet>
+
+	<changeSet id="task-2698-serviceHostType" author="cmorgan">
+		<dropTable tableName="SERVICEHOSTPOOL"/>
+		<dropColumn tableName="SERVICEHOST" columnName="TYPE"/>
+		<addColumn tableName="SERVICEHOST">
+			<column name="SERVICEHOSTCONFIGURATION_ID" type="BIGINT"></column>
+		</addColumn>
+		<createTable tableName="SERVICEHOSTCONFIGURATION">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="PENDINGALLOCATIONS" type="INT" />
+			<column name="PENDINGDELETIONS" type="INT" />
+			<column name="VERSION" type="INT" />
+		</createTable>
+		<createTable tableName="SERVICEHOSTCONFIGURATIONSERVICES">
+			<column name="ServiceHostConfiguration_ID" type="BIGINT"/>
+			<column name="SUPPORTEDSERVICES" type="VARCHAR(255)" />
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="SERVICEHOSTCONFIGURATION_ID"
+			baseTableName="SERVICEHOST" constraintName="FK_SERVICEHOST_SERVICEHOSTCONFIGURATION_ID"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="SERVICEHOSTCONFIGURATION"
+			referencesUniqueColumn="false" />
+		<addForeignKeyConstraint baseColumnNames="ServiceHostConfiguration_ID"
+			baseTableName="SERVICEHOSTCONFIGURATIONSERVICES" constraintName="SRVCHSTCONFIGURATIONSERVICESSrvcHstConfigurationID"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="SERVICEHOSTCONFIGURATION"
+			referencesUniqueColumn="false" />
+	</changeSet>
+	<changeSet author="cmorgan" id="task-2816-fair-hudson-service">
+		<createTable tableName="PROMISETOKEN">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="CREATE_DATE" type="DATETIME" />
+			<column name="DATE_USED" type="DATETIME" />
+			<column name="EXPIRYDATE" type="DATETIME" />
+			<column defaultValue="" name="TOKEN" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="VERSION" type="INT" />
+		</createTable>
+	</changeSet>
+	<changeSet author="cmorgan" id="task-2990-disable-accounts">
+		<addColumn tableName="PROFILE">
+
+			<column defaultValueBoolean="false" name="DISABLED"
+				type="BIT" />
+		</addColumn>
+	</changeSet>
+</databaseChangeLog>

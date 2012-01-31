@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:d='urn:import:com.tasktop.c2c.server.profile.web.ui.client.view.deployment'>
+	<g:HTMLPanel>
+	<g:HTMLPanel ui:field="noDeploymentPanel">
+		<fieldset>	
+			<label><label>&nbsp;</label></label>
+			<p>There is no artifact setup yet.</p>
+		</fieldset>
+	</g:HTMLPanel>
+
+	<g:HTMLPanel ui:field="hasDeploymentPanel">
+		<fieldset>	
+			<label>Last Deployment:</label>
+			<p><g:Label ui:field="lastDeploymentDate"/></p>
+		</fieldset>
+		<fieldset>	
+			<label>Type:</label>
+			<p><g:Label ui:field="artifactTypeLabel"/></p>
+		</fieldset>
+		<fieldset>	
+			<label>Job:</label>
+			<p><g:Label ui:field="jobLabel"/></p>
+		</fieldset>
+		<fieldset>	
+			<label>Build:</label>
+			<p><g:Label ui:field="buildLabel"/></p>
+		</fieldset>
+		<fieldset>	
+			<label>Artifact:</label>
+			<p><g:Label ui:field="artifactLabel"/></p>
+		</fieldset>
+	</g:HTMLPanel>
+</g:HTMLPanel>
+
+</ui:UiBinder>	

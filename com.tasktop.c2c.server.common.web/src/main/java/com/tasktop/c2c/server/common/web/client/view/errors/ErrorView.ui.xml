@@ -1,0 +1,14 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel>
+		<div ui:field="errorImage" class="hero error"/>
+	    <div class="hero-text error">
+          <h2>Sadly, we found a cloudless sky<span><g:Label ui:field="errorDescription"/></span> </h2>
+          <ul>
+            <li>Need assistance or believe this page should be working? <g:Anchor ui:field="supportTicketAnchor">File a Support Ticket</g:Anchor></li>
+            <li>Return to the <g:Anchor ui:field="previousPageAnchor">previous page</g:Anchor></li>
+            <li>Head back to the <g:Anchor ui:field="mainPageAnchor">Main Page</g:Anchor></li>
+          </ul>
+        </div>
+	</g:HTMLPanel>
+</ui:UiBinder>

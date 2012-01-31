@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+        xmlns:g="urn:import:com.google.gwt.user.client.ui"
+        xmlns:c="urn:import:com.tasktop.c2c.server.profile.web.ui.client.view.components">
+	<g:HTMLPanel>
+		<div class="project-detail-container">
+			<!-- Project Details Left Section Start-->
+			<div class="project-left-section left">
+				<!-- About Project -->
+				<div class="about-project">
+					<div class="headingMedium">About Project<g:Anchor ui:field="readMoreAnchor" styleName="read-more right" >Read more</g:Anchor></div>
+					<p>
+						<g:Label ui:field="description"/>
+					</p>
+				</div>
+				<div class="spacer"></div>
+				<!-- About Project End -->
+				<!-- Project Sources Start -->
+				<div ui:field="scmSectionDiv">
+					<div class="project-sources">
+						<div class="headingMedium">Sources</div>
+						<p class="description">
+							Git source code repositories are located at:
+						</p>
+						<g:FlowPanel ui:field="scmPanel"/>
+						<div class="clear"></div>
+					</div>
+					<div class="spacer"></div>
+				</div>
+				<!-- Maven Repo Start -->
+				<div ui:field="mavenSectionDiv">
+					<div class="project-mavan-repo">
+						<div class="headingMedium">Maven</div>
+						<p>
+							The Maven repository for this project is located at:
+						</p>
+			
+				   		<p>
+				   			<g:TextBox ui:field="mavenUrlTextBox" styleName="git" readOnly="true"/>
+					  </p>
+					  <p>
+					    To deploy Maven artifacts to this repository, use:
+					  </p>
+				   		<p>
+				   			<g:TextBox ui:field="mavenDavUrlTextBox" styleName="ssh" readOnly="true"/>
+					  </p>
+					  <div class="clear"></div>
+					</div>
+					<div class="spacer"></div>
+				</div>
+				<!-- Maven Repo End -->
+				<!-- Project Details Left Section End-->
+			</div>
+			<!-- Project Details Left Section Start-->
+			<div class="project-right-section right">
+				<c:SimpleActivityView ui:field="activityView"/>	
+			</div>
+			
+			<div class="clear"></div>
+			<g:HTMLPanel ui:field="wikiWrapper" styleName="project-read-more">
+				<div class="headingMedium">Read More<g:Anchor ui:field="wikiHomePageLink" styleName="read-more right">Go To Wiki Page</g:Anchor></div>
+				<p>
+					<g:SimplePanel ui:field="wikiContentPanel"  />
+				</p>
+			</g:HTMLPanel>
+			<div class="clear"></div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Service
+Bundle-SymbolicName: com.tasktop.c2c.server.event.service
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Tasktop Technologies Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

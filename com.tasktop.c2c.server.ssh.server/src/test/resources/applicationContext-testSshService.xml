@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+	<context:component-scan base-package="com.tasktop.c2c.server.ssh.server,com.tasktop.c2c.server.ssh.server.tests"/>
+
+	<tx:annotation-driven />
+
+	<bean id="sshKeyPairProvider" class="org.apache.sshd.server.keyprovider.SimpleGeneratorHostKeyProvider">
+		<constructor-arg>
+			<value>sshkey.ser</value>
+		</constructor-arg>
+	</bean>
+	
+
+	<bean id="sshServer" class="org.apache.sshd.SshServer" factory-method="setUpDefaultServer"
+		p:port="22"
+		p:keyPairProvider-ref="sshKeyPairProvider"
+		p:publickeyAuthenticator-ref="sshPublicKeyAuthenticator"
+		p:passwordAuthenticator-ref="sshPasswordAuthenticator"
+		p:commandFactory-ref="defaultSshCommandFactory">
+	</bean>
+</beans>

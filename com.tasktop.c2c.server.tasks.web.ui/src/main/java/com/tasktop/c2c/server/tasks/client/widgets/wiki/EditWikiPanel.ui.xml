@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:d="urn:import:com.google.gwt.user.datepicker.client"
+	xmlns:t="urn:import:com.tasktop.c2c.server.tasks.client.widgets"
+	xmlns:tc="urn:import:com.tasktop.c2c.server.tasks.client.widgets.chooser.task"
+	xmlns:w="urn:import:com.tasktop.c2c.server.common.web.client.widgets"
+	xmlns:c="urn:import:com.tasktop.c2c.server.common.web.client.widgets.chooser">
+	
+	<ui:with field='res' type='com.tasktop.c2c.server.tasks.client.TaskResources'/>
+	
+	<g:HTMLPanel styleName="{res.style.wikiEdit}">
+
+	<div class="{res.style.wikiControl}" >
+		<g:Anchor ui:field="helpAnchor" styleName="{res.style.small}" >Wiki Help</g:Anchor>
+		<g:ToggleButton ui:field="toggleButton" title="Toggle Edit"/>
+		<div>
+			<g:Image ui:field="busyImage"/>
+		</div>
+	</div>
+	<div class="clear"/>
+	<div>
+		<g:SimplePanel ui:field="panel"/>
+	</div>
+				
+	</g:HTMLPanel>
+</ui:UiBinder>

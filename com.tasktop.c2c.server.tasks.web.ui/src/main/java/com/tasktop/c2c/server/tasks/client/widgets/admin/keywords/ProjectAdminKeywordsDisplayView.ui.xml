@@ -1,0 +1,23 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel>
+		<div class="deployment">
+			<div class="deployment-details">
+				<h3>Tag Details
+					<g:Anchor addStyleNames="right delete misc-icon" ui:field="deleteKeyword"><span/>Delete</g:Anchor>
+					<g:Anchor addStyleNames="right edit misc-icon" ui:field="editKeyword"><span/>Edit</g:Anchor>
+				</h3>
+				<fieldset>
+					<label>Name:</label>
+					<g:Label ui:field="keywordName"/>
+				</fieldset>
+				<fieldset>
+					<label>Description:</label>
+					<div class="description">
+						<g:Label ui:field="keywordDescription"/>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

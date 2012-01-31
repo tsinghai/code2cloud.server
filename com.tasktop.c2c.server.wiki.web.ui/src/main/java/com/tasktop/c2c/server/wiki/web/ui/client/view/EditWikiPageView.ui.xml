@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:a="urn:import:com.tasktop.c2c.server.common.web.client.widgets"
+	xmlns:w="urn:import:com.tasktop.c2c.server.wiki.web.ui.client.view">
+	<g:HTMLPanel styleName="add-edit-project deployment">
+		<div class="deployment-heading">
+			<h2>
+				<g:Label ui:field="pageTitle" styleName="left"></g:Label>
+				<g:Button ui:field="saveButton2" addStyleNames="button special right">Save</g:Button>
+				<g:Button ui:field="cancelButton2" addStyleNames="button right">Cancel</g:Button>
+			</h2>
+			<div class="clear"></div>
+		</div>
+		<div class="document-name edit">
+			<h3>Title</h3>
+			<fieldset>
+				<div class="left">
+					<g:TextBox ui:field="path" styleName="input edit-title-input"></g:TextBox>
+				</div>
+			<div class="clear"></div>
+			</fieldset>
+		</div>
+		<div class="document-text edit">
+			<h3>Text</h3>
+			<fieldset>
+				<w:EditWikiPanel ui:field="content" visibleLines="30" />
+			</fieldset>
+		</div>
+		<g:HTMLPanel ui:field="attachmentsPanel" styleName="attachments edit">
+			<h3>Attachments</h3>
+			<g:FlowPanel ui:field='attachmentsListPanel'></g:FlowPanel>
+			<g:FormPanel ui:field='attachmentForm' addStyleNames="wikiAttachments">
+				<g:HTMLPanel>
+					<fieldset>
+						<div>
+							<g:FileUpload ui:field='attachment' name="attachment"></g:FileUpload>
+							<g:Button ui:field='attachmentSubmit' addStyleNames="button special">Attach File</g:Button>
+						</div>
+					</fieldset>
+				</g:HTMLPanel>
+			</g:FormPanel>
+			<div class="clear"></div>
+		</g:HTMLPanel>
+	  <div class="attachments edit">
+ 						<h3>Access Controls</h3>
+ 						<fieldset>
+ 						  <label>Edit:</label>
+ 							<div>
+								<g:ValueListBox ui:field='editAccess' />
+ 							</div>
+ 						</fieldset>
+ 						<g:HTMLPanel ui:field="deleteAccessPanel">
+ 						<fieldset>
+ 						  <label>Delete:</label>
+ 							<div>
+								<g:ValueListBox ui:field='deleteAccess' />
+ 							</div>
+ 						</fieldset>
+ 						</g:HTMLPanel>
+		<div class="clear"></div>
+   	  </div>
+		<div class="save top-margin">
+			<g:Button ui:field="saveButton" addStyleNames="button special right">Save</g:Button>
+			<g:Button ui:field="cancelButton" addStyleNames="button right">Cancel</g:Button>
+			<div class="clear"></div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

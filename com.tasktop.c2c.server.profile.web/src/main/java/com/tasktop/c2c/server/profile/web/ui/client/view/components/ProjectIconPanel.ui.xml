@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel>
+			<div class="project-nav-wrapper">
+				<div class="project-nav-section">
+					<div class="left">
+						<g:Anchor ui:field="projectHome" styleName="button project-nav-item">Home</g:Anchor>
+					</div>
+					<div class="left">
+						<g:Anchor ui:field="dashboard" styleName="button project-nav-item">Dashboard</g:Anchor>
+					</div>
+					<div class="left">
+						<g:Anchor ui:field="tasks" styleName="button project-nav-item">Tasks</g:Anchor>
+					</div>
+					<div class="left">
+						<g:Anchor ui:field="wiki" styleName="button project-nav-item">Wiki</g:Anchor>
+					</div>
+					<div class="left">
+						<g:Anchor ui:field="builds" styleName="button project-nav-item">Builds</g:Anchor>
+					</div>
+					<div class="left">
+						<g:Anchor ui:field="deployments" styleName="button project-nav-item">Deployments</g:Anchor>
+					</div>
+					<div class="left">
+						<g:Anchor ui:field="team" styleName="button project-nav-item">Team</g:Anchor>
+					</div>
+					<div class="left" ui:field="optionsWrapper">
+						<g:Anchor ui:field="options" styleName="button project-nav-item">Options</g:Anchor>
+					</div>
+				</div>
+      		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

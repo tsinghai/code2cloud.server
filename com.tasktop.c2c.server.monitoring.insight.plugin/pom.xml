@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>monitoring.insight.plugin</artifactId>
+	<name>insight monitioring plugin</name>
+	<packaging>jar</packaging>
+		<parent>
+		<groupId>com.tasktop.c2c.server</groupId>
+		<artifactId>lib</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+		<relativePath>../com.tasktop.c2c.server.profile.build/parent/pom.xml</relativePath>
+	</parent>
+
+
+	<properties>
+		<insight.version>1.0.0.M3.SR02</insight.version>
+	</properties>
+<!-- commented out as part of Task 1110
+    <repositories>
+        <repository>
+            <id>spring-release</id>
+            <name>Spring Release Repository</name>
+            <url>http://maven.springframework.org/release</url>
+        </repository>
+        <repository>
+            <id>spring-milestone</id>
+            <name>Spring Milestone Repository</name>
+            <url>http://maven.springframework.org/milestone</url>
+        </repository>
+    </repositories> -->
+
+	<dependencies>
+		<dependency>
+			<groupId>com.tasktop.c2c.server</groupId>
+			<artifactId>monitoring.api</artifactId>
+		</dependency>
+
+		<!-- Provided dependencies (part of Insight) -->
+		<dependency>
+			<groupId>com.springsource.insight</groupId>
+			<artifactId>insight-idk</artifactId>
+			<version>${insight.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.springsource.insight.plugins</groupId>
+			<artifactId>insight-plugin-spring-web</artifactId>
+			<version>${insight.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				 <executions>
+		          <execution>
+		            <id>make-assembly</id> <!-- this is used for inheritance merges -->
+		            <phase>package</phase> <!-- append to the packaging phase. -->
+		            <goals>
+		              <goal>single</goal> <!-- goals == mojos -->
+		            </goals>
+		          </execution>
+		        </executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

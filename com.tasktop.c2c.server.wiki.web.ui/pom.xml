@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>wiki.web.ui</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>wiki web ui</name>
+	<parent>
+		<groupId>com.tasktop.c2c.server</groupId>
+		<artifactId>lib</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+		<relativePath>../com.tasktop.c2c.server.profile.build/parent/pom.xml</relativePath>
+	</parent>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.tasktop.c2c.server</groupId>
+			<artifactId>common.web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.tasktop.c2c.server</groupId>
+			<artifactId>wiki.api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.tasktop.c2c.server</groupId>
+			<artifactId>profile.web.ui</artifactId>
+		</dependency>
+		<!-- FIXME this dep is a hack due to task anchor detection in wiki -->
+		<dependency>
+			<groupId>com.tasktop.c2c.server</groupId>
+			<artifactId>tasks.web.ui</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt.inject</groupId>
+			<artifactId>gin</artifactId>
+		</dependency>
+       <dependency>
+             <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.7</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<!-- sources need to be bundled with the jar so they are visible to GWT's 
+			compiler -->
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.java</include>
+					<include>**/*.gwt.xml</include>
+					<include>**/*.ui.xml</include>
+					<include>**/*.css</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+
+	</build>
+</project>

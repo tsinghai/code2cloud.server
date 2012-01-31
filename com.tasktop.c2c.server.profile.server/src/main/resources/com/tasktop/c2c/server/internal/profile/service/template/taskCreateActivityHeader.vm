@@ -1,0 +1,22 @@
+| DO NOT REPLY TO THIS EMAIL
+|
+| ${task.url}
+
+
+${task.reporter.realname} (${task.reporter.loginName}) Created ${task.taskType} ${task.id}
+
+Summary: ${task.shortDescription} 
+Status: ${task.status.value}
+Priority: ${task.priority.value}
+Severity: ${task.severity.value}
+Tags: ${taskTags}
+Product: ${task.product.name}
+Component: ${task.component.name}
+Release: ${task.milestone.value}
+Iteration: ${task.iteration}
+Owner: ${taskOwner}
+CC: ${taskWatchers}
+
+Description:
+
+${task.description}

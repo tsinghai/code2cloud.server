@@ -1,0 +1,72 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'
+			 xmlns:cellview="urn:import:com.google.gwt.user.cellview.client">
+	<g:HTMLPanel>
+		<div>
+			<div class="auth">
+				<h2>Password</h2>
+				<div class="inner-contents">
+					<div class="change-password">
+						<g:Anchor ui:field="changePasswordAnchor" addStyleNames="underline change">Change your
+							Password
+						</g:Anchor>
+					</div>
+					<g:HTMLPanel ui:field="changePasswordPanel" visible="false" addStyleNames="change-password-form profile-div">
+						<fieldset>
+							<label class="left">Old Password</label>
+							<div>
+								<g:PasswordTextBox ui:field="oldPasswordField" addStyleNames="input"/>
+							</div>
+							<div class="clear"/>
+						</fieldset>
+						<fieldset>
+							<label class="left">New Password</label>
+							<div>
+								<g:PasswordTextBox ui:field="newPasswordField" addStyleNames="input"/>
+							</div>
+							<div class="clear"/>
+						</fieldset>
+						<fieldset>
+							<label class="left">Confirm Password</label>
+							<div>
+								<g:PasswordTextBox ui:field="confirmNewPasswordField" addStyleNames="input"/>
+							</div>
+							<div class="clear"/>
+						</fieldset>
+						<div class="button-wrap right">
+							<g:Button ui:field="cancelChangePasswordButton" addStyleNames="button" text="Cancel"/>
+							<g:Button ui:field="saveChangePasswordButton" addStyleNames="button special" text="Save"/>
+						</div>
+						<div class="clear"/>
+					</g:HTMLPanel>
+					<!-- change password div ends-->
+				</div>
+				<div class="github">
+					<h2>GitHub</h2>
+					<div class="inner-contents">
+						<p>
+							Associate your
+							<a href="http://www.github.com" target="_blank" class="underline">GitHub</a>
+							account with your Code2Cloud account.
+						</p>
+						<g:FormPanel ui:field="githubForm" method="POST" action="api/connect/github">
+							<!-- Only here because we need to add a "hidden" to this form sometimes. FormPanel only allows one child widget though, so we make that a FlowPanel and add children there. -->
+							<g:FlowPanel>
+								<g:Anchor ui:field="linkGitHubButton" addStyleNames="button special github" target="_blank">
+									Link your Github Account
+								</g:Anchor>
+							</g:FlowPanel>
+						</g:FormPanel>
+					</div>
+					<!-- When user clicks add SSH key the following div should be displayed to add new ssh key -->
+				</div>
+				<div class="ssh-keys">
+					<h2>SSH Keys <g:Anchor ui:field="addSshKeyButton" addStyleNames="right add misc-icon"><span/>Add Key</g:Anchor></h2>
+					<div class="inner-contents">
+						<cellview:CellTable ui:field="sshKeyTable"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

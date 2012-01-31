@@ -1,0 +1,23 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel>
+	
+		<ul class="inline-tabs">
+			<li class="">
+				<g:Anchor addStyleNames="button" ui:field="generalAdminAnchor">General</g:Anchor>
+			</li>
+			<li>
+				<g:Anchor addStyleNames="button" ui:field="productsAdminAnchor">Products</g:Anchor>
+			</li>
+			<li>
+				<g:Anchor addStyleNames="button" ui:field="iterationsAdminAnchor">Iterations</g:Anchor>
+			</li>
+			<li>
+				<g:Anchor addStyleNames="button" ui:field="keywordsAdminAnchor">Tags</g:Anchor>
+			</li>
+			<li>
+				<g:Anchor addStyleNames="button" ui:field="customFieldsAdminAnchor">Custom Fields</g:Anchor>
+			</li>
+		</ul>
+	</g:HTMLPanel>
+</ui:UiBinder>

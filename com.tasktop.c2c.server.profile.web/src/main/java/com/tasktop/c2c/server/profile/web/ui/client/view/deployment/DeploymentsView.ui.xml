@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:a="urn:import:com.tasktop.c2c.server.common.web.client.widgets"
+	xmlns:d='urn:import:com.tasktop.c2c.server.profile.web.ui.client.view.deployment'>
+	<g:HTMLPanel>
+		<div class="toaster">
+			<div class="messages">
+				<g:HTMLPanel ui:field="deploymentErrorPanel">
+					<div class="error misc-icon"><span></span>
+						<g:Label ui:field="errorLabel"></g:Label>
+					</div>
+				</g:HTMLPanel>	
+			</div>
+  		</div>
+		<div class="project-detail-container">
+			<div class="menu left">
+				<div class="clear"></div>
+				<div class="menu-items">
+					<div class="top">
+						<h5>Deployments<g:Anchor ui:field="newButton" styleName="right action add-deployment">+</g:Anchor></h5>
+					</div>
+					<ul>
+						<g:FlowPanel ui:field="deploymentsListPanel" />
+					</ul>
+					<div class="bottom"></div>
+				</div>
+			</div>
+			<d:DeploymentReadOnlyView ui:field="deploymentReadOnlyView"/>
+			<d:DeploymentEditView ui:field="deploymentEditView"/>
+			<d:NewDeploymentView ui:field="newDeploymentView"/>
+			<g:HTMLPanel ui:field="noDeploymentsMessagePanel"  visible="false">
+				<div class="clear"></div>
+				<div>
+					<g:Label>You don't have any deployments yet. Create a new deployment to get started.</g:Label>
+				</div>
+			</g:HTMLPanel>
+			<div class="clear"></div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

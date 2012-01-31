@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet author="profiledb" id="insertSequenceInfo" >
+		<insert tableName="SEQUENCE">
+			<column name="SEQ_NAME" value="SEQ_GEN" />
+			<column name="SEQ_COUNT" value="0" />
+		</insert>
+	</changeSet>
+	
+	<changeSet author="profiledb" id="insertMaxProjects" >
+		<insert tableName="CONFIGURATIONPROPERTY">
+			<column name="ID" value="1" />
+			<column name="VERSION" value="1" />
+			<column name="NAME" value="system.project.maxnum" />
+			<column name="VALUE" value="1000" />
+		</insert>
+	</changeSet>
+
+	
+</databaseChangeLog>

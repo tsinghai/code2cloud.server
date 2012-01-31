@@ -1,0 +1,21 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<ui:style>
+		.popup {
+			width: 450px;
+			padding: 15px;
+		}
+	</ui:style>
+	<g:HTMLPanel styleName="{style.popup}">
+		<div>
+			Are you sure you want to delete the query: <g:Label ui:field="queryName"/>? This operation cannot be undone.
+		</div>
+		<br/>
+		<div class="center">
+			<g:Button ui:field="deleteButton" styleName="button special">Delete</g:Button>
+			<g:Button ui:field="cancelButton" styleName="button">Cancel</g:Button>
+		</div>
+
+	</g:HTMLPanel>
+</ui:UiBinder>

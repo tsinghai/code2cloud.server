@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+			 xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel>
+		<g:VerticalPanel ui:field="errorPanel"/>
+		<div class="deployment project-admin left">
+			<h3>Team Management</h3>
+			<g:FlowPanel ui:field="teamMembersPanel"/>
+			<g:TextBox ui:field="inviteEmail" addStyleNames="text" />
+			<g:Button ui:field="inviteButton" addStyleNames="invite button">Invite</g:Button>
+		</div>
+		<!-- Project Tab Contents End -->
+		<div class="project-help right">
+			<p class="note">
+				Note: To grant access to a user, use the Invite link. You can edit or remove existing team members using the table on this page.
+			</p>
+		</div>
+		<div class="clear"></div>
+	</g:HTMLPanel>
+</ui:UiBinder>

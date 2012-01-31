@@ -1,0 +1,41 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel>
+
+		<div class="deployment">
+			<div class="deployment-details">
+				<h3>Product Details
+					<g:Anchor addStyleNames="right delete misc-icon" ui:field="deleteProduct"><span/>Delete
+					</g:Anchor>
+					<g:Anchor addStyleNames="right edit misc-icon" ui:field="editProduct"><span/>Edit
+					</g:Anchor>
+				</h3>
+				<fieldset>
+					<label>Name:</label>
+					<g:Label ui:field="productName"/>
+				</fieldset>
+				<fieldset>
+					<label>Description:</label>
+					<div class="description">
+						<g:Label ui:field="productDescription"/>
+					</div>
+				</fieldset>
+				<fieldset>
+					<label>Default Release:</label>
+					<g:Label ui:field="productDefaultRelease"/>
+				</fieldset>
+			</div>
+			<div class="components">
+				<h3>Components</h3>
+				<div class="clear"/>
+				<g:HTML ui:field="components"/>
+			</div>
+			<div class="releases">
+				<h3>Releases</h3>
+				<div class="clear"/>
+				<g:HTML ui:field="releases"/>
+			</div>
+		</div>
+
+	</g:HTMLPanel>
+</ui:UiBinder>

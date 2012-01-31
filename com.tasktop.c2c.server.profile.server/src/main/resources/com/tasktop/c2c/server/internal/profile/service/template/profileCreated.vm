@@ -1,0 +1,21 @@
+Hello,
+
+Thank you for signing up for ${AppName}. Your account has been created. You may sign in at:
+
+${AppBaseUrl}#signin
+
+Here are some resources to help get you started.
+
+------------------------------------------------
+Visit the Discover page to browse Public Projects
+------------------------------------------------
+${AppBaseUrl}
+
+------------------------------------------------
+Create a Project
+------------------------------------------------
+${AppBaseUrl}#newProject
+
+Thank you for using ${AppName}. Happy Coding!
+
+- The ${AppName} Team

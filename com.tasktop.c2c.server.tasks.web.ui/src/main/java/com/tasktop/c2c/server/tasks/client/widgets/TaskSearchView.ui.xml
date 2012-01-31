@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:d="urn:import:com.google.gwt.user.datepicker.client"
+	xmlns:a="urn:import:com.tasktop.c2c.server.common.web.client.widgets">
+	<g:HTMLPanel addStyleNames="deployment adv-search">
+		<div class="deployment-heading">
+			<h2>
+				<g:Label ui:field="pageLabel">Advanced Search</g:Label>
+				<g:Button addStyleNames="button special right" ui:field="searchButton">Search</g:Button>
+				<g:Button addStyleNames="button special right" ui:field="saveButton">Save</g:Button>
+				<g:Button addStyleNames="button right" ui:field="cancelButton">Cancel</g:Button>
+			</h2>
+			<div class="clear"></div>
+		</div>
+		<div class="task-section adv-search edit">
+			<h3></h3>
+			<div class="left">
+				<fieldset>
+				<div class="item">
+					<g:TextBox ui:field="summaryDescriptionComment" styleName="text" />
+				</div>
+				<div class="item">
+					<label class="checkbox left"><g:SimpleCheckBox addStyleNames="left" ui:field="summary" value="true" /> Summary</label>
+					<label class="left"><g:SimpleCheckBox addStyleNames="left" ui:field="description" value="true" /> Description + Comments</label>
+				</div>
+				</fieldset>
+			</div>
+			<div class="clear"/>
+		</div>
+		<div class="task-section edit">
+			<h3>Product</h3>
+			<div class="product-item left">
+				<label>Product</label>
+				<g:ListBox ui:field="product" name="product" multipleSelect="true" />
+			</div>
+			<div class="product-item left">
+				<label>Component</label>
+				<g:ListBox ui:field="component" name="component" multipleSelect="true" />
+			</div>
+			<div class="product-item left">
+				<label>Release</label>
+				<g:ListBox ui:field="milestone" name="release" multipleSelect="true" />
+			</div>
+			<div class="product-item left">
+				<label>Iteration</label>
+				<g:ListBox ui:field="iteration" name="iteration" multipleSelect="true" />
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="task-section edit">
+			<h3>Properties</h3>
+			<div class="product-item left">
+				<label>Type</label>
+				<g:ListBox ui:field="type" name="type" multipleSelect="true" />
+			</div>
+			<div class="product-item left">
+				<label>Priority</label>
+				<g:ListBox ui:field="priority" name="priority" multipleSelect="true" />
+			</div>
+			<div class="product-item left">
+				<label>Severity</label>
+				<g:ListBox ui:field="severity" name="severity" multipleSelect="true" />
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="task-section edit">
+			<h3>Tags</h3>
+			<div class="product-item left">
+				<label><g:Label ui:field="tagsLabel">Tag</g:Label></label>
+				<g:FlowPanel ui:field="tagsPanel"/>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="task-section edit">
+			<h3>Workflow</h3>
+			<div class="product-item left">
+				<label>Status</label>
+				<g:ListBox ui:field="status" name="status" multipleSelect="true" />
+			</div>
+			<div class="product-item left">
+				<label>Resolution</label>
+				<g:ListBox ui:field="resolution" name="resolution" multipleSelect="true" />
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="task-section edit">
+			<h3>Date</h3>
+			<div class="product-item left">
+				<label>&nbsp;</label>
+				<g:ListBox ui:field="dateType">
+					<g:item>Created</g:item>
+					<g:item>Updated</g:item>
+				</g:ListBox>
+			</div>
+			<div class="product-item left">
+				<label>Start</label>
+				<d:DateBox ui:field="dateStart" />
+			</div>
+			<div class="product-item left">
+				<label>End</label>
+				<d:DateBox ui:field="dateEnd" />
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="task-section edit">
+			<h3>People</h3>
+			<div class="people-item summary-item left">
+				<label><g:Label ui:field="nameLabel">Name</g:Label></label>
+				<g:FlowPanel ui:field="peoplePanel" />
+				<div class="item">
+					<label class="checkbox left"><g:SimpleCheckBox addStyleNames="left" ui:field="creator" value="true" /> Creator</label>
+					<label class="checkbox left"><g:SimpleCheckBox addStyleNames="left" ui:field="assignee" value="true" /> Owner</label>
+					<label class="checkbox left"><g:SimpleCheckBox addStyleNames="left" ui:field="commenter" value="true" /> Commenter</label>
+					<label class="left"><g:SimpleCheckBox addStyleNames="left" ui:field="cc" value="true" /> CC</label>
+				 </div>
+			</div>
+			<div class="clear"/>
+		</div>
+		<div class="task-section edit">
+			<h3>Other</h3>
+			<div class="custom-fields">
+				<g:FlowPanel ui:field="detailsContainer" />
+			</div>
+		</div>
+		<div class="right save">
+			<g:Button ui:field="searchButton2" styleName="button special">Search</g:Button>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

@@ -1,0 +1,19 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel>
+		<ul class="inline-tabs">
+			<li>
+				<g:Anchor ui:field="profileSelector" addStyleNames="button">Profile</g:Anchor>
+			</li>
+			<li>
+				<g:Anchor ui:field="authenticationSelector" addStyleNames="button">Authentication</g:Anchor>
+			</li>
+			<li>
+				<g:Anchor ui:field="notificationsSelector" addStyleNames="button">Notifications</g:Anchor>
+			</li>
+		</ul>
+		<div class="clear"/>
+		<g:SimplePanel ui:field="contentPanel"/>
+		<div class="clear"/>
+	</g:HTMLPanel>
+</ui:UiBinder>

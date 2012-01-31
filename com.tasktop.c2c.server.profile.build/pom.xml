@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.tasktop.c2c.server</groupId>
+	<artifactId>profile.build</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>profile build</name>
+	<description>Build profile projects</description>
+
+
+	<modules>
+		<module>parent</module>
+		<module>api-parent</module>
+		<module>../com.tasktop.c2c.server.cloud.api</module>
+		<module>../com.tasktop.c2c.server.cloud.service</module>
+		<module>../com.tasktop.c2c.server.common.api</module>
+		<module>../com.tasktop.c2c.server.common.service</module>
+		<module>../com.tasktop.c2c.server.common.web</module>
+		<module>../com.tasktop.c2c.server.configuration.service</module>
+		<module>../com.tasktop.c2c.server.auth.service</module>
+
+		<module>../com.tasktop.c2c.server.tasks.api</module>
+		<module>../com.tasktop.c2c.server.tasks.web.ui</module>
+		<module>../com.tasktop.c2c.server.tasks.server</module>
+		<module>../com.tasktop.c2c.server.tasks.web</module>
+
+		<module>../com.tasktop.c2c.server.wiki.api</module>
+		<module>../com.tasktop.c2c.server.wiki.web.ui</module>
+		<module>../com.tasktop.c2c.server.wiki.server</module>
+		<module>../com.tasktop.c2c.server.wiki.web</module>
+
+		<module>../com.tasktop.c2c.server.services.web</module>
+
+		<module>../com.tasktop.c2c.server.ssh.server</module>
+
+		<module>../com.tasktop.c2c.server.profile.api</module>
+		<module>../com.tasktop.c2c.server.profile.web.ui</module>
+		<module>../com.tasktop.c2c.server.profile.server</module>
+		<module>../com.tasktop.c2c.server.profile.web</module>
+
+		<module>../com.tasktop.c2c.server.event.api</module>
+		<module>../com.tasktop.c2c.server.event.service</module>
+
+		<!--  Older, not currently used
+		<module>../com.tasktop.c2c.server.loadtest</module>
+
+		<module>../com.tasktop.c2c.server.monitoring.api</module>
+		<module>../com.tasktop.c2c.server.monitoring.service</module>
+		<module>../com.tasktop.c2c.server.monitoring.insight.plugin</module>
+		 -->
+		<module>../com.tasktop.c2c.server.deployment.api</module>
+		
+        <module>../com.tasktop.c2c.server.hudson.web</module>
+        <module>../com.tasktop.c2c.server.hudson.plugin.auth</module>
+        <module>../com.tasktop.c2c.server.hudson.plugin.buildlistener</module>
+        <module>../com.tasktop.c2c.server.hudson.plugin.cloud</module>
+        <module>../com.tasktop.c2c.server.hudson.plugin.configuration</module>
+        <module>../com.tasktop.c2c.server.hudson.plugin.ui</module>
+        <module>../com.tasktop.c2c.server.hudson.configuration.web</module>
+
+        <module>../com.tasktop.c2c.server.util.docs</module>
+	</modules>
+	
+	<build>
+		<plugins>
+			<plugin>
+               <artifactId>maven-deploy-plugin</artifactId>
+               <version>2.5</version>
+               <configuration>
+                 <skip>true</skip>
+              </configuration>
+            </plugin>
+		</plugins>
+	</build>
+
+</project>

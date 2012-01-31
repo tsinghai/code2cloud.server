@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel styleName="paging right">
+
+			<g:Anchor ui:field="nextPage" styleName="button misc-icon right next">
+				<span class="no-margin"></span>
+			</g:Anchor>
+			<g:Anchor ui:field="prevPage" styleName="button misc-icon right prev">
+				<span class="no-margin"></span>
+			</g:Anchor>
+			<span class="task-pagination right">
+				Show <g:Label ui:field="itemLabel">tasks:</g:Label>
+				<g:ListBox ui:field="pageSizeSelector"/>
+				<g:Label ui:field="label"/>
+			</span>
+	</g:HTMLPanel>
+</ui:UiBinder>

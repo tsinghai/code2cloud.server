@@ -1,0 +1,24 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'
+			 xmlns:d='urn:import:com.tasktop.c2c.server.profile.web.ui.client.view.deployment'>
+	<ui:style>
+		.popup {
+			width: 400px;
+			padding: 15px;
+		}
+	</ui:style>
+	<g:HTMLPanel styleName="{style.popup}">
+		<div>
+			Do you want to remove this person from the project?
+		</div>
+		<br/>
+
+		<div class="center">
+			<g:Button ui:field="cancelButton" styleName="button">No</g:Button>
+			<g:Button ui:field="removeButton" styleName="button special">Yes</g:Button>
+		</div>
+
+	</g:HTMLPanel>
+
+</ui:UiBinder>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module >
+  <!-- Specify the paths for translatable code -->
+  <source path=''>
+  	<include name="ScmLocation.java"/>
+  	<include name="ScmType.java"/>
+  	<include name="ServiceType.java"/>
+  	<include name="ServiceHost.java"/>
+  </source>
+</module>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel>
+	
+					<div class="project-filter">
+						<ul class="right filter-activity ">
+						  <li>Show:</li>
+						  	<li><g:CheckBox ui:field="buildToggleButton" text="Build" /></li>
+							<li><g:CheckBox ui:field="wikiToggleButton" text="Wiki" /></li>
+							<li><g:CheckBox ui:field="taskToggleButton" text="Tasks" /></li>
+							<li><g:CheckBox ui:field="scmToggleButton" text="Source" /></li>
+						</ul>
+						<div class="clear"></div>
+					</div>
+        <div class="project-latest-activity">
+			<h4>Recent Activity</h4>
+		  	<g:FlowPanel ui:field="activityPanel" addStyleNames="dashboardActivityPanel"/>
+	  	</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

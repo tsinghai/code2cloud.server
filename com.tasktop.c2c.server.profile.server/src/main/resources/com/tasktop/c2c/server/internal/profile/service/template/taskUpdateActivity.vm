@@ -1,0 +1,8 @@
+
+${activity.author.realname} (${activity.author.loginName}) changed:
+
+${updateHeader}
+===============================================================================
+#foreach ( $update in ${activity.fieldUpdates} )
+${update.fieldDescription} | ${update.oldValue} | ${update.newValue} 
+#end

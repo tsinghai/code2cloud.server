@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:t="urn:import:com.tasktop.c2c.server.tasks.client.widgets"
+	xmlns:c="urn:import:com.tasktop.c2c.server.common.web.client.widgets.chooser"
+	xmlns:w="urn:import:com.tasktop.c2c.server.tasks.client.widgets.wiki"
+	xmlns:a="urn:import:com.tasktop.c2c.server.common.web.client.widgets"
+	xmlns:tm='urn:import:com.tasktop.c2c.server.common.web.client.widgets.time'
+	xmlns:gd='urn:import:com.google.gwt.user.datepicker.client'>
+	
+	<ui:with field='res' type='com.tasktop.c2c.server.tasks.client.TaskResources'/>
+	
+	<g:HTMLPanel>
+		<fieldset>
+			<label><g:Label ui:field="name"/></label>
+			<div class="{res.style.inlineEditTrigger}">
+				<g:Anchor ui:field="editTriggerAnchor"/>
+			</div>
+			<g:HTML ui:field="readOnlyHtml"/>
+			<g:SimplePanel styleName="{res.style.editing}" ui:field="editingDiv"/>
+		</fieldset>
+	</g:HTMLPanel>
+</ui:UiBinder>

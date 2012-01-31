@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel styleName="project-detail-container">
+		<h2><g:Label ui:field="title"/></h2>
+		<div class="menu left">
+			<div class="menu-items">
+				<g:SimplePanel ui:field='searchPanel'/>
+				<ul>
+					<!--
+		      		<li><a class="selected" href="#">My Contributions</a></li>
+		      		<li><a href="#">Recently Changed</a></li>
+		      		-->
+		      		<li><g:Anchor ui:field="allSearchLink">All Pages</g:Anchor></li>
+		    	</ul>
+		    	<div class="bottom"></div>
+		  	</div>
+		 	<div class="spacer"></div>
+		</div>
+		<div class="content right">
+			<div class="filter">
+				<div class="left">
+	 				<g:Button ui:field='newPageButton' addStyleNames="button special">New Page</g:Button>
+				</div>
+				<div class="right">
+				<!--
+				<ul class="project-sort right">
+					<li><label>Sort By</label></li>
+					<li>
+						<input name="sort_by" type="hidden" value="Name" />
+						<div class="button drop-down">
+							<span>Name</span>
+							<div class="arrow">&#9662;</div>
+							<div class="options">
+								<span>Changed</span>
+								<span>Created</span>
+							</div>
+						</div>
+					</li>
+				</ul>
+				-->
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="spacer"></div>
+		<g:FlowPanel ui:field="pagePanel"/>
+		<div class="clear"></div>
+		<!--
+		<div class="pagination">
+			<div class="sizing left">
+	 			<span>1 to 20 of 24 Projects</span>
+	    		<input name="sizing" type="hidden" value="10 Projects per page" />
+	            <div class="button drop-down">
+	            	<span>10 Projects per page</span>
+	            	<div class="arrow">&#9662;</div>
+	            	<div class="options">
+	            		<span>10 Projects per page</span>
+	                	<span>20 Projects per page</span>
+	                	<span>20 Projects per page</span>
+					</div>
+				</div>
+	    	</div>
+			<div class="paging right">
+				<a class="inactive button" href="#">first</a>
+				<a class="inactive button" href="#">previous</a>
+				<a class="active page" href="#">1</a>
+				<a class="page" href="#">2</a>
+				<a class="page" href="#">3</a>
+				<a class="page extra" href="#">...</a>
+				<a class="page" href="#">25</a>
+				<a class="button" href="#">Next</a>
+				<a class="button last" href="#">Last</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		-->
+		</div>
+		<div class="clear"></div>	
+	</g:HTMLPanel>
+</ui:UiBinder>

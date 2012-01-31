@@ -1,0 +1,19 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<ui:style>
+		.popup {
+			background: #ebf3f8;
+			padding: 20px 30px;
+			width: 400px;
+		}
+	</ui:style>
+
+	<g:HTMLPanel styleName="{style.popup}">
+		<p>Are you sure you want to remove this SSH key?</p>
+		<p><g:Label ui:field="keyLabel"/></p>
+		<div class="center">
+			<g:Button ui:field="cancelButton" addStyleNames="button cancel" text="Cancel"/>
+			<g:Button ui:field="okButton" addStyleNames="button special">OK</g:Button>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

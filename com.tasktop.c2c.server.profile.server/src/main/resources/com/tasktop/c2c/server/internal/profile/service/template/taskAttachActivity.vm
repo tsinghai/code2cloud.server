@@ -1,0 +1,5 @@
+
+Attachment ${activity.attachment.filename} by ${activity.attachment.submitter.realname} 
+
+Description:
+${activity.attachment.description} 

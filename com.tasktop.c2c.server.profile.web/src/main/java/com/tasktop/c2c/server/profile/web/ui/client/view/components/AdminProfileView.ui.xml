@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:a="urn:import:com.tasktop.c2c.server.common.web.client.widgets"
+    xmlns:cellview="urn:import:com.google.gwt.user.cellview.client">
+	
+  	<ui:with field='res' type='com.tasktop.c2c.server.profile.web.ui.client.resources.ProfileResources'/>
+
+	<g:HTMLPanel>
+		<div class="clear"/>
+		<div class="{res.style.profileListFilter}">
+			<ul class="left">
+				<li>
+					<g:TextBox ui:field="filterText"/>
+				</li>
+			</ul>
+			<ul class="right">
+			  <li>Show:</li>
+			  	<li><g:CheckBox ui:field="showDisabled" text="Disabled"/></li>
+				<li><g:CheckBox ui:field="showNewsEmailOptOut" text="Opted Out of News Emails"/></li>
+				<li><g:CheckBox ui:field="showServiceEmailOptOut" text="Opted Out of Service Emails"/></li>
+			</ul>
+			<div class="clear"/>
+		</div>
+		<div class="{res.style.profileListPanel} left">
+		<div>
+			<cellview:CellList styleName="{res.style.profileList}" ui:field="profileList"/>
+			<cellview:SimplePager ui:field="pager"/>
+			<div class="bottom"/>
+		</div>
+		</div>		
+			<div class="{res.style.profileEditPanel} menu" ui:field="editProfileDiv">
+				<ul>
+				<li>
+					<h3>Properties</h3>
+				</li>				
+				<li>
+				<fieldset>
+					<label>Name</label>
+					<div>
+					<g:Label ui:field="firstName"/>
+					<g:Label ui:field="lastName"/>
+					</div>
+				</fieldset>
+				<fieldset>
+					<label>Username</label>
+					<g:Label ui:field="username"/>
+				</fieldset>
+				<fieldset>
+					<label>Email</label>
+					<g:Label ui:field="email"/>
+				</fieldset>
+				<fieldset>
+					<Label>Status</Label>
+					<g:Label ui:field="status"/>
+					<div class="actions">
+						<g:Button styleName="button special" ui:field="toggleDisableButton"/>
+					</div>			
+				</fieldset>
+				</li>
+				</ul>			
+			</div>
+		<div class="clear"/>
+				<g:DisclosurePanel ui:field="emailsPanel">
+					<g:header>Full Email List</g:header>
+					<g:TextArea ui:field="emailArea" visibleLines="20"/>
+				</g:DisclosurePanel>
+	
+	</g:HTMLPanel>
+</ui:UiBinder>

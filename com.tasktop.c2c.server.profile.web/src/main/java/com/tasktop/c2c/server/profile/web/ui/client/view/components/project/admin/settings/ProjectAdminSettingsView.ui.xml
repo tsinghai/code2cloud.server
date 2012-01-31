@@ -1,0 +1,15 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel>
+
+		<g:SimplePanel ui:field="contentContainer"/>
+
+		<div class="project-help right">
+			<p class="note">
+				Note: Setting a Project as "Public" makes the project code, wiki docs, tasks and builds publicly
+				available
+			</p>
+		</div>
+
+	</g:HTMLPanel>
+</ui:UiBinder>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+			 xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<g:HTMLPanel>
+		<g:Anchor ui:field="account" addStyleNames="misc-icon account"><span/>Account
+		</g:Anchor>
+		<g:Anchor ui:field="help" addStyleNames="misc-icon help"><span/>Help
+		</g:Anchor>
+		<g:Anchor ui:field="signOut" addStyleNames="misc-icon sign-out"><span/>Sign Out
+		</g:Anchor>
+	</g:HTMLPanel>
+</ui:UiBinder>

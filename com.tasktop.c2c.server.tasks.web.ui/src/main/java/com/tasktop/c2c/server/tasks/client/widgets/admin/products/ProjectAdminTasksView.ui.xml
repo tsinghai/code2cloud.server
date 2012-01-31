@@ -1,0 +1,12 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'
+			 xmlns:a='urn:import:com.tasktop.c2c.server.tasks.client.widgets.admin.products'>
+	<g:HTMLPanel>
+		<div class="menu left">
+			<a:ProjectAdminTasksMenu ui:field="menu"/>
+		</div>
+		<div class="content right">
+			<g:SimplePanel ui:field="contentContainer"/>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>
