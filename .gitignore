@@ -3,7 +3,7 @@
 *.class
 *.refactorings
 */bin/
-org.cloudfoundry.code.server/org.cloudfoundry.code.server.profile.web/.gwt/.gwt-log
+*/.gwt-log
 *.ipr
 *.iml
 *.iws
